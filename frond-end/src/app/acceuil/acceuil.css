@@ -1,0 +1,131 @@
+
+body {
+  height: 100%;
+}
+
+header {
+  background-color: whitesmoke;
+  font-size: 100px;
+  padding-bottom: 15px;
+}
+
+header div img {
+  float: left;
+}
+
+header::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+#menu {
+  background-color: whitesmoke;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+#menu:hover, #menu:focus {
+  background-color: steelblue;
+  border: 1px solid black;
+}
+
+.dropdown a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-menu a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown {
+  display: inline-block;
+  float: left;
+  padding-top: 33px;
+  padding-left: 100px;
+  margin-right: 5px;
+  text-align: center;
+  line-height: 25px;
+  text-decoration: none;
+  position: fixed;
+  z-index: 1;
+}
+
+#img-polytech {
+  margin-top: 12px;
+  padding-left: 300px;
+  display: block;
+  position: fixed;
+}
+
+#img-epdhad {
+  padding-left: 29%;
+  display: block;
+  padding-bottom: 5px;
+}
+
+.rubrique a:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.rubrique a:hover {
+  background-color: steelblue;
+  color: lightskyblue;
+  text-decoration: none;
+  background-position: 0 -15px;
+  -webkit-transition: background-position 0.1s linear;
+  -moz-transition: background-position 0.1s linear;
+  -o-transition: background-position 0.1s linear;
+  transition: background-position 0.1s linear;
+}
+
+.rubrique a {
+  font-family: "Tahoma", Arial, sans-serif;
+  border-radius: 2px;
+  background-color: #004fb5;
+  border: 1px solid wheat;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 20px;
+  padding: 20px;
+  cursor: pointer;
+  box-shadow: 10px 5px 5px steelblue;
+  overflow: auto;
+  margin-right: 50px;
+  text-decoration: none;
+  float: right;
+}
+
+.rubrique {
+  text-align: center;
+  padding-right: 7%;
+  padding-top: 20px;
+}
+
+.navbar {
+  padding-top: 5px;
+}
+
+
+
