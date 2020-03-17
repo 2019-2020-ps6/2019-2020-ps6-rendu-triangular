@@ -16,7 +16,7 @@ import {QuestionComponent} from './quizzes/question/question.component';
     QuizComponent,
     HeaderComponent,
     QuizFormComponent,
-    QuestionComponent
+   // QuestionComponent
   ],
   imports: [
     BrowserModule,
