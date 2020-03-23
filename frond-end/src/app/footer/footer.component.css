@@ -1,0 +1,23 @@
+.container-fluid, #copyright {
+  background-color: #313431;
+  color: #dddddd;
+}
+
+#PhraseEHPAD {
+  line-height: 1.7rem;
+  text-decoration: underline ;
+  color: #3ba347;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+#villes1 a, #villes2 a {
+  color: whitesmoke;
+  font-family: "Candara Light", fantasy;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+ul {
+  list-style-type: none;
+}
