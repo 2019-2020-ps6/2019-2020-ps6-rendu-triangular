@@ -1,6 +1,8 @@
 .container-fluid, #copyright {
   background-color: #313431;
   color: #dddddd;
+  font-size: medium;
+  height: auto;
 }
 
 #PhraseEHPAD {
@@ -16,6 +18,12 @@
   font-family: "Candara Light", fantasy;
   font-weight: bold;
   font-size: 25px;
+}
+
+footer{
+  position: relative;
+  width: auto;
+  height: min-content;
 }
 
 ul {
