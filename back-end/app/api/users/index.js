@@ -1,70 +1,50 @@
-const { Router } = require('express')
+const { Router } = require('express');
 
-const { User } = require('../../models')
+const { User } = require('../../models');
+const manageAllErrors = require('../../utils/routes/error-management');
 
-const router = new Router()
+const router = new Router();
 
-/**
- * recupère la liste des users
- */
 router.get('/', (req, res) => {
   try {
     res.status(200).json(User.get())
   } catch (err) {
-    res.status(500).json(err)
+    manageAllErrors(res, err)
   }
-})
-/**
- * Recupère un user par son id
- */
-router.get('/:quizId', (req, res) => {
-  console.log(req.params)
-  try {
-    res.status(202).json(User.getById(req.params.quizId))
-  } catch (err) {
-    res.status(500).json(err)
-  }
-})
+});
 
-/**
- * Supprime un user par son ID
- */
-router.delete('/:quizId', (req, res) => {
-  console.log(req.params)
+router.get('/:userId', (req, res) => {
   try {
-    res.status(203).json(User.delete(req.params.quizId))
+    res.status(200).json(User.getById(req.params.userId))
   } catch (err) {
-    res.status(500).json(err)
+    manageAllErrors(res, err)
   }
-})
-/**
- * Crée un user
- */
+});
+
 router.post('/', (req, res) => {
   try {
-    const quiz = User.create({ ...req.body })
-    res.status(201).json(quiz)
+    const user = User.create({ ...req.body });
+    res.status(201).json(user)
   } catch (err) {
-    if (err.name === 'ValidationError') {
-      res.status(400).json(err.extra)
-    } else {
-      res.status(500).json(err)
-    }
+    manageAllErrors(res, err)
   }
-})
+});
 
-/**
- * Modifier un user
- */
-
-router.put('/:quizId', (req, res) => {
-  console.log(req.body)
+router.put('/:userId', (req, res) => {
   try {
-    res.status(204).json(User.update(req.params.quizId,req.body))
+    res.status(200).json(User.update(req.params.userId, req.body))
   } catch (err) {
-    res.status(500).json(err)
+    manageAllErrors(res, err)
   }
-})
+});
 
+router.delete('/:userId', (req, res) => {
+  try {
+    User.delete(req.params.userId);
+    res.status(204).end()
+  } catch (err) {
+    manageAllErrors(res, err)
+  }
+});
 
-module.exports = router
+module.exports = router;

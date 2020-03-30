@@ -1,55 +1,68 @@
 const { Router } = require('express')
 
-const { Question } = require('../../../models')
+const { Answer, Quiz, Question } = require('../../../models');
+const manageAllErrors = require('../../../utils/routes/error-management');
+const AnswersRouter = require('./answers');
+const { filterQuestionsFromQuizz, getQuestionFromQuiz } = require('./manager');
 
-const router = Router({ mergeParams: true })
+const router = new Router({ mergeParams: true });
 
 router.get('/', (req, res) => {
   try {
-    res.status(200).json(Question.get())
+    // Check if quizId exists, if not it will throw a NotFoundError
+    Quiz.getById(req.params.quizId);
+    res.status(200).json(filterQuestionsFromQuizz(req.params.quizId))
   } catch (err) {
-    res.status(500).json(err)
+    manageAllErrors(res, err)
   }
-})
+});
 
-router.get('/:quizId', (req, res) => {
-  console.log(req.params)
+router.get('/:questionId', (req, res) => {
   try {
-    res.status(202).json(Question.getById(req.params.quizId))
+    const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId);
+    res.status(200).json(question)
   } catch (err) {
-    res.status(500).json(err)
+    manageAllErrors(res, err)
   }
-})
+});
 
 router.post('/', (req, res) => {
   try {
-    const quiz = Question.create({ ...req.body })
-    res.status(201).json(quiz)
-  } catch (err) {
-    if (err.name === 'ValidationError') {
-      res.status(400).json(err.extra)
-    } else {
-      res.status(500).json(err)
+    // Check if quizId exists, if not it will throw a NotFoundError
+    Quiz.getById(req.params.quizId)
+    const quizId = parseInt(req.params.quizId, 10)
+    let question = Question.create({ label: req.body.label, quizId })
+    // If answers have been provided in the request, we create the answer and update the response to send.
+    if (req.body.answers && req.body.answers.length > 0) {
+      const answers = req.body.answers.map((answer) => Answer.create({ ...answer, questionId: question.id }));
+      question = { ...question, answers }
     }
-  }
-})
-
-router.delete('/:quizId', (req, res) => {
-  console.log(req.params)
-  try {
-    res.status(203).json(Question.delete(req.params.quizId))
+    res.status(201).json(question)
   } catch (err) {
-    res.status(500).json(err)
+    manageAllErrors(res, err)
   }
-})
+});
 
-router.put('/:quizId', (req, res) => {
-  console.log(req.body)
+router.put('/:questionId', (req, res) => {
   try {
-    res.status(204).json(Question.update(req.params.quizId,req.body))
+    const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId);
+    const updatedQuestion = Question.update(req.params.questionId, { label: req.body.label, quizId: question.quizId });
+    res.status(200).json(updatedQuestion)
   } catch (err) {
-    res.status(500).json(err)
+    manageAllErrors(res, err)
   }
-})
+});
 
-module.exports = router
+router.delete('/:questionId', (req, res) => {
+  try {
+    getQuestionFromQuiz(req.params.quizId, req.params.questionId);
+    Question.delete(req.params.questionId);
+    res.status(204).end()
+  } catch (err) {
+    manageAllErrors(res, err)
+  }
+});
+
+router.use('/:questionId/answers', AnswersRouter);
+
+module.exports = router;
