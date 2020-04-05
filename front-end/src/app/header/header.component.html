@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <header>
+    <div class="navbar">
+
+      <div id="img-polytech">
+        <a href="http://unice.fr/polytechnice/fr#.Xneg7NOg-Hs" target="_blank" ><img src="../../assets/Polytech2.png" style="max-width: 100px" alt="Png Polytech"></a>
+      </div>
+
+      <div id="img-epdhad1">
+       <a href="#Accueil" routerLink="accueil" routerLinkActive="active"><img src="../../assets/ephad5.jpg" alt="image ephad"></a>
+      </div>
+
+      <div class="rubrique">
+
+        <div class="dropdown">
+          <button id="Gestion_quiz" class="btn dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >{{GestionQuiz}}</button>
+          <div class="dropdown-menu" id="content-quiz" aria-labelledby="Gestion_quiz">
+            <a class="dropdown-item" href="#" routerLink="quiz-form" >Créer un Quiz</a>
+            <a class="dropdown-item" href="#" routerLink="quiz-list">Modifier/Voir un Quiz</a>
+          </div>
+          <a id="Accueil" routerLink="accueil" routerLinkActive="active"  >{{Accueil}}</a>
+
+        </div>
+
+
+        <div class="dropdown">
+          <a id="APropos" routerLink="apropos" routerLinkActive="active"  >{{APropos}}</a>
+
+          <button id="Lancement"  class="btn  dropdown-toggle" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >{{Lancement}}</button>
+          <div class="dropdown-menu " id="content-lancement" aria-labelledby="Lancement">
+            <a class="dropdown-item" routerLink="lancement" routerLinkActive="active" href="#">Lancer un Quiz</a>
+            <a class="dropdown-item" href="#">Arreter le quiz en cours</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+
+
+</div>
+
+
+

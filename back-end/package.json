@@ -1,10 +1,9 @@
 {
-  "name": "back-end",
+  "name": "2019-2020-ps6-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app/index.js",
     "dev": "./node_modules/.bin/nodemon app/index.js",
     "lint": "./node_modules/.bin/eslint -c .eslintrc.js app/",
@@ -13,23 +12,19 @@
   "precommit": [
     "lint"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/2019-2020-ps6/2019-2020-ps6-rendu-triangular.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+  },
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.16.4",
-    "morgan": "latest",
+    "body-parser": "1.19.0",
     "cors": "2.8.5",
-    "joi": "14.3.1"
+    "express": "4.17.1",
+    "joi": "14.3.1",
+    "morgan": "1.9.1"
   },
   "devDependencies": {
-    "cors": "^2.8.5",
-    "joi": "^14.3.1",
     "eslint": "6.8.0",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-plugin-import": "2.20.0",

@@ -1,9 +1,9 @@
-const { Router } = require('express');
+const { Router } = require('express')
 
-const { User } = require('../../models');
-const manageAllErrors = require('../../utils/routes/error-management');
+const { User } = require('../../models')
+const manageAllErrors = require('../../utils/routes/error-management')
 
-const router = new Router();
+const router = new Router()
 
 router.get('/', (req, res) => {
   try {
@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
   } catch (err) {
     manageAllErrors(res, err)
   }
-});
+})
 
 router.get('/:userId', (req, res) => {
   try {
@@ -19,16 +19,16 @@ router.get('/:userId', (req, res) => {
   } catch (err) {
     manageAllErrors(res, err)
   }
-});
+})
 
 router.post('/', (req, res) => {
   try {
-    const user = User.create({ ...req.body });
+    const user = User.create({ ...req.body })
     res.status(201).json(user)
   } catch (err) {
     manageAllErrors(res, err)
   }
-});
+})
 
 router.put('/:userId', (req, res) => {
   try {
@@ -36,15 +36,15 @@ router.put('/:userId', (req, res) => {
   } catch (err) {
     manageAllErrors(res, err)
   }
-});
+})
 
 router.delete('/:userId', (req, res) => {
   try {
-    User.delete(req.params.userId);
+    User.delete(req.params.userId)
     res.status(204).end()
   } catch (err) {
     manageAllErrors(res, err)
   }
-});
+})
 
-module.exports = router;
+module.exports = router

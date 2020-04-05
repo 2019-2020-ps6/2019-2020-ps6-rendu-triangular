@@ -1,11 +1,11 @@
-# NodeJS Back-End 
+# NodeJS Back-End Starter
 
 ## Install & Run
 
 1) Install [NodeJS Installer](https://nodejs.org/en/download/) (you should already have NodeJS since it was a dependency of the Front-End)
 2) Clone your repository `git clone https://github.com/PATH_TO_YOUR_BACK_END_REPOSITORY.git`
 3) install the dependencies `npm install`
-4) Run the application `npm run dev`
+4) Run the application `npm start`
 
 ## Development
 
