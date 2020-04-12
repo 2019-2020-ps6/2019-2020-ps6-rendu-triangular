@@ -1,21 +1,27 @@
 
-<div class="card w-25 text-center">
-  <h2>Create a new Quiz</h2>
-  <form class="quiz-form" [formGroup]="quizForm">
-    <label for="name">
-      Title <br>
-      <input class="input-custom" type="text" id="name" [formControlName]="'name'">
-    </label>
-    <br>
-    <label for="theme">
-      Theme <br>
-      <input class="input-custom" type="text" id="theme" [formControlName]="'theme'">
-    </label>
-    <br>
-    <button  class="btn btn-raised btn-primary" routerLink="/quiz-list" routerLinkActive="active" type="submit" class="button-card" (click)="addQuiz() ">Create</button>
-  </form>
-</div>
+<div class="container-fluid">
+  <div class="col-md-6 login-form-2">
+    <h1 class="display-4">Création d'un quiz</h1>
+    <form class="quiz-form" [formGroup]="quizForm">
+      <div class="form-group">
+        <input [formControlName]="'name'" class="form-control" id="name" placeholder="Nom" type="text" value=""/>
+      </div>
+      <div class="form-group">
+        <input [formControlName]="'theme'" class="form-control" id="theme" placeholder="Thème" type="text" value=""/>
+      </div>
+      <div class="form-group">
+        <input (click)="addQuiz() " class="btnSubmit" routerLink="/quiz-list" routerLinkActive="active" type="submit"
+               value="Creer"/>
+      </div>
 
+    </form>
+  </div>
+</div>
 
 <!-- Uncomment below to see your form structure and how it changes-->
 <!-- <br><br>{{quizForm.getRawValue() | json}} -->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" id="bootstrap-css" rel="stylesheet">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+

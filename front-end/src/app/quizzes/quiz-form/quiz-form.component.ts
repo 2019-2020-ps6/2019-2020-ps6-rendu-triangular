@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
-import { QuizService } from '../../../services/quiz.service';
-import { Quiz } from '../../../models/quiz.model';
+import {QuizService} from '../../../services/quiz.service';
+import {Quiz} from '../../../models/quiz.model';
 
 @Component({
   selector: 'app-quiz-form',
@@ -31,6 +31,7 @@ export class QuizFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.quizService.quizzes$.next(this.quizService.getQuizList());
   }
 
   addQuiz() {

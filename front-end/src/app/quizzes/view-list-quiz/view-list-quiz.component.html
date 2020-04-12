@@ -1,0 +1,6 @@
+<input class="button-card btn-primary" routerLink="/quiz-form" type="button" value="Back"/>
+<div class="quiz-list">
+  <div *ngFor="let quiz of quizList" class="d-inline-block quiz" id="quiz">
+    <app-view-quiz (quizSelected)="quizSelected($event)" [quiz]="quiz"></app-view-quiz>
+  </div>
+</div>

@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {Routes, RouterModule} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {QuizListComponent} from './quizzes/quiz-list/quiz-list.component';
 import {QuizFormComponent} from './quizzes/quiz-form/quiz-form.component';
 import {EditQuizComponent} from './quizzes/edit-quiz/edit-quiz.component';
@@ -12,6 +11,10 @@ import {AproposComponent} from './main/apropos/apropos.component';
 import {LancementComponent} from './main/lancement/lancement.component';
 import {QuizComponent} from './quizzes/quiz/quiz.component';
 import {PageNotFoundComponent} from './main/page-not-found/page-not-found.component';
+import {ModifyQuizComponent} from "./quizzes/modify-quiz/modify-quiz.component";
+import {ViewListQuizComponent} from "./quizzes/view-list-quiz/view-list-quiz.component";
+import {ResultatsComponent} from "./main/resultats/resultats.component";
+import {ResultatsRecordComponent} from "./main/resultats-record/resultats-record.component";
 
 
 const routes: Routes = [
@@ -19,13 +22,17 @@ const routes: Routes = [
   {path: 'quiz-form', component: QuizFormComponent},
   {path: 'edit-quiz/:id', component: EditQuizComponent},
   {path: 'quiz', component: QuizComponent},
+  {path: 'modify-quiz/:id', component: ModifyQuizComponent},
   {path: 'question-list', component: QuestionListComponent},
   {path: 'question-form', component: QuestionFormComponent},
   {path: 'question', component: QuestionComponent},
   {path: 'apropos', component: AproposComponent},
-  {path: 'lancement', component: LancementComponent},
+  {path: 'view-list-quiz', component: ViewListQuizComponent},
+  {path: 'lancement/:id', component: LancementComponent},
   {path: '', redirectTo: '/accueil', pathMatch: 'full'},
   {path: 'accueil', component: AcceuilComponent},
+  {path: 'resultats-record', component: ResultatsRecordComponent},
+  {path: 'resultats/:id', component: ResultatsComponent},
   {path: '**', component: PageNotFoundComponent},
 
 ];
@@ -36,4 +43,7 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 // tslint:disable-next-line:max-line-length
-export const routingComponents = [QuizFormComponent, QuizListComponent, EditQuizComponent, QuestionListComponent, QuestionFormComponent, PageNotFoundComponent, AcceuilComponent, AproposComponent];
+export const routingComponents = [QuizFormComponent, QuizListComponent, EditQuizComponent, QuestionListComponent,
+  QuestionFormComponent, PageNotFoundComponent, AcceuilComponent,
+  AproposComponent, ModifyQuizComponent,
+  LancementComponent, ResultatsComponent, ResultatsRecordComponent];

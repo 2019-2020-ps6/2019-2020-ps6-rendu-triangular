@@ -1,27 +1,38 @@
-<div class="card">
+<div class="card ">
   <h2>Create a new question</h2>
-  <form class="quiz-form" [formGroup]="questionForm">
-    <label for="label">
-      Title <br>
-      <input class="input-custom" type="text" id="label" [formControlName]="'label'">
-    </label>
-    <br>
-    <button class="button-card" (click)="addAnswer()">Add Answer</button>
-    <div class="answer" formArrayName="answers">
-      <div *ngFor="let address of answers.controls; let i=index">
-        <div class="answer-form" [formGroupName]="i">
-          <label>
-            Answer
-            <input type="text" [formControlName]="'value'">
-            <br>
-            Correct
-            <input type="checkbox" [formControlName]="'isCorrect'">
-          </label>
+  <div class="row">
+    <form [formGroup]="questionForm" class="quiz-form col-sm">
+      <label for="label">
+        Title <br>
+        <input [formControlName]="'label'" class="input-custom" id="label" type="text">
+      </label>
+      <br>
+      <button (click)="addAnswer()" class="button-card">Add Answer</button>
+      <div class="answer" formArrayName="answers">
+        <div *ngFor="let address of answers.controls; let i=index">
+          <div [formGroupName]="i" class="answer-form">
+            <label>
+              Answer
+              <input [formControlName]="'value'" type="text">
+              <br>
+              Correct
+              <input [formControlName]="'isCorrect'" type="checkbox">
+            </label>
+          </div>
         </div>
       </div>
-    </div>
-    <button type="submit" class="button-card" (click)="addQuestion()">Create</button>
-  </form>
+
+      <button (click)="addQuestion()" class="btn-primary" type="submit">Create</button>
+    </form>
+
+    <form>
+      <div class="form-group col-sm">
+        <label class="text-secondary" for="exampleFormControlFile1">Ajouter une image (optionel)</label>
+        <input class="form-control-file" id="exampleFormControlFile1" type="file">
+      </div>
+    </form>
+  </div>
+
 </div>
 
 <!-- Uncomment below to see your form structure and how it changes-->

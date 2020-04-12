@@ -1,10 +1,11 @@
-import {Injectable, Output} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import { Quiz } from '../models/quiz.model';
-import { QUIZ_LIST } from '../mocks/quiz-list.mock';
-import { Question } from '../models/question.model';
-import { serverUrl, httpOptionsBase } from '../configs/server.config';
+import {Quiz} from '../models/quiz.model';
+import {QUIZ_LIST} from '../mocks/quiz-list.mock';
+import {Question} from '../models/question.model';
+import {httpOptionsBase} from '../configs/server.config';
+import {LancementComponent} from "../app/main/lancement/lancement.component";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,11 @@ export class QuizService {
    */
   private quizzes: Quiz[] = QUIZ_LIST;
 
+  userAnswers: LancementComponent;
+
+  getAnswerArray() {
+    return this.userAnswers.getUserArrayOfAnswercopy();
+  }
 
 
   /**
@@ -53,8 +59,9 @@ export class QuizService {
   }
 
     addQuiz(quiz: Quiz) {
-    this.http.post<Quiz>(this.quizUrl, quiz, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
-  }
+      this.http.post<Quiz>(this.quizUrl, quiz, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
+      this.updateQuizzes(quiz, this.quizzes.indexOf(quiz));
+    }
 
   public getJSON(): Observable<any> {
     return this.http.get('http://localhost:9428/api/quizzes');
@@ -76,10 +83,11 @@ export class QuizService {
     }
   }
 
-  editQuiz(quiz: Quiz) {
-    const urlWithId = this.quizUrl + '/' + quiz.id;
-    this.http.put<Quiz>(urlWithId, this.httpOptions).subscribe( () => this.setQuizzesFromUrl());
-    }
+  editQuiz(oldQuiz: Quiz, newQuiz: Quiz) {
+    const urlWithId = this.quizUrl + '/' + oldQuiz.id;
+    const neUrlId = this.quizUrl + '/' + newQuiz.id;
+    this.http.put<Quiz>(urlWithId, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
+  }
 
   addQuestion(quiz: Quiz, question: Question) {
     const questionUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath;
@@ -93,10 +101,13 @@ export class QuizService {
     this.updateQuizzes(quiz, this.quizzes.indexOf(quiz));
   }
 
+  public getQuizList(): Quiz[] {
+    return this.quizzes;
+  }
 
   /** Note: The functions below don't interact with the server. It's an example of implementation for the exercice 10.
 
-  addQuestion(quiz: Quiz, question: Question) {
+   addQuestion(quiz: Quiz, question: Question) {
     quiz.questions.push(question);
     const index = this.quizzes.findIndex((q: Quiz) => q.id === quiz.id);
     if (index) {
@@ -104,7 +115,7 @@ export class QuizService {
     }
   }
 
-  deleteQuestion(quiz: Quiz, question: Question) {
+   deleteQuestion(quiz: Quiz, question: Question) {
     const index = quiz.questions.findIndex((q) => q.label === question.label);
     if (index !== -1) {
       quiz.questions.splice(index, 1)
@@ -115,6 +126,7 @@ export class QuizService {
   private updateQuizzes(quiz: Quiz, index: number) {
     this.quizzes[index] = quiz;
     this.quizzes$.next(this.quizzes);
+
   }
 
 }

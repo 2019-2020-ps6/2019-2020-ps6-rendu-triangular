@@ -1,9 +1,17 @@
 <!--<app-quiz-form></app-quiz-form>-->
-<button class="button-card bg-primary" routerLink="/quiz-form">Back</button>
+<input class="button-card btn-primary" routerLink="/quiz-form" type="button" value="Back"/>
+
 <div class="quiz-list">
-    <div class="quiz" *ngFor="let quiz of quizList">
-        <!--Inputs & Output allow communication between parent & child components.-->
-        <!--More information: https://angular.io/guide/component-interaction-->
-        <app-quiz [quiz]="quiz" (quizSelected)="quizSelected($event)" (deleteQuiz)="deleteQuiz($event)" (editQuiz)="editQuiz($event)" (modifyQuiz)="modifyQuiz($event)" ></app-quiz>
+  <div *ngIf="quizList.length === 0">
+    <div class="display-1">
+      Aucun Quiz
     </div>
   </div>
+
+  <div *ngFor="let quiz of quizList" class="quiz">
+    <!--Inputs & Output allow communication between parent & child components.-->
+    <!--More information: https://angular.io/guide/component-interaction-->
+    <app-quiz (deleteQuiz)="deleteQuiz($event)" (editQuiz)="editQuiz($event)" (modifyQuiz)="modifyQuiz($event)"
+              (quizSelected)="quizSelected($event)" [quiz]="quiz"></app-quiz>
+  </div>
+</div>

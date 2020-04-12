@@ -1,0 +1,9 @@
+<div class="card">
+  <h2>
+    <i class="fab fa-leanpub"></i>
+    {{question.label}}
+  </h2>
+  <div *ngFor="let answer of question.answers; let i=index" class="answer">
+    {{i + 1}} - {{answer.value}} <br>
+  </div>
+</div>

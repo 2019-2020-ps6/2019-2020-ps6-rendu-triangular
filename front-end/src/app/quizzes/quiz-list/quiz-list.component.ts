@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { QuizService } from '../../../services/quiz.service';
-import { Quiz } from '../../../models/quiz.model';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {QuizService} from '../../../services/quiz.service';
+import {Quiz} from '../../../models/quiz.model';
 
 @Component({
   selector: 'app-quiz-list',
@@ -19,6 +19,7 @@ export class QuizListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.quizService.quizzes$.next(this.quizService.getQuizList());
   }
 
   quizSelected(selected: boolean) {
@@ -34,6 +35,6 @@ export class QuizListComponent implements OnInit {
   }
 
   modifyQuiz(quiz: Quiz){
-    this.quizService.editQuiz(quiz);
+    this.router.navigate(['/modify-quiz/' + quiz.id]);
   }
 }

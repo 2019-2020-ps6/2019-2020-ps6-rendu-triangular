@@ -1,5 +1,15 @@
 .quiz-list {
   display: flex;
   font-family: Candara, monospace;
+}
 
+button {
+  background-image: url('/front-end/src/assets/name.png');
+  height: 50px;
+  width: 50px;
+}
+
+#id {
+  height: 50px;
+  width: 50px;
 }

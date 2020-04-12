@@ -1,7 +1,35 @@
 @import '../../../styles/card.scss';
 
 .edit {
-    margin-left: 0.3em;
+  margin-left: 0.3em;
   font-family: Candara, monospace;
+}
 
+.card {
+  padding: 5%;
+  background-color: royalblue;
+  //background: #0062cc;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 25px;
+}
+
+h2 {
+  color: #e3dcdc;
+}
+
+button {
+  border-radius: 1rem;
+  padding: 1.5%;
+  border: none;
+  cursor: pointer;
+  display: block;
+  float: left;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 35px;
+}
+
+#lastButton {
+  margin-left: 80px;
+  margin-top: 15px;
 }

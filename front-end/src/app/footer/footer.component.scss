@@ -1,17 +1,18 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
-
 .container-fluid, #copyright {
-  background-color: #313431;
+  //background-color: #313431;
   color: #dddddd;
-  font-size: medium;
+  font-size: 25px;
+  background-image: url("https://wallpapertag.com/wallpaper/full/9/9/4/870041-cool-solid-black-wallpaper-1920x1080-1920x1080.jpg");
+
 }
 
 #PhraseEHPAD {
-  line-height: 1.7rem;
-  text-decoration: underline ;
-  color: #3ba347;
-  font-weight: bold;
+  line-height: 1.3rem;
+  text-decoration: underline;
+  color: #ffffff;
+  font-weight: lighter;
   font-size: 25px;
 }
 

@@ -1,1 +1,28 @@
-<p>lancement works!</p>
+<ng-container *ngIf="quiz">
+  <h2>{{quiz.name}}</h2>
+
+  <div *ngFor="let question of quiz.questions; index as i">
+    <app-view-question [question]="question"></app-view-question>
+    <form class="form-inline">
+      <div class="form-group mb-2">
+        <label class="sr-only" for="ChampRéponse">Réponse</label>
+        <input class="form-control-plaintext" id="ChampRéponse" readonly type="text" value="Réponse:">
+      </div>
+      <div class="form-group  mb-2">
+        <label class="sr-only" for="Réponse">Réponse</label>
+        <input (keyup)="onInput($event)" class="form-control" id="Réponse" placeholder="Entrer un numéro" type="text">
+      </div>
+      <div class="form-check">
+        <label for="materialIndeterminate2"></label><input class="form-check-input" id="materialIndeterminate2"
+                                                           type="checkbox">
+      </div>
+    </form>
+  </div>
+
+  <button class="button-card btn btn-primary btn-lg active" routerLink="resultats/{{quiz.id}}" routerLinkActive="active"
+          type="submit"> Terminer
+  </button>
+
+</ng-container>
+
+

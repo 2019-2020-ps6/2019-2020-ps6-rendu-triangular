@@ -1,0 +1,25 @@
+<div class="card" id="view">
+  <h2>
+    <i class="far fa-address-card"></i>
+    Nom : {{quiz.name}}
+  </h2>
+  <h2>
+    <i class="fas fa-atlas"></i>
+    Thème : {{quiz.theme}}
+  </h2>
+  <h2>
+    <i class="far fa-question-circle"></i>
+    Questions : {{quiz.questions.length}}
+  </h2>
+  <div *ngIf="quiz.questions.length === 0; else second">
+    <button (click)="selectQuiz()" class="button-card btn btn-primary btn-lg " disabled
+            routerLink="/lancement/{{quiz.id}}" routerLinkActive="active">Selectionner
+    </button>
+  </div>
+
+  <ng-template #second>
+    <button (click)="selectQuiz()" class="button-card btn btn-primary btn-lg " routerLink="/lancement/{{quiz.id}}"
+            routerLinkActive="active">Selectionner
+    </button>
+  </ng-template>
+</div>

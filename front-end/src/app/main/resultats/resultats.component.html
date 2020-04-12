@@ -1,0 +1,11 @@
+<div class="text-primary">
+  <h1>{{quiz.name}}</h1>
+  <app-view-quiz [quiz]="quiz"></app-view-quiz>
+  <div *ngFor="let question of quiz.questions">
+    <app-view-question [quiz]="quiz"></app-view-question>
+  </div>
+  <div class="text-secondary">
+    <h4>Score : {{pointsGagne}} </h4>
+  </div>
+</div>
+
