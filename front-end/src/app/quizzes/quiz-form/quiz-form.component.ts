@@ -41,4 +41,9 @@ export class QuizFormComponent implements OnInit {
     this.quizService.addQuiz(quizToCreate);
   }
 
+  takeImageUrl() {
+    let url = document.getElementById("exampleFormControlFile1");
+
+  }
+
 }

@@ -11,11 +11,10 @@
     <i class="far fa-question-circle"></i>
     Questions : {{quiz.questions.length}}
   </h2>
-  <button (click)="selectQuiz()" class="button-card">Selectionner</button>
+  <!--<button (click)="selectQuiz()" class="button-card">Selectionner</button>-->
+  <button (click)="edit()" class="button-card edit" id="lastButton" routerLink="/edit-quiz/{{quiz.id}}">
+    Ajouter une question
+  </button>
   <button (click)="delete()" class="button-card">Supprimer</button>
   <button (click)="modify()" class="button-card " routerLink="/modify-quiz/{{quiz.id}}">Modifier</button>
-  <button (click)="edit()" class="button-card edit" id="lastButton" routerLink="/edit-quiz/{{quiz.id}}">
-    Ajouter/Supprimer une question
-  </button>
-
 </div>

@@ -2,10 +2,16 @@
 .card {
   font-family: "Candara", Helvetica, Arial, sans-serif;
   padding: 60px;
+
+}
+
+.card:hover {
+  background-color: #3f51b5;
 }
 
 #view {
   border-radius: 25px;
   color: #e3dcdc;
-  background-color: #3f51b5;
+  //background: url("https://cdn.imgbin.com/7/19/12/imgbin-question-mark-icon-question-mark-question-marks-illustration-UGYvNpwk10jy8u73x76pDBz5X.jpgg");
+  background: url("https://medias.liberation.fr/photo/1269696-p-tit-libe-les-droits-de-l-enfant-menu-quiz.png?modified_at=1573658071&ratio_x=03&ratio_y=02&width=750");
 }

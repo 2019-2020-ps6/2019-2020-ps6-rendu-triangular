@@ -1,22 +1,31 @@
 
-<div class="container-fluid">
-  <div class="col-md-6 login-form-2">
-    <h1 class="display-4">Création d'un quiz</h1>
-    <form class="quiz-form" [formGroup]="quizForm">
-      <div class="form-group">
-        <input [formControlName]="'name'" class="form-control" id="name" placeholder="Nom" type="text" value=""/>
-      </div>
-      <div class="form-group">
-        <input [formControlName]="'theme'" class="form-control" id="theme" placeholder="Thème" type="text" value=""/>
-      </div>
-      <div class="form-group">
-        <input (click)="addQuiz() " class="btnSubmit" routerLink="/quiz-list" routerLinkActive="active" type="submit"
-               value="Creer"/>
-      </div>
+<div class="container-fluid bg-light " id="form">
+  <article class="d-flex justify-content-center container">
+    <div class="col-md-6 login-form-2 ">
+      <h1 class="display-4 text-dark">Création d'un quiz</h1>
+      <form [formGroup]="quizForm" class="quiz-form">
+        <div class="form-group ">
+          <input [formControlName]="'name'" class="form-control" id="name" placeholder="Nom" type="text" value=""/>
+        </div>
+        <div class="form-group">
+          <input [formControlName]="'theme'" class="form-control" id="theme" placeholder="Thème" type="text" value=""/>
+        </div>
+        <div class="form-group col-sm">
+          <label class="text-secondary" for="exampleFormControlFile1">Ajouter une image (optionel)</label>
+          <input class="form-control-file" id="exampleFormControlFile1" type="file">
+        </div>
+        <div class="form-group">
+          <input (click)="addQuiz() " class="btnSubmit" routerLink="/quiz-list" routerLinkActive="active" type="submit"
+                 value="Creer"/>
+        </div>
 
-    </form>
-  </div>
+      </form>
+    </div>
+  </article>
 </div>
+
+
+
 
 <!-- Uncomment below to see your form structure and how it changes-->
 <!-- <br><br>{{quizForm.getRawValue() | json}} -->

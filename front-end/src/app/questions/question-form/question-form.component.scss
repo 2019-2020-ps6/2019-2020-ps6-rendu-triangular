@@ -6,7 +6,20 @@
 
 }
 
+#File {
+  padding-left: 750px;
+}
+
+.card {
+  padding: 5%;
+  background: whitesmoke;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 25px;
+  display: block;
+}
+
 
 .container-fluid {
   font-family: Candara, monospace;
+
 }

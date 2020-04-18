@@ -1,18 +1,18 @@
-<div class="card ">
-  <h2>Create a new question</h2>
+<div class="card text-center text-primary">
+  <h2 class="text-center">Question</h2>
   <div class="row">
-    <form [formGroup]="questionForm" class="quiz-form col-sm">
+    <form [formGroup]="questionForm" class="quiz-form col-sm ">
       <label for="label">
-        Title <br>
-        <input [formControlName]="'label'" class="input-custom" id="label" type="text">
+        Titre <br>
+        <input [formControlName]="'label'" class="input-custom " id="label" type="text">
       </label>
       <br>
-      <button (click)="addAnswer()" class="button-card">Add Answer</button>
+      <button (click)="addAnswer()" class="button-card text-primary ">Ajouter les réponses</button>
       <div class="answer" formArrayName="answers">
         <div *ngFor="let address of answers.controls; let i=index">
           <div [formGroupName]="i" class="answer-form">
             <label>
-              Answer
+              Réponse
               <input [formControlName]="'value'" type="text">
               <br>
               Correct
@@ -22,15 +22,21 @@
         </div>
       </div>
 
-      <button (click)="addQuestion()" class="btn-primary" type="submit">Create</button>
-    </form>
-
-    <form>
-      <div class="form-group col-sm">
-        <label class="text-secondary" for="exampleFormControlFile1">Ajouter une image (optionel)</label>
-        <input class="form-control-file" id="exampleFormControlFile1" type="file">
+      <div class="File">
+        <input class="input-group input-file" id="File" type="file">
       </div>
+
+      <button (click)="addQuestion()" aria-pressed="true" class="btn-primary btn-lg active" data-toggle="button"
+              type="submit">Creer
+      </button>
     </form>
+    <br>
+
+    <!--<div class="file">
+      <label class="text-secondary" for="exampleFormControlFile1">Ajouter une image (optionel)</label>
+    </div>-->
+
+
   </div>
 
 </div>

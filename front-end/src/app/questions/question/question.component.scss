@@ -1,5 +1,17 @@
 @import '../../../styles/card.scss';
 
-.card{
+.card {
   font-family: Candara, monospace;
+  padding: 5%;
+  background: #006fc2;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 25px;
+}
+
+.answer {
+  font-size: 25px;
+}
+
+#question-Image {
+  background: url("https://tidygreenclean.co.uk/wp-content/uploads/2017/12/QA-page-header-1.png");
 }

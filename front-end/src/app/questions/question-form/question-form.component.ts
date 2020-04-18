@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { QuizService } from '../../../services/quiz.service';
-import { Quiz } from 'src/models/quiz.model';
-import { Question } from 'src/models/question.model';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {QuizService} from '../../../services/quiz.service';
+import {Quiz} from 'src/models/quiz.model';
+import {Question} from 'src/models/question.model';
 
 @Component({
   selector: 'app-question-form',
@@ -50,6 +50,7 @@ export class QuestionFormComponent implements OnInit {
     if(this.questionForm.valid) {
       const question = this.questionForm.getRawValue() as Question;
       this.quizService.addQuestion(this.quiz, question);
+      this.quizService.updateQuizzes(this.quiz.id);
       this.initializeQuestionForm();
     }
   }

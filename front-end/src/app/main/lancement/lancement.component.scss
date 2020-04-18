@@ -1,10 +1,28 @@
 input[type=checkbox] {
-  /* Double-sized Checkboxes */
-  -ms-transform: scale(5); /* IE */
-  -moz-transform: scale(5); /* FF */
-  -webkit-transform: scale(5); /* Safari and Chrome */
-  -o-transform: scale(5); /* Opera */
+  -ms-transform: scale(5);
+  -moz-transform: scale(5);
+  -webkit-transform: scale(5);
+  -o-transform: scale(5);
   transform: scale(4);
   padding-left: 50px;
   left: 100%;
+}
+
+.quest {
+  margin-top: 100px;
+}
+
+#quiz {
+  min-height: 70vh;
+}
+
+#answerBox {
+  padding-left: 500px;
+}
+
+#suivantBtn, #finishBtn {
+  display: block;
+  position: relative;
+  float: right;
+  margin-top: 50px;
 }

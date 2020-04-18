@@ -1,46 +1,43 @@
-<div class="container-fluid">
-  <header>
-    <div class="navbar">
 
-      <div id="img-polytech">
-        <a href="http://unice.fr/polytechnice/fr#.Xneg7NOg-Hs" target="_blank" ><img src="../../assets/Polytech2.png" style="max-width: 100px" alt="Png Polytech"></a>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-light  " id="nav">
 
-      <div id="img-epdhad1">
-       <a href="#Accueil" routerLink="accueil" routerLinkActive="active"><img src="../../assets/ephad5.jpg" alt="image ephad"></a>
-      </div>
+  <a class="navbar-brand text-white lead" routerLink="accueil">PolyQuiz</a>
+  <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+          class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-      <div class="rubrique">
+  <div class="d-flex justify-content-end" id="header-left">
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active ">
+          <a class="nav-link  " routerLink="accueil">Accueil <span class="sr-only">(current)</span></a>
+        </li>
 
-        <div class="dropdown">
-          <button id="Gestion_quiz" class="btn dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >{{GestionQuiz}}</button>
-          <div class="dropdown-menu" id="content-quiz" aria-labelledby="Gestion_quiz">
-            <a class="dropdown-item" href="#" routerLink="quiz-form" >Créer un Quiz</a>
-            <a class="dropdown-item" href="#" routerLink="quiz-list">Voir/Modifier un Quiz</a>
+        <li class="nav-item dropdown">
+          <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle " data-toggle="dropdown"
+             href="#" id="navbarDropdown" role="button">
+            Quiz
+          </a>
+          <div aria-labelledby="navbarDropdown" class="dropdown-menu " id="quiz-content">
+            <a class="dropdown-item text-dark " routerLink="quiz-form">Créer un quiz</a>
+            <a class="dropdown-item text-dark" routerLink="view-list-quiz">Lancer un quiz</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-dark" routerLink="quiz-list">Voir les Quizzes</a>
           </div>
-          <a id="Accueil" routerLink="accueil" routerLinkActive="active"  >{{Accueil}}</a>
+        </li>
 
-        </div>
+        <li class="nav-item">
+          <a class="nav-link " routerLink="resultats-record">Resulats</a>
+        </li>
 
+        <li class="nav-item">
+          <a class="nav-link " routerLink="apropos">A Propos</a>
+        </li>
 
-        <div class="dropdown">
-          <a id="APropos" routerLink="apropos" routerLinkActive="active"  >{{APropos}}</a>
-
-          <button id="Lancement"  class="btn  dropdown-toggle" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >{{Lancement}}</button>
-          <div class="dropdown-menu " id="content-lancement" aria-labelledby="Lancement">
-            <a class="dropdown-item" href="#" routerLink="view-list-quiz" routerLinkActive="active">Lancer un Quiz</a>
-            <a class="dropdown-item" routerLink="resultats-record" routerLinkActive="active">Résultats</a>
-          </div>
-
-        </div>
-      </div>
-
+      </ul>
     </div>
-  </header>
+  </div>
 
-
-
-</div>
-
-
+</nav>
 

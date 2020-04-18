@@ -1,28 +1,109 @@
-<ng-container *ngIf="quiz">
-  <h2>{{quiz.name}}</h2>
+<div *ngIf="quiz" class="container-fluid" id="quiz">
+  <h2 class="text-center display-4">Thème : {{quiz.name}}</h2>
 
   <div *ngFor="let question of quiz.questions; index as i">
-    <app-view-question [question]="question"></app-view-question>
-    <form class="form-inline">
-      <div class="form-group mb-2">
-        <label class="sr-only" for="ChampRéponse">Réponse</label>
-        <input class="form-control-plaintext" id="ChampRéponse" readonly type="text" value="Réponse:">
+
+    <div *ngIf="i == nombre" class="quest">
+      <app-view-question [question]="question"></app-view-question>
+
+      <form class="form-inline text-center" id="answerBox">
+        <div class="form-group mb-2">
+          <label class="sr-only" for="ChampRéponse">Réponse</label>
+          <input class="form-control-plaintext" id="ChampRéponse" readonly type="text" value="  ">
+        </div>
+        <div class="form-group  mb-2">
+          <label class="sr-only" for="Réponse">Réponse</label>
+          <input (keyup)="onInput($event)" class="form-control" id="Réponse" placeholder="Entrer un numéro" type="text">
+        </div>
+        <div class="form-check">
+          <!--<label for="checkbox"></label><input class="form-check-input" id="checkbox"
+                                                             type="checkbox" >-->
+          <button (click)="processUserAnswer()" class="bbtn btn-primary btn-warning " data-target="#modalRéponse"
+                  data-toggle="modal"
+                  id="verifier">Vérifier
+          </button>
+        </div>
+      </form>
+
+
+      <div *ngIf="nombre!=quiz.questions.length-1; else last" class="row">
+        <div class="col">
+          <button (click)="increment()" class="button-card btn btn-primary btn-lg active "
+                  id="suivantBtn" type="submit"> Suivant
+          </button>
+        </div>
       </div>
-      <div class="form-group  mb-2">
-        <label class="sr-only" for="Réponse">Réponse</label>
-        <input (keyup)="onInput($event)" class="form-control" id="Réponse" placeholder="Entrer un numéro" type="text">
-      </div>
-      <div class="form-check">
-        <label for="materialIndeterminate2"></label><input class="form-check-input" id="materialIndeterminate2"
-                                                           type="checkbox">
-      </div>
-    </form>
+
+      <ng-template #last class="row">
+        <div class="col">
+          <button (click)="increment()" class="button-card btn btn-primary btn-lg active " data-target="#ModalRejouer"
+                  data-toggle="modal"
+                  id="finishBtn" type="submit"> Terminer
+          </button>
+        </div>
+      </ng-template>
+
+
+    </div>
+
   </div>
 
-  <button class="button-card btn btn-primary btn-lg active" routerLink="resultats/{{quiz.id}}" routerLinkActive="active"
+  <!--<button class="button-card btn btn-danger btn-lg active" routerLink="resultats/" routerLinkActive="active"
           type="submit"> Terminer
-  </button>
+  </button>-->
 
-</ng-container>
+</div>
 
+<!-- Modal pour réponses -->
+<div class="modal fade" id="modalRéponse" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal" type="button">&times;</button>
+        <h4 class="modal-title text-left">Réponse</h4>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="answerIsCorrect == true; else wrongAnswer">
+          <p>Bonne réponse</p>
+        </div>
+
+        <ng-template #wrongAnswer>
+          <p>Mauvaise réponse</p>
+        </ng-template>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal pour Rejouer la partie -->
+<div class="modal fade" id="ModalRejouer" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal" type="button">&times;</button>
+        <h4 class="modal-title text-left">Voulez Vous continuer ?</h4>
+      </div>
+      <div class="modal-body">
+        <!-- Affichage des résulats du quiz -->
+        <p> Score : {{scoreFinal}} / {{quiz.questions.length}}</p>
+        <p>Number of Failures : {{numberOfFails}}</p>
+      </div>
+      <div class="modal-footer">
+        <button (click)="refreshComponent()" class="btn btn-warning" data-dismiss="modal"
+                routerLink="../../lancement/{{quiz.id}}" routerLinkActive="true" type="button">Rejouer
+        </button>
+        <button class="btn btn-primary" data-dismiss="modal" routerLink="../../view-list-quiz" routerLinkActive="true"
+                type="button">Arreter
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 

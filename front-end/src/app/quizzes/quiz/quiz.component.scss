@@ -11,6 +11,8 @@
   //background: #0062cc;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
   border-radius: 25px;
+  width: auto;
+  height: auto;
 }
 
 h2 {
@@ -19,17 +21,16 @@ h2 {
 
 button {
   border-radius: 1rem;
-  padding: 1.5%;
+  padding: 50px;
   border: none;
-  cursor: pointer;
   display: block;
-  float: left;
+  float: right;
   text-align: center;
   text-decoration: none;
-  margin-right: 35px;
+  //margin-right: 35px;
 }
 
-#lastButton {
+/*#lastButton {
   margin-left: 80px;
   margin-top: 15px;
-}
+}*/

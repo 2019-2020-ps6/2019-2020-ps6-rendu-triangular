@@ -8,10 +8,37 @@
   color: white;
 }
 
+#nav {
+  background-color: #323232;
+  color: black;
+}
+
+
+#dropdown-Content a:hover {
+  background-color: lightgray;
+}
+
+#header-left a:hover {
+  background-color: #575757;
+  color: whitesmoke;
+}
+
+#quiz-content a:hover {
+  background-color: #e2dfdf;
+}
+
+#header-left a {
+  color: white;
+}
+
 .header {
   background: teal;
   padding: 0.5em;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+}
+
+#header-left {
+  padding-left: 1300px;
 }
 
 
@@ -23,7 +50,7 @@ header {
   //background-color: whitesmoke;
   font-size: 100px;
   padding-bottom: 15px;
-  background-image: url("http://getwallpapers.com/wallpaper/full/7/2/7/662622.jpg");
+  //background-image: url("http://getwallpapers.com/wallpaper/full/7/2/7/662622.jpg");
 
 }
 
@@ -110,5 +137,7 @@ header::after {
 }
 
 .container-fluid {
-  background-image: url("http://getwallpapers.com/wallpaper/full/7/2/7/662622.jpg");
+  //background-image: url("http://getwallpapers.com/wallpaper/full/7/2/7/662622.jpg");
 }
+
+

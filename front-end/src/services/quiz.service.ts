@@ -60,7 +60,7 @@ export class QuizService {
 
     addQuiz(quiz: Quiz) {
       this.http.post<Quiz>(this.quizUrl, quiz, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
-      this.updateQuizzes(quiz, this.quizzes.indexOf(quiz));
+      this.updateQuizzes(quiz.id);
     }
 
   public getJSON(): Observable<any> {
@@ -85,26 +85,25 @@ export class QuizService {
 
   editQuiz(oldQuiz: Quiz, newQuiz: Quiz) {
     const urlWithId = this.quizUrl + '/' + oldQuiz.id;
-    const neUrlId = this.quizUrl + '/' + newQuiz.id;
+    const newUrlId = this.quizUrl + '/' + newQuiz.id;
     this.http.put<Quiz>(urlWithId, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
   }
 
   addQuestion(quiz: Quiz, question: Question) {
     const questionUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath;
     this.http.post<Question>(questionUrl, question, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id));
-    this.updateQuizzes(quiz, this.quizzes.indexOf(quiz));
   }
 
   deleteQuestion(quiz: Quiz, question: Question) {
     const questionUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + question.id;
     this.http.delete<Question>(questionUrl, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id));
-    this.updateQuizzes(quiz, this.quizzes.indexOf(quiz));
   }
 
   public getQuizList(): Quiz[] {
     return this.quizzes;
   }
 
+  // @ts-ignore
   /** Note: The functions below don't interact with the server. It's an example of implementation for the exercice 10.
 
    addQuestion(quiz: Quiz, question: Question) {
@@ -123,10 +122,8 @@ export class QuizService {
     }
   }
    **/
-  private updateQuizzes(quiz: Quiz, index: number) {
-    this.quizzes[index] = quiz;
-    this.quizzes$.next(this.quizzes);
-
+  public updateQuizzes(quizId: string) {
+    const urlWithId = this.quizUrl + '/' + quizId;
+    this.http.get<Quiz>(urlWithId).subscribe(() => this.setQuizzesFromUrl());
   }
-
 }

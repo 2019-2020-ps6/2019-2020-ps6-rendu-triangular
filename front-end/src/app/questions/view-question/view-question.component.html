@@ -1,9 +1,11 @@
-<div class="card">
-  <h2>
-    <i class="fab fa-leanpub"></i>
+<div class="card container">
+
+  <h2 class="text-center ">
+    <img alt="question Image" id="question-Image"
+         src="https://tidygreenclean.co.uk/wp-content/uploads/2017/12/QA-page-header-1.png">
     {{question.label}}
   </h2>
-  <div *ngFor="let answer of question.answers; let i=index" class="answer">
+  <div *ngFor="let answer of question.answers; let i=index" class="answer text-center lead">
     {{i + 1}} - {{answer.value}} <br>
   </div>
 </div>
