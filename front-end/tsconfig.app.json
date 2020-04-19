@@ -6,8 +6,7 @@
   },
   "files": [
     "src/main.ts",
-    "src/polyfills.ts",
-    "../../../../../../AppData/Roaming/JetBrains/WebStorm2020.1/javascript/extLibs/global-types/node_modules/@types/jquery/misc.d.ts"
+    "src/polyfills.ts"
   ],
   "include": [
     "src/**/*.ts"
