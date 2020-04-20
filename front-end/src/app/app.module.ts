@@ -24,6 +24,7 @@ import {ViewQuizComponent} from './quizzes/view-quiz/view-quiz.component';
 import {ViewQuestionComponent} from './questions/view-question/view-question.component';
 import {ResultatsComponent} from './main/resultats/resultats.component';
 import {ResultatsRecordComponent} from './main/resultats-record/resultats-record.component';
+import {DescriptionAccueilComponent} from './main/acceuil/description-accueil/description-accueil.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import {ResultatsRecordComponent} from './main/resultats-record/resultats-record
     ViewQuestionComponent,
     ResultatsComponent,
     ResultatsRecordComponent,
+    DescriptionAccueilComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,9 @@
 
 <nav class="navbar navbar-expand-lg navbar-light  " id="nav">
 
-  <a class="navbar-brand text-white lead" routerLink="accueil">PolyQuiz</a>
+  <i (click)="manageNav()" class="fa fa-reorder" id="sidenavTrigger" style="font-size: 24px"></i>
+
+  <a class="navbar-brand text-white lead" id="Polyquiz" routerLink="accueil">PolyQuiz</a>
   <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
           class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
     <span class="navbar-toggler-icon"></span>
@@ -11,7 +13,8 @@
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active ">
-          <a class="nav-link  " routerLink="accueil">Accueil <span class="sr-only">(current)</span></a>
+          <a class="nav-link  " routerLink="accueil" routerLinkActive="active">Accueil <span
+            class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item dropdown">
@@ -28,11 +31,11 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " routerLink="resultats-record">Resulats</a>
+          <a class="nav-link " routerLink="resultats-record" routerLinkActive="active">Resulats</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " routerLink="apropos">A Propos</a>
+          <a class="nav-link " routerLink="apropos" routerLinkActive="active">A Propos</a>
         </li>
 
       </ul>
@@ -40,4 +43,25 @@
   </div>
 
 </nav>
+
+<div #sidebar [ngStyle]="{'visibility': toggle()}" id="sidebar-wrapper">
+
+  <ul (mouseleave)="mouseLeaveQuizDropdown()" class="sidebar-nav">
+    <li><a (click)="closeNav()" routerLink="accueil" routerLinkActive="active">Accueil</a></li>
+    <li>
+      <a (mouseenter)="mouseEnterQuizDropdown()" class="dropdown-btn">Quiz<i class="fa fa-caret-down"></i></a>
+      <div *ngIf="showdropdownContent" class="dropdown-container">
+        <a (click)="closeNav()" class="dropdown-item text-secondary " routerLink="quiz-form">Créer un quiz</a>
+        <a (click)="closeNav()" class="dropdown-item text-secondary" routerLink="view-list-quiz">Lancer un quiz</a>
+        <a (click)="closeNav()" class="dropdown-item text-secondary" routerLink="quiz-list">Voir les Quizzes</a>
+      </div>
+    </li>
+    <li><a (click)="closeNav()" routerLink="resultats-record" routerLinkActive="active">Résultats</a>
+    </li>
+    <li><a (click)="closeNav()" routerLink="apropos" routerLinkActive="active">A propos</a>
+    </li>
+  </ul>
+</div>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 

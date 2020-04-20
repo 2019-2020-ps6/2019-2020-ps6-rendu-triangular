@@ -1,9 +1,5 @@
 @import "../../styles/variables";
 
-/**
- Use :host to apply some style to your entire component #24c6dc, #514a9d
- #0f0c29, #302b63, #24243e linear-gradient(to right,#302b63, #0f0c29, #302b63);
- */
 :host {
   color: white;
 }
@@ -13,6 +9,32 @@
   color: black;
 }
 
+#sidenavTrigger {
+}
+
+#Polyquiz {
+  margin-left: 30px;
+}
+
+#sidenavTrigger {
+  color: white;
+}
+
+#sidenavTrigger:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.sidebar-wrapper {
+  height: max-content;
+  position: fixed;
+  animation-name: expand;
+  animation-duration: 4s;
+}
+
+@keyframes expand {
+
+}
 
 #dropdown-Content a:hover {
   background-color: lightgray;
@@ -78,6 +100,130 @@ header::after {
   border: 1px solid black;
 }
 
+
+#wrapper {
+  padding-left: 250px;
+  transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper {
+  margin-left: -250px;
+  left: 250px;
+  width: 250px;
+  background: #000;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
+  //transition: all 0.4s ease 0s;
+}
+
+@keyframes ex {
+
+}
+
+#page-content-wrapper {
+  width: 100%;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-nav li {
+  line-height: 40px;
+  text-indent: 20px;
+}
+
+.sidebar-nav li a {
+  color: #999999;
+  display: block;
+  text-decoration: none;
+}
+
+.sidebar-nav li a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+  height: 65px;
+  line-height: 60px;
+  font-size: 18px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+  color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+
+.content-header {
+  height: 65px;
+  line-height: 65px;
+}
+
+.content-header h1 {
+  margin: 0;
+  margin-left: 20px;
+  line-height: 65px;
+  display: inline-block;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.inset {
+  padding: 20px;
+}
+
+@media (max-width: 767px) {
+
+  #wrapper {
+    padding-left: 0;
+  }
+
+  #sidebar-wrapper {
+    left: 0;
+  }
+
+  #wrapper.active {
+    position: relative;
+    left: 250px;
+  }
+
+  #wrapper.active #sidebar-wrapper {
+    left: 250px;
+    width: 250px;
+    transition: all 0.4s ease 0s;
+  }
+
+  #menu-toggle {
+    display: inline-block;
+  }
+
+  .inset {
+    padding: 15px;
+  }
+
+}
+
+/**
 #img-polytech {
   margin-top: 15px;
   padding-left: 300px;
@@ -138,6 +284,4 @@ header::after {
 
 .container-fluid {
   //background-image: url("http://getwallpapers.com/wallpaper/full/7/2/7/662622.jpg");
-}
-
-
+}**/

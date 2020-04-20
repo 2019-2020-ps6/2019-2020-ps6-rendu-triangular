@@ -1,0 +1,23 @@
+section {
+  min-height: 60vh;
+}
+
+#description {
+}
+
+section::before {
+  display: block;
+  content: " ";
+  margin-top: -65px;
+  height: 65px;
+  visibility: hidden;
+}
+
+#desc {
+  font-family: "Andale Mono", serif;
+  margin-top: 10vh;
+}
+
+#text {
+  margin-top: 5vh;
+}

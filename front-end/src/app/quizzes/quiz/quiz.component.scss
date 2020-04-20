@@ -7,30 +7,24 @@
 
 .card {
   padding: 5%;
-  background-color: royalblue;
+  background-color: #d1dbdb;
   //background: #0062cc;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
   border-radius: 25px;
   width: auto;
   height: auto;
+  min-width: 20vh;
 }
 
 h2 {
-  color: #e3dcdc;
+  color: #000000;
 }
 
 button {
   border-radius: 1rem;
   padding: 50px;
   border: none;
-  display: block;
-  float: right;
+  display: inline-block;
   text-align: center;
   text-decoration: none;
-  //margin-right: 35px;
 }
-
-/*#lastButton {
-  margin-left: 80px;
-  margin-top: 15px;
-}*/

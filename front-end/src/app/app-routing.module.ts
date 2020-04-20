@@ -15,6 +15,7 @@ import {ModifyQuizComponent} from "./quizzes/modify-quiz/modify-quiz.component";
 import {ViewListQuizComponent} from "./quizzes/view-list-quiz/view-list-quiz.component";
 import {ResultatsComponent} from "./main/resultats/resultats.component";
 import {ResultatsRecordComponent} from "./main/resultats-record/resultats-record.component";
+import {DescriptionAccueilComponent} from "./main/acceuil/description-accueil/description-accueil.component";
 
 
 const routes: Routes = [
@@ -30,16 +31,17 @@ const routes: Routes = [
   {path: 'view-list-quiz', component: ViewListQuizComponent},
   {path: 'lancement/:id', component: LancementComponent},
   {path: '', redirectTo: '/accueil', pathMatch: 'full'},
-  {path: 'accueil', component: AcceuilComponent},
   {path: 'resultats-record', component: ResultatsRecordComponent},
   {path: 'resultats/:id', component: ResultatsComponent},
+  {path: 'accueil', component: AcceuilComponent},
+  {path: 'description', component: DescriptionAccueilComponent},
   {path: '**', component: PageNotFoundComponent},
 
 ];
 
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forRoot(routes)]
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})]
 })
 export class AppRoutingModule { }
 // tslint:disable-next-line:max-line-length
