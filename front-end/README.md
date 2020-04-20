@@ -1,4 +1,4 @@
-# Starter Quiz
+# Poly Quiz
 
 ## Installation
 
