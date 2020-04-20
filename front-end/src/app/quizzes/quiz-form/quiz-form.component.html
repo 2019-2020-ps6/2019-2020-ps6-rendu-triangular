@@ -12,20 +12,21 @@
         </div>
         <div class="form-group col-sm">
           <label class="text-secondary" for="exampleFormControlFile1">Ajouter une image (optionel)</label>
-          <input class="form-control-file" id="exampleFormControlFile1" type="file">
+          <input (change)="takeImageUrl($event)" class="form-control-file" id="exampleFormControlFile1" type="file">
         </div>
+
         <div class="form-group">
           <input (click)="addQuiz() " class="btnSubmit" routerLink="/quiz-list" routerLinkActive="active" type="submit"
                  value="Creer"/>
         </div>
 
+        <img (change)="loadImage($event)" [src]="imagePreview" alt="Dropped Image" height=200 id="image" src="#"
+             width=300>
+
       </form>
     </div>
   </article>
 </div>
-
-
-
 
 <!-- Uncomment below to see your form structure and how it changes-->
 <!-- <br><br>{{quizForm.getRawValue() | json}} -->

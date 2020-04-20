@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 import {QuizService} from '../../../services/quiz.service';
@@ -11,23 +11,17 @@ import {Quiz} from '../../../models/quiz.model';
 })
 export class QuizFormComponent implements OnInit {
 
-  // Note: We are using here ReactiveForms to create our form. Be careful when you look for some documentation to
-  // avoid TemplateDrivenForm (another type of form)
-
-  /**
-   * QuizForm: Object which manages the form in our component.
-   * More information about Reactive Forms: https://angular.io/guide/reactive-forms#step-1-creating-a-formgroup-instance
-   */
   public quizForm: FormGroup;
+
+  imagePreview: string;
+  @ViewChild('image') imageContainer: ElementRef;
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
     this.quizForm = this.formBuilder.group({
       name: [''],
-      theme: ['']
+      theme: [''],
+      //image: [null]
     });
-    // You can also add validators to your inputs such as required, maxlength or even create your own validator!
-    // More information: https://angular.io/guide/reactive-forms#simple-form-validation
-    // Advanced validation: https://angular.io/guide/form-validation#reactive-form-validation
   }
 
   ngOnInit() {
@@ -41,9 +35,24 @@ export class QuizFormComponent implements OnInit {
     this.quizService.addQuiz(quizToCreate);
   }
 
-  takeImageUrl() {
-    let url = document.getElementById("exampleFormControlFile1");
-
+  takeImageUrl(event: Event) {
+    this.loadImage((event.target as HTMLInputElement).files[0]);
   }
+
+  loadImage(file) {
+    this.quizForm.get('image').patchValue(file);
+    this.quizForm.get('image').updateValueAndValidity();
+
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      if (this.quizForm.get('image').valid) {
+        this.imagePreview = reader.result as string;
+        //this.imageContainer.nativeElement.src = this.imagePreview;
+      }
+    }
+  }
+
 
 }

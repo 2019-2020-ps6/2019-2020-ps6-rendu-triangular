@@ -29,7 +29,6 @@ export class QuizService {
     return this.userAnswers.getUserArrayOfAnswercopy();
   }
 
-
   /**
    * Observable which contains the list of the quiz.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
@@ -45,6 +44,8 @@ export class QuizService {
   private httpOptions = httpOptionsBase;
 
   constructor(private http: HttpClient) {
+
+
     this.setQuizzesFromUrl();
     this.getJSON().subscribe(data => {
       console.log(data);

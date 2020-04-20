@@ -27,6 +27,9 @@ export class LancementComponent implements OnInit {
 
   answerIsCorrect: boolean;
 
+  isAtEnd: boolean
+
+
   @Output()
   scoreFinal: number;
   numberOfFails: number;
@@ -34,8 +37,8 @@ export class LancementComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private quizService: QuizService) {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
-
     //this.quizService.quizzes$.next(this.quizService.getQuizList());
+
   }
 
   ngOnInit(): void {
@@ -43,10 +46,16 @@ export class LancementComponent implements OnInit {
     this.quizService.setSelectedQuiz(id);
     this.userArrayOfAnswer = new Array();
     this.nombre = 0;
+    if (!this.isAtEnd)
+      this.checkerEvolution();
     this.scoreFinal = 0;
     this.numberOfFails = 0;
+    this.scoreEvolution();
     this.answerIsCorrect = false;
-
+    this.isAtEnd = false;
+    console.log("evolutionIndex :" + localStorage.getItem("evolutionIndex"));
+    console.log("is at end :" + this.isAtEnd);
+    console.log(this.answerIsCorrect);
   }
 
   onInput(event: KeyboardEvent) {
@@ -61,6 +70,9 @@ export class LancementComponent implements OnInit {
       console.log(this.userArrayOfAnswer);
     }
 
+    console.log("evolutionIndex :" + localStorage.getItem("evolutionIndex"));
+    console.log("is at end :" + this.isAtEnd);
+
   }
 
   public getUserArrayOfAnswercopy() {
@@ -68,20 +80,30 @@ export class LancementComponent implements OnInit {
   }
 
   increment() {
-    let modal = (<HTMLElement>document.getElementById("ModalRejouer"));
+    let finalBtn = (<HTMLButtonElement>document.getElementById("finishBtn"));
 
     if (this.answerIsCorrect) {
       this.nombre++;
+      localStorage.setItem("evolutionIndex", String(this.nombre));
+      localStorage.setItem("finalScore", String(this.scoreFinal));
+      localStorage.setItem("numberOfAttempts", String(this.numberOfFails));
+
+
       this.userArrayOfAnswer = [];
       this.answerIsCorrect = false;
-    } else if (this.nombre == this.quiz.questions.length - 1) {
-      //hide modal for the last question
-      //modal.hidden = true;
+    } else if (this.nombre === this.quiz.questions.length - 1) {
+      finalBtn.disabled = true;
+
+    } else if (this.nombre === this.quiz.questions.length) {
+      if (this.answerIsCorrect)
+        this.isAtEnd = true;
     }
+
   }
 
   processUserAnswer() {
     let questionAnswers = this.quiz.questions[this.nombre].answers;
+    let finalBtn = (<HTMLButtonElement>document.getElementById("finishBtn"));
 
     //First find the right answer
     for (let i = 0; i < questionAnswers.length; i++)
@@ -97,6 +119,8 @@ export class LancementComponent implements OnInit {
       let inputToDisable = (<HTMLInputElement>document.getElementById("Réponse"));
       inputToDisable.disabled = true;
       this.scoreFinal++;
+      if (finalBtn.disabled)
+        finalBtn.disabled = false;
 
     } else //Make a pop up wrong answer
     {
@@ -104,14 +128,27 @@ export class LancementComponent implements OnInit {
       this.numberOfFails++;
     }
 
-    console.log("nomber :" + this.nombre);
-    console.log("user input :" + this.userArrayOfAnswer[0]);
-    console.log("right answer :" + (this.rightAnswerIndex + 1));
     console.log("Answer is correct ? :" + this.answerIsCorrect);
+    console.log("evolutionIndex :" + localStorage.getItem("evolutionIndex"));
+    console.log("is at end ? :" + this.isAtEnd);
   }
 
   refreshComponent() {
+    localStorage.clear();
     window.location.reload();
+  }
+
+  checkerEvolution() {
+    this.nombre = Number(localStorage.getItem("evolutionIndex"));
+  }
+
+  scoreEvolution() {
+    this.scoreFinal = Number(localStorage.getItem("finalScore"));
+    this.numberOfFails = Number(localStorage.getItem("numberOfAttempts"));
+  }
+
+  emptyLocalStorage() {
+    localStorage.clear();
   }
 
 }

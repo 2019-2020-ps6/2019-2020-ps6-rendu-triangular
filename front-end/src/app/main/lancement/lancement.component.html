@@ -97,13 +97,11 @@
         <button (click)="refreshComponent()" class="btn btn-warning" data-dismiss="modal"
                 routerLink="../../lancement/{{quiz.id}}" routerLinkActive="true" type="button">Rejouer
         </button>
-        <button class="btn btn-primary" data-dismiss="modal" routerLink="../../view-list-quiz" routerLinkActive="true"
+        <button (click)="emptyLocalStorage()" class="btn btn-primary" data-dismiss="modal"
+                routerLink="../../view-list-quiz" routerLinkActive="true"
                 type="button">Arreter
         </button>
       </div>
     </div>
   </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-

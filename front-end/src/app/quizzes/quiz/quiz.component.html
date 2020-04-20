@@ -11,6 +11,10 @@
     <i class="far fa-question-circle"></i>
     Questions : {{quiz.questions.length}}
   </h2>
+  <div *ngIf="quiz.image">
+    {{quiz.image}}
+  </div>
+
   <!--<button (click)="selectQuiz()" class="button-card">Selectionner</button>-->
   <button (click)="edit()" class="button-card edit" id="lastButton" routerLink="/edit-quiz/{{quiz.id}}">
     Ajouter une question
