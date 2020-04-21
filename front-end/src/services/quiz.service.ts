@@ -12,27 +12,16 @@ import {LancementComponent} from "../app/main/lancement/lancement.component";
 })
 export class QuizService {
 
-  /**
-   * Services Documentation:
-   * https://angular.io/docs/ts/latest/tutorial/toh-pt4.html
-   */
-
-  /**
-   * The list of quiz.
-   * The list is retrieved from the mock.
-   */
   private quizzes: Quiz[] = QUIZ_LIST;
 
   userAnswers: LancementComponent;
+  urlGameRecorder = 'http://localhost:9428/api/game-record'
+
 
   getAnswerArray() {
     return this.userAnswers.getUserArrayOfAnswercopy();
   }
 
-  /**
-   * Observable which contains the list of the quiz.
-   * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
-   */
   public quizzes$: BehaviorSubject<Quiz[]>
     = new BehaviorSubject(this.quizzes);
 
@@ -47,6 +36,7 @@ export class QuizService {
 
 
     this.setQuizzesFromUrl();
+
     this.getJSON().subscribe(data => {
       console.log(data);
     });
@@ -104,25 +94,6 @@ export class QuizService {
     return this.quizzes;
   }
 
-  // @ts-ignore
-  /** Note: The functions below don't interact with the server. It's an example of implementation for the exercice 10.
-
-   addQuestion(quiz: Quiz, question: Question) {
-    quiz.questions.push(question);
-    const index = this.quizzes.findIndex((q: Quiz) => q.id === quiz.id);
-    if (index) {
-      this.updateQuizzes(quiz, index);
-    }
-  }
-
-   deleteQuestion(quiz: Quiz, question: Question) {
-    const index = quiz.questions.findIndex((q) => q.label === question.label);
-    if (index !== -1) {
-      quiz.questions.splice(index, 1)
-      this.updateQuizzes(quiz, index);
-    }
-  }
-   **/
   public updateQuizzes(quizId: string) {
     const urlWithId = this.quizUrl + '/' + quizId;
     this.http.get<Quiz>(urlWithId).subscribe(() => this.setQuizzesFromUrl());

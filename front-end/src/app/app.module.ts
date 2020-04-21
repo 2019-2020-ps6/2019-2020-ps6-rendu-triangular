@@ -25,6 +25,7 @@ import {ViewQuestionComponent} from './questions/view-question/view-question.com
 import {ResultatsComponent} from './main/resultats/resultats.component';
 import {ResultatsRecordComponent} from './main/resultats-record/resultats-record.component';
 import {DescriptionAccueilComponent} from './main/acceuil/description-accueil/description-accueil.component';
+import {GameRecordService} from "../services/game-record.service";
 
 
 @NgModule({
@@ -59,7 +60,7 @@ import {DescriptionAccueilComponent} from './main/acceuil/description-accueil/de
     BrowserAnimationsModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [GameRecordService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

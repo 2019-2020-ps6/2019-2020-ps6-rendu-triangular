@@ -2,6 +2,8 @@ import {Component, Input, OnInit, Output} from '@angular/core';
 import {Quiz} from "../../../models/quiz.model";
 import {QuizService} from 'src/services/quiz.service';
 import {ActivatedRoute} from '@angular/router';
+import {GameRecorder} from "../../../models/game-recorder.model";
+import {GameRecordService} from "../../../services/game-record.service";
 
 
 @Component({
@@ -29,19 +31,27 @@ export class LancementComponent implements OnInit {
 
   isAtEnd: boolean
 
+  gameRecorder: GameRecorder;
+
+  gameRecorders: GameRecorder[];
 
   @Output()
   scoreFinal: number;
   numberOfFails: number;
 
 
-  constructor(private route: ActivatedRoute, private quizService: QuizService) {
+  constructor(private route: ActivatedRoute, private quizService: QuizService, private game: GameRecordService) {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
     //this.quizService.quizzes$.next(this.quizService.getQuizList());
+
+    this.game.gameRecorderList$.subscribe(sm => {
+      this.gameRecorders = sm;
+    })
 
   }
 
   ngOnInit(): void {
+
     const id = this.route.snapshot.paramMap.get('id');
     this.quizService.setSelectedQuiz(id);
     this.userArrayOfAnswer = new Array();
@@ -56,6 +66,8 @@ export class LancementComponent implements OnInit {
     console.log("evolutionIndex :" + localStorage.getItem("evolutionIndex"));
     console.log("is at end :" + this.isAtEnd);
     console.log(this.answerIsCorrect);
+    this.gameRecorder = new GameRecorder();
+    this.gameRecorder.startDate = new Date();
   }
 
   onInput(event: KeyboardEvent) {
@@ -88,17 +100,24 @@ export class LancementComponent implements OnInit {
       localStorage.setItem("finalScore", String(this.scoreFinal));
       localStorage.setItem("numberOfAttempts", String(this.numberOfFails));
 
-
       this.userArrayOfAnswer = [];
       this.answerIsCorrect = false;
     } else if (this.nombre === this.quiz.questions.length - 1) {
       finalBtn.disabled = true;
 
+
     } else if (this.nombre === this.quiz.questions.length) {
-      if (this.answerIsCorrect)
+      if (this.answerIsCorrect) {
         this.isAtEnd = true;
+
+      }
     }
 
+    this.gameRecorder.numberOfAttempts = this.numberOfFails;
+    this.gameRecorder.finalScore = this.scoreFinal;
+    this.gameRecorder.endDate = new Date();
+
+    this.game.performGameRecorder(this.gameRecorder);
   }
 
   processUserAnswer() {

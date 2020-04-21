@@ -1,8 +1,32 @@
 <div class="container-fluid" id="resultat-record">
   <div class="container" id="result-container">
-    <div class="tab-content">
-      une table
-    </div>
+    <div class="display-4">Historique de jeux</div>
+    <table class="table table-sm table-dark">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Number of Attemps</th>
+        <th scope="col">Score</th>
+        <th scope="col">End Date</th>
+
+      </tr>
+      </thead>
+      <tbody *ngFor="let gameRec of gameRecordList; let i = index">
+      <tr>
+        <th scope="row">{{i + 1}}</th>
+        <td>{{gameRec.startDate | date:'yyyy-MM-dd'}}</td>
+        <td>{{gameRec.endDate.getSeconds - gameRec.startDate.getSeconds}} s</td>
+        <td>{{gameRec.numberOfAttempts}}</td>
+        <td>{{gameRec.finalScore}}</td>
+        <td>{{gameRec.endDate | date:'yyyy-MM-dd'}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
+
+  <button (click)="deleteGameRecorder()" class="btn-primary" id="supr" style="width: 100px;height: 100px">delete
+  </button>
 
 </div>

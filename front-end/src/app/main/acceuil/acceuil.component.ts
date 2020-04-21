@@ -15,5 +15,4 @@ export class AcceuilComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
 }
