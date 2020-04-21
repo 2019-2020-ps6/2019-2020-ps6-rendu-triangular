@@ -3,7 +3,7 @@
 
   <div *ngFor="let question of quiz.questions; index as i">
 
-    <div *ngIf="i == nombre" class="quest">
+    <div *ngIf="i === nombre" class="quest">
       <app-view-question [question]="question"></app-view-question>
 
       <form class="form-inline text-center" id="answerBox">
@@ -16,15 +16,12 @@
           <input (keyup)="onInput($event)" class="form-control" id="Réponse" placeholder="Entrer un numéro" type="text">
         </div>
         <div class="form-check">
-          <!--<label for="checkbox"></label><input class="form-check-input" id="checkbox"
-                                                             type="checkbox" >-->
           <button (click)="processUserAnswer()" class="bbtn btn-primary btn-warning " data-target="#modalRéponse"
                   data-toggle="modal"
                   id="verifier">Vérifier
           </button>
         </div>
       </form>
-
 
       <div *ngIf="nombre!=quiz.questions.length-1; else last" class="row">
         <div class="col">

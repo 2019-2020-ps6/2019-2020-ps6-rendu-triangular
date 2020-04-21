@@ -1,4 +1,27 @@
-.card {
+
+.container-fluid {
+  //background: url("http://getwallpapers.com/wallpaper/full/e/8/3/639794.jpg");
+  background: url("http://getwallpapers.com/wallpaper/full/4/9/f/640068.jpg");
+}
+
+#modif {
   font-family: Candara, monospace;
   text-align: center;
+  padding: 5%;
+  width: 50vh;
+  //background: #0062cc;
+  background: whitesmoke;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+  margin-left: 700px;
+  //height: 90vh;
+  border-radius: 25px;
+  color: #fff;
+  // margin-top: 100px;
+}
+
+#modifBtn {
+  font-weight: 600;
+  color: #0062cc;
+  background-color: whitesmoke;
+  border-radius: 10px;
 }

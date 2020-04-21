@@ -45,7 +45,6 @@ export class LancementComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private quizService: QuizService, private game: GameRecordService) {
     this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
-    //this.quizService.quizzes$.next(this.quizService.getQuizList());
 
     this.game.gameRecorderList$.subscribe(sm => {
       this.gameRecorders = sm;
@@ -54,6 +53,8 @@ export class LancementComponent implements OnInit {
     this.game.tempsDeJeu$.subscribe(sm => {
       this.tempsDeJeu = sm;
     })
+
+    quizService.perfomQuiz(this.quiz);
 
   }
 
@@ -95,8 +96,7 @@ export class LancementComponent implements OnInit {
     }
 
     console.log("evolutionIndex :" + localStorage.getItem("evolutionIndex"));
-    console.log("is at end :" + this.isAtEnd);
-
+    console.log("quiz.questionIndex :" + this.quiz.questionIndex);
   }
 
   public getUserArrayOfAnswercopy() {
@@ -108,6 +108,9 @@ export class LancementComponent implements OnInit {
 
     if (this.answerIsCorrect) {
       this.nombre++;
+      this.quizService.modifyQuestionIndex(this.quiz);
+      this.quizService.editQuiz(this.quiz);
+
       localStorage.setItem("evolutionIndex", String(this.nombre));
       localStorage.setItem("finalScore", String(this.scoreFinal));
       localStorage.setItem("numberOfAttempts", String(this.numberOfFails));
@@ -163,6 +166,7 @@ export class LancementComponent implements OnInit {
 
     console.log("Answer is correct ? :" + this.answerIsCorrect);
     console.log("evolutionIndex :" + localStorage.getItem("evolutionIndex"));
+    console.log("quiz.questioniDex = " + this.quiz.questionIndex);
     console.log("is at end ? :" + this.isAtEnd);
   }
 

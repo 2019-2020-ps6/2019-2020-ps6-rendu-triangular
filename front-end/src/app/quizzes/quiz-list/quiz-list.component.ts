@@ -18,16 +18,16 @@ export class QuizListComponent implements OnInit {
       this.quizList = quizzes;
     });
 
-    for (let i = 0; i < this.quizList.length; i++) {
+    /*or (let i = 0; i < this.quizList.length; i++) {
       this.quizService.updateQuizzes(this.quizList[i].id);
-    }
+    }*/
   }
 
   ngOnInit() {
     this.quizService.quizzes$.next(this.quizService.getQuizList());
-    for (let i = 0; i < this.quizList.length; i++) {
+    /*for (let i = 0; i < this.quizList.length; i++) {
       this.quizService.updateQuizzes(this.quizList[i].id);
-    }
+    }*/
     this.nombre = 0;
   }
 

@@ -21,6 +21,7 @@ export class QuizFormComponent implements OnInit {
       name: [''],
       theme: [''],
       //image: [null]
+      questionIndex: 0
     });
   }
 

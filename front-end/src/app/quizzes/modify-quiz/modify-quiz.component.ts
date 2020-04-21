@@ -19,17 +19,25 @@ export class ModifyQuizComponent implements OnInit {
   constructor(private route: ActivatedRoute, public formBuilder: FormBuilder, public quizService: QuizService) {
     this.quizForm = this.formBuilder.group({
       name: [''],
-      theme: ['']
+      theme: [''],
+    });
+
+    this.quizService.quizSelected$.subscribe((sm) => {
+      this.quiz = sm;
     });
 
   }
 
   ngOnInit(): void {
+    this.quizService.quizzes$.next(this.quizService.getQuizList());
+    const id = this.route.snapshot.paramMap.get('id');
+    this.quizService.setSelectedQuiz(id);
   }
 
   modifyQuiz() {
     const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
-    this.quizService.editQuiz(this.quiz, quizToCreate);
+    quizToCreate.id = this.quiz.id;
+    this.quizService.editQuiz(quizToCreate);
   }
 
 }

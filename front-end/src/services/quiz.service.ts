@@ -15,8 +15,6 @@ export class QuizService {
   private quizzes: Quiz[] = QUIZ_LIST;
 
   userAnswers: LancementComponent;
-  urlGameRecorder = 'http://localhost:9428/api/game-record'
-
 
   getAnswerArray() {
     return this.userAnswers.getUserArrayOfAnswercopy();
@@ -34,7 +32,6 @@ export class QuizService {
 
   constructor(private http: HttpClient) {
 
-
     this.setQuizzesFromUrl();
 
     this.getJSON().subscribe(data => {
@@ -49,13 +46,21 @@ export class QuizService {
     });
   }
 
-    addQuiz(quiz: Quiz) {
-      this.http.post<Quiz>(this.quizUrl, quiz, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
-      this.updateQuizzes(quiz.id);
+  getById(id) {
+    for (let i of this.quizzes) {
+      if (i.id === id)
+        return i;
     }
+    return null;
+  }
+
+  addQuiz(quiz: Quiz) {
+    this.http.post<Quiz>(this.quizUrl, quiz, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
+    this.updateQuizzes(quiz.id);
+  }
 
   public getJSON(): Observable<any> {
-    return this.http.get('http://localhost:9428/api/quizzes');
+    return this.http.get('http://localhost:9428/api/quizzes/');
   }
 
   setSelectedQuiz(quizId: string) {
@@ -74,10 +79,9 @@ export class QuizService {
     }
   }
 
-  editQuiz(oldQuiz: Quiz, newQuiz: Quiz) {
+  editQuiz(oldQuiz: Quiz) {
     const urlWithId = this.quizUrl + '/' + oldQuiz.id;
-    const newUrlId = this.quizUrl + '/' + newQuiz.id;
-    this.http.put<Quiz>(urlWithId, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
+    this.http.put<Quiz>(urlWithId, oldQuiz).subscribe(() => this.setQuizzesFromUrl());
   }
 
   addQuestion(quiz: Quiz, question: Question) {
@@ -98,4 +102,17 @@ export class QuizService {
     const urlWithId = this.quizUrl + '/' + quizId;
     this.http.get<Quiz>(urlWithId).subscribe(() => this.setQuizzesFromUrl());
   }
+
+  public modifyQuestionIndex(quiz: Quiz) {
+    quiz.questionIndex++;
+    this.perfomQuiz(quiz);
+  }
+
+  public perfomQuiz(quiz) {
+    this.quizSelected$.next(quiz);
+    this.setQuizzesFromUrl();
+
+  }
+
+
 }

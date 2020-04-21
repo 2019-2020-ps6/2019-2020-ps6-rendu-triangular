@@ -1,21 +1,20 @@
-import { Quiz } from '../models/quiz.model';
-import { Question } from '../models/question.model';
+import {Quiz} from '../models/quiz.model';
+import {Question} from '../models/question.model';
 
 export const QUESTION_ACTOR: Question = {
   id: '1',
   label: 'Jean Gabin a joué dans...',
-    answers: [
-        {
-            value: 'Les tuches II',
-            isCorrect: false,
-        },
-        {
+  answers: [
+    {
+      value: 'Les tuches II',
+      isCorrect: false,
+    },
+    {
             value: 'La grande illusion',
             isCorrect: true,
         }
     ]
 };
-
 
 export const QUESTION_SPORT: Question = {
   id: '1',
@@ -38,11 +37,6 @@ export const QUIZ_LIST: Quiz[] = [
     name: 'Les Cinéastes', // What's happening if I change this value..?
     theme: 'Actor',
     questions: [QUESTION_ACTOR],
+    questionIndex: 0
   },
-  {
-    id: '1',
-    name: 'Les Sports',
-    theme : 'Sports',
-    questions: [QUESTION_SPORT],
-  }
   ];

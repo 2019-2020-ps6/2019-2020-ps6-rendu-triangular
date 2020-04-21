@@ -1,9 +1,10 @@
 import {Question} from './question.model';
 
-export interface Quiz {
+export class Quiz {
   id: string;
   name: string;
   theme?: string;
   questions: Question[];
   image?: string;
+  questionIndex: number;
 }

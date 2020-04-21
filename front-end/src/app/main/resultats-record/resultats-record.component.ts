@@ -22,6 +22,7 @@ export class ResultatsRecordComponent implements OnInit {
     this.subscription = this.game.gameRecorderList$.subscribe((list) => {
       this.gameRecordList = list;
     })
+
     this.subscription2 = this.game.gameRecorder$.subscribe((sm) => {
       this.toPush = sm;
     })

@@ -1,20 +1,25 @@
-<button class="button-card bg-primary" routerLink="/quiz-list">Back</button>
+<div class="container-fluid">
+  <button class="button-card bg-white" routerLink="/quiz-list">Back</button>
 
-<div class="card w-100">
-  <h2>Modifier un quiz</h2>
-  <form class="quiz-form" [formGroup]="quizForm">
-    <label for="name">
-      Titre <br>
-      <input class="input-custom" type="text" id="name" [formControlName]="'name'">
-    </label>
-    <br>
-    <label for="theme">
-      Thème <br>
-      <input class="input-custom" type="text" id="theme" [formControlName]="'theme'">
-    </label>
-    <br>
-    <button routerLink="/quiz-list" routerLinkActive="active" type="submit" class="button-card" (click)="modifyQuiz() ">Modify</button>
-  </form>
+  <div *ngIf="quiz" class="card  text-center text-dark" id="modif">
+    <h2>Modifier un quiz</h2>
+    <form [formGroup]="quizForm" class="quiz-form">
+      <label for="name">
+        Titre <br>
+        <input [formControlName]="'name'" class="input-custom" id="name" type="text">
+      </label>
+      <br>
+      <label for="theme">
+        Thème <br>
+        <input [formControlName]="'theme'" class="input-custom" id="theme" type="text">
+      </label>
+      <br>
+      <button (click)="modifyQuiz() " class="button-card" id="modifBtn" routerLink="/quiz-list"
+              routerLinkActive="active" type="submit">Modify
+      </button>
+    </form>
+  </div>
 </div>
+
 <!-- Uncomment below to see your form structure and how it changes-->
 <!-- <br><br>{{quizForm.getRawValue() | json}} -->

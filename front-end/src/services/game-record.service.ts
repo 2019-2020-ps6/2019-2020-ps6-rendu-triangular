@@ -49,7 +49,4 @@ export class GameRecordService {
     this.tempsDeJeu$.next(s);
   }
 
-  getGameRecorderList() {
-    return this.gameRecorderList;
-  }
 }
