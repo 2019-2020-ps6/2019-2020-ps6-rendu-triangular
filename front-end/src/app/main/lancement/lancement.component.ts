@@ -4,6 +4,7 @@ import {QuizService} from 'src/services/quiz.service';
 import {ActivatedRoute} from '@angular/router';
 import {GameRecorder} from "../../../models/game-recorder.model";
 import {GameRecordService} from "../../../services/game-record.service";
+import {interval} from "rxjs";
 
 
 @Component({
@@ -22,6 +23,8 @@ export class LancementComponent implements OnInit {
   userInput: string;
 
   next: boolean;
+
+  tempsDeJeu: number;
 
   nombre: number;
 
@@ -48,9 +51,18 @@ export class LancementComponent implements OnInit {
       this.gameRecorders = sm;
     })
 
+    this.game.tempsDeJeu$.subscribe(sm => {
+      this.tempsDeJeu = sm;
+    })
+
   }
 
   ngOnInit(): void {
+
+    const counter = interval(1000);
+    counter.subscribe(value => {
+      this.tempsDeJeu = value;
+    })
 
     const id = this.route.snapshot.paramMap.get('id');
     this.quizService.setSelectedQuiz(id);
@@ -116,8 +128,10 @@ export class LancementComponent implements OnInit {
     this.gameRecorder.numberOfAttempts = this.numberOfFails;
     this.gameRecorder.finalScore = this.scoreFinal;
     this.gameRecorder.endDate = new Date();
+    this.gameRecorder.duration = this.tempsDeJeu
 
     this.game.performGameRecorder(this.gameRecorder);
+    this.game.performTempsDeJeu(this.tempsDeJeu);
   }
 
   processUserAnswer() {

@@ -4,5 +4,5 @@ export class GameRecorder {
   endDate: Date;
   numberOfAttempts: number;
   finalScore: number
-
+  duration: number;
 }

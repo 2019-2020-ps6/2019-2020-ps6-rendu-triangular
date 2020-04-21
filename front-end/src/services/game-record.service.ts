@@ -7,12 +7,16 @@ import {httpOptionsBase} from "../configs/server.config";
 @Injectable()
 export class GameRecordService {
   urlGameRecorder = 'http://localhost:9428/api/game-record'
-  public gameRecorder$: BehaviorSubject<GameRecorder> = new BehaviorSubject<GameRecorder>(new GameRecorder());
+
   private httpOptions = httpOptionsBase;
 
   private gameRecorderList: GameRecorder[];
 
   public gameRecorderList$: BehaviorSubject<GameRecorder[]> = new BehaviorSubject(this.gameRecorderList);
+
+  public gameRecorder$: BehaviorSubject<GameRecorder> = new BehaviorSubject<GameRecorder>(new GameRecorder());
+
+  public tempsDeJeu$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor(private http: HttpClient) {
     this.getGameRecorder();
@@ -39,6 +43,10 @@ export class GameRecordService {
 
   public performGameRecorder(game: GameRecorder) {
     this.gameRecorder$.next(game);
+  }
+
+  public performTempsDeJeu(s: number) {
+    this.tempsDeJeu$.next(s);
   }
 
   getGameRecorderList() {

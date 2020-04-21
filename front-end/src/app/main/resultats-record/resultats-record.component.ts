@@ -12,8 +12,11 @@ export class ResultatsRecordComponent implements OnInit {
 
   public gameRecordList: GameRecorder[];
   public toPush: GameRecorder;
+  duration: number;
   private subscription: Subscription;
   private subscription2: Subscription;
+  private subscription3: Subscription;
+
 
   constructor(private game: GameRecordService) {
     this.subscription = this.game.gameRecorderList$.subscribe((list) => {
@@ -21,6 +24,10 @@ export class ResultatsRecordComponent implements OnInit {
     })
     this.subscription2 = this.game.gameRecorder$.subscribe((sm) => {
       this.toPush = sm;
+    })
+
+    this.subscription3 = this.game.tempsDeJeu$.subscribe(sm => {
+      this.duration = sm;
     })
 
     if (typeof this.toPush.finalScore != 'undefined')
