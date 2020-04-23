@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {GameRecorder} from "../../../models/game-recorder.model";
 import {GameRecordService} from "../../../services/game-record.service";
 import {interval} from "rxjs";
+import {FormBuilder} from "@angular/forms";
 
 
 @Component({
@@ -38,13 +39,18 @@ export class LancementComponent implements OnInit {
 
   gameRecorders: GameRecorder[];
 
+  questionIndex: number
+
   @Output()
   scoreFinal: number;
   numberOfFails: number;
 
 
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private game: GameRecordService) {
-    this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
+  constructor(private route: ActivatedRoute, protected formBuilder: FormBuilder, private quizService: QuizService, private game: GameRecordService) {
+    this.quizService.quizSelected$.subscribe((quiz) => {
+        this.quiz = quiz;
+      }
+    );
 
     this.game.gameRecorderList$.subscribe(sm => {
       this.gameRecorders = sm;
@@ -54,8 +60,11 @@ export class LancementComponent implements OnInit {
       this.tempsDeJeu = sm;
     })
 
-    quizService.perfomQuiz(this.quiz);
+    this.quizService.quizIndex$.subscribe((index) => {
+      this.quiz.questionIndex = index;
+    })
 
+    this.quizService.perfomQuiz(this.quiz);
   }
 
   ngOnInit(): void {
@@ -65,20 +74,22 @@ export class LancementComponent implements OnInit {
       this.tempsDeJeu = value;
     })
 
+    this.quizService.quizzes$.next(this.quizService.getQuizList());
     const id = this.route.snapshot.paramMap.get('id');
     this.quizService.setSelectedQuiz(id);
+
     this.userArrayOfAnswer = new Array();
     this.nombre = 0;
+
     if (!this.isAtEnd)
       this.checkerEvolution();
+
     this.scoreFinal = 0;
     this.numberOfFails = 0;
     this.scoreEvolution();
     this.answerIsCorrect = false;
     this.isAtEnd = false;
-    console.log("evolutionIndex :" + localStorage.getItem("evolutionIndex"));
-    console.log("is at end :" + this.isAtEnd);
-    console.log(this.answerIsCorrect);
+
     this.gameRecorder = new GameRecorder();
     this.gameRecorder.startDate = new Date();
   }
@@ -88,15 +99,11 @@ export class LancementComponent implements OnInit {
 
     if (event.keyCode === 8) {
       this.userArrayOfAnswer = [];
-      console.log("Backspace is pressed");
     } else {
       this.userArrayOfAnswer.push(parseInt(this.userInput));
       this.userArrayOfAnswercopy = this.userArrayOfAnswer;
       console.log(this.userArrayOfAnswer);
     }
-
-    console.log("evolutionIndex :" + localStorage.getItem("evolutionIndex"));
-    console.log("quiz.questionIndex :" + this.quiz.questionIndex);
   }
 
   public getUserArrayOfAnswercopy() {
@@ -108,8 +115,7 @@ export class LancementComponent implements OnInit {
 
     if (this.answerIsCorrect) {
       this.nombre++;
-      this.quizService.modifyQuestionIndex(this.quiz);
-      this.quizService.editQuiz(this.quiz);
+      this.quiz.questionIndex++;
 
       localStorage.setItem("evolutionIndex", String(this.nombre));
       localStorage.setItem("finalScore", String(this.scoreFinal));
@@ -135,10 +141,24 @@ export class LancementComponent implements OnInit {
 
     this.game.performGameRecorder(this.gameRecorder);
     this.game.performTempsDeJeu(this.tempsDeJeu);
+
+    this.quizService.quizSelectedUpdater(this.quiz);
+    this.quizService.performQuizIndex(this.quiz.questionIndex);
+    this.update(this.quiz.questionIndex);
+  }
+
+  update(index: number) {
+    const quizze = new Quiz();
+    quizze.id = this.quiz.id;
+    quizze.name = this.quiz.name;
+    quizze.theme = this.quiz.theme;
+    console.log(quizze);
+    quizze.questionIndex = index;
+    this.quizService.editQuiz(quizze);
   }
 
   processUserAnswer() {
-    let questionAnswers = this.quiz.questions[this.nombre].answers;
+    let questionAnswers = this.quiz.questions[this.quiz.questionIndex].answers;
     let finalBtn = (<HTMLButtonElement>document.getElementById("finishBtn"));
 
     //First find the right answer
@@ -163,16 +183,12 @@ export class LancementComponent implements OnInit {
       this.answerIsCorrect = false;
       this.numberOfFails++;
     }
-
-    console.log("Answer is correct ? :" + this.answerIsCorrect);
-    console.log("evolutionIndex :" + localStorage.getItem("evolutionIndex"));
-    console.log("quiz.questioniDex = " + this.quiz.questionIndex);
-    console.log("is at end ? :" + this.isAtEnd);
   }
 
   refreshComponent() {
     localStorage.clear();
     window.location.reload();
+    this.update(0);
   }
 
   checkerEvolution() {
@@ -186,6 +202,8 @@ export class LancementComponent implements OnInit {
 
   emptyLocalStorage() {
     localStorage.clear();
+    this.update(0);
   }
+
 
 }

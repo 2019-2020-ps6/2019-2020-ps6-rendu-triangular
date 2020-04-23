@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Quiz} from '../../../models/quiz.model';
+import {Subscription} from "rxjs";
+import {QuizService} from "../../../services/quiz.service";
 
 @Component({
   selector: 'app-quiz',
@@ -23,7 +25,17 @@ export class QuizComponent implements OnInit {
   @Output()
   modifyQuiz: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
-  constructor() {
+  subscription: Subscription = new Subscription();
+  subscriptionIndex: Subscription = new Subscription();
+
+  constructor(private quizService: QuizService) {
+    this.subscription = this.quizService.quizSelected$.subscribe((quiz) => {
+      this.quiz = quiz;
+    })
+
+    this.subscriptionIndex = this.quizService.quizIndex$.subscribe((index) => {
+      this.quiz.questionIndex = index;
+    })
   }
 
   ngOnInit() {

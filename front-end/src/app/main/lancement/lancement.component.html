@@ -1,9 +1,9 @@
-<div *ngIf="quiz" class="container-fluid" id="quiz">
+<div *ngIf="quiz" class="container-fluid text-white" id="quiz">
   <h2 class="text-center display-4">Thème : {{quiz.name}}</h2>
 
   <div *ngFor="let question of quiz.questions; index as i">
 
-    <div *ngIf="i === nombre" class="quest">
+    <div *ngIf="i === quiz.questionIndex" class="quest">
       <app-view-question [question]="question"></app-view-question>
 
       <form class="form-inline text-center" id="answerBox">

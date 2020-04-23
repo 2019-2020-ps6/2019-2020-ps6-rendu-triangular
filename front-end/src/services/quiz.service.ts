@@ -30,6 +30,8 @@ export class QuizService {
 
   private httpOptions = httpOptionsBase;
 
+  public quizIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
   constructor(private http: HttpClient) {
 
     this.setQuizzesFromUrl();
@@ -37,6 +39,15 @@ export class QuizService {
     this.getJSON().subscribe(data => {
       console.log(data);
     });
+
+  }
+
+  public quizSelectedUpdater(quiz: Quiz) {
+    this.quizSelected$.next(quiz);
+  }
+
+  public performQuizIndex(index) {
+    this.quizIndex$.next(index);
   }
 
   setQuizzesFromUrl() {
@@ -46,12 +57,9 @@ export class QuizService {
     });
   }
 
-  getById(id) {
-    for (let i of this.quizzes) {
-      if (i.id === id)
-        return i;
-    }
-    return null;
+  getQuizById(quiz: Quiz) {
+    const url = this.quizUrl + '/' + quiz.id;
+    return this.http.get<Quiz>(url);
   }
 
   addQuiz(quiz: Quiz) {
@@ -80,6 +88,7 @@ export class QuizService {
   }
 
   editQuiz(oldQuiz: Quiz) {
+    console.log(oldQuiz.id);
     const urlWithId = this.quizUrl + '/' + oldQuiz.id;
     this.http.put<Quiz>(urlWithId, oldQuiz).subscribe(() => this.setQuizzesFromUrl());
   }
@@ -103,16 +112,9 @@ export class QuizService {
     this.http.get<Quiz>(urlWithId).subscribe(() => this.setQuizzesFromUrl());
   }
 
-  public modifyQuestionIndex(quiz: Quiz) {
-    quiz.questionIndex++;
-    this.perfomQuiz(quiz);
-  }
-
   public perfomQuiz(quiz) {
     this.quizSelected$.next(quiz);
     this.setQuizzesFromUrl();
-
   }
-
 
 }
