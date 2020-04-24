@@ -13,11 +13,26 @@ section::before {
   visibility: hidden;
 }
 
+#section {
+  //background-image: url("http://getwallpapers.com/wallpaper/full/f/e/3/168419.jpg");
+  //background: whitesmoke;
+  background: url("http://getwallpapers.com/wallpaper/full/7/e/c/639912.jpg");
+
+}
+
+#description {
+  // background: whitesmoke;
+}
+
 #desc {
   font-family: "Andale Mono", serif;
-  margin-top: 10vh;
 }
 
 #text {
   margin-top: 5vh;
+}
+
+#part1, #part2, #part3, #part4 {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
