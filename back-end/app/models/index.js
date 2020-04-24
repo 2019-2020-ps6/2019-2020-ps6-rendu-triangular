@@ -9,5 +9,5 @@ module.exports = {
   Question,
   Quiz,
   User,
-    GameRecorder
+  GameRecorder
 }
