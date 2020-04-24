@@ -4,8 +4,9 @@ export interface Answer {
     isCorrect: boolean;
 }
 
-export interface Question {
-    id: string;
-    label: string;
-    answers: Answer[];
+export class Question {
+  id: string;
+  label: string;
+  image?: string;
+  answers: Answer[];
 }

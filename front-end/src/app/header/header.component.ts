@@ -17,6 +17,8 @@ export class HeaderComponent implements OnInit {
 
   showdropdownContent: boolean;
 
+  sideBar: HTMLElement = document.getElementById("sidebar-wrapper") as HTMLElement;
+
   constructor() {
   }
 
@@ -26,10 +28,13 @@ export class HeaderComponent implements OnInit {
   }
 
   manageNav() {
-    if (this.sideNavIsClicked === false)
+    if (this.sideNavIsClicked === false) {
+
       this.sideNavIsClicked = true;
-    else
+    } else {
       this.sideNavIsClicked = false;
+    }
+
   }
 
   toggle() {

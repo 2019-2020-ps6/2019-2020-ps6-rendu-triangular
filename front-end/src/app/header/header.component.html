@@ -45,15 +45,17 @@
 </nav>
 
 <div #sidebar [ngStyle]="{'visibility': toggle()}" id="sidebar-wrapper">
+  <i (click)="closeNav()" class="fas fa-times" id="closeButton" style="font-size: 24px"></i>
 
-  <ul (mouseleave)="mouseLeaveQuizDropdown()" class="sidebar-nav">
+
+  <ul (mouseleave)="mouseLeaveQuizDropdown()" class="sidebar-nav" id="content">
     <li><a (click)="closeNav()" routerLink="accueil" routerLinkActive="active">Accueil</a></li>
-    <li>
+    <li id="sidebar-content">
       <a (mouseenter)="mouseEnterQuizDropdown()" class="dropdown-btn">Quiz<i class="fa fa-caret-down"></i></a>
       <div *ngIf="showdropdownContent" class="dropdown-container">
-        <a (click)="closeNav()" class="dropdown-item text-secondary " routerLink="quiz-form">Créer un quiz</a>
-        <a (click)="closeNav()" class="dropdown-item text-secondary" routerLink="view-list-quiz">Lancer un quiz</a>
-        <a (click)="closeNav()" class="dropdown-item text-secondary" routerLink="quiz-list">Voir les Quizzes</a>
+        <a (click)="closeNav()" class="dropdown-item " routerLink="quiz-form">Créer un quiz</a>
+        <a (click)="closeNav()" class="dropdown-item " routerLink="view-list-quiz">Lancer un quiz</a>
+        <a (click)="closeNav()" class="dropdown-item " routerLink="quiz-list">Voir les Quizzes</a>
       </div>
     </li>
     <li><a (click)="closeNav()" routerLink="resultats-record" routerLinkActive="active">Résultats</a>

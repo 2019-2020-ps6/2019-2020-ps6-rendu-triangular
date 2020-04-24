@@ -20,6 +20,7 @@ export class ModifyQuizComponent implements OnInit {
     this.quizForm = this.formBuilder.group({
       name: [''],
       theme: [''],
+      image: ['']
     });
 
     this.quizService.quizSelected$.subscribe((sm) => {

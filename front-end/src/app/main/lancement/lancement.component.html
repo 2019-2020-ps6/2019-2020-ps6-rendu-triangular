@@ -23,7 +23,7 @@
         </div>
       </form>
 
-      <div *ngIf="nombre!=quiz.questions.length-1; else last" class="row">
+      <div *ngIf="quiz.questionIndex!=quiz.questions.length-1; else last" class="row">
         <div class="col">
           <button (click)="increment()" class="button-card btn btn-primary btn-lg active "
                   id="suivantBtn" type="submit"> Suivant

@@ -5,6 +5,10 @@
       <label for="label">
         Titre <br>
         <input [formControlName]="'label'" class="input-custom " id="label" type="text">
+      </label> <br>
+      <label for="image">
+        Lien de l'image <br>
+        <input [formControlName]="'image'" class="input-custom " id="image" type="text">
       </label>
       <br>
       <button (click)="addAnswer()" class="button-card text-primary ">Ajouter les réponses</button>
@@ -20,10 +24,6 @@
             </label>
           </div>
         </div>
-      </div>
-
-      <div class="File">
-        <input class="input-group input-file" id="File" type="file">
       </div>
 
       <button (click)="addQuestion()" aria-pressed="true" class="btn-primary btn-lg active" data-toggle="button"

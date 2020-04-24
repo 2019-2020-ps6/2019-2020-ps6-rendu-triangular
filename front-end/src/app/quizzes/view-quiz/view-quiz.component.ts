@@ -24,7 +24,8 @@ export class ViewQuizComponent implements OnInit {
     this.quizSelected.emit(true);
   }
 
-  fuction() {
+  getImageUrl() {
+    return "url(' " + this.quiz.image + " ')";
   }
 
 }

@@ -1,4 +1,27 @@
-<div class="card">
+<div *ngIf="quiz.image !='' ;" [ngStyle]="{'background': getImageUrl()}" class="card" id="quiz-card">
+  <h2 class="text-white">
+    {{quiz.name}}
+  </h2>
+  <h2 class="text-white">
+    <i class="fas fa-atlas"></i>
+    Thème : {{quiz.theme}}
+  </h2>
+  <h2 class="text-white">
+    <i class="far fa-question-circle"></i>
+    Questions : {{quiz.questions.length}}
+  </h2>
+
+  <button (click)="edit()" class="button-card bg-primary text-white" id="lastButton"
+          routerLink="/edit-quiz/{{quiz.id}}">
+    Ajouter une question
+  </button>
+  <button (click)="delete()" class="button-card bg-primary text-white">Supprimer</button>
+  <button (click)="modify()" class="button-card bg-primary text-white " routerLink="/modify-quiz/{{quiz.id}}">Modifier
+  </button>
+</div>
+
+
+<!--<ng-template #here [ngStyle]="{'background-image': getDefaultImageUrl()}" class="card" id="quiz-card2">
   <h2>
     <i class="far fa-address-card"></i>
     Nom : {{quiz.name}}
@@ -11,14 +34,11 @@
     <i class="far fa-question-circle"></i>
     Questions : {{quiz.questions.length}}
   </h2>
-  <div *ngIf="quiz.image">
-    {{quiz.image}}
-  </div>
 
   <!--<button (click)="selectQuiz()" class="button-card">Selectionner</button>-->
-  <button (click)="edit()" class="button-card edit" id="lastButton" routerLink="/edit-quiz/{{quiz.id}}">
-    Ajouter une question
-  </button>
-  <button (click)="delete()" class="button-card">Supprimer</button>
-  <button (click)="modify()" class="button-card " routerLink="/modify-quiz/{{quiz.id}}">Modifier</button>
-</div>
+<!-- <button (click)="edit()" class="button-card " id="lastButton2" routerLink="/edit-quiz/{{quiz.id}}">
+   Ajouter une question
+ </button>
+ <button (click)="delete()" class="button-card ">Supprimer</button>
+ <button (click)="modify()" class="button-card  " routerLink="/modify-quiz/{{quiz.id}}">Modifier</button>
+</ng-template>-->

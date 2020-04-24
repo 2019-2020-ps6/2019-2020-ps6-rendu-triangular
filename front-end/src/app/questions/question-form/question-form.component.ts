@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from 'src/models/quiz.model';
 import {Question} from 'src/models/question.model';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-question-form',
@@ -16,16 +17,29 @@ export class QuestionFormComponent implements OnInit {
 
   public questionForm: FormGroup;
 
+  public sub: Subscription = new Subscription()
+
   constructor(public formBuilder: FormBuilder, private quizService: QuizService) {
     // Form creation
     this.initializeQuestionForm();
+    this.sub = this.quizService.question$.subscribe((question) => {
+
+    })
   }
 
-  private initializeQuestionForm() {
-    this.questionForm = this.formBuilder.group({
-      label: ['', Validators.required],
-      answers: this.formBuilder.array([])
-    });
+  addQuestion() {
+    const question = this.questionForm.getRawValue() as Question;
+    if (question.image === '')
+      question.image = "https://images.assetsdelivery.com/compings_v2/will46/will461412/will46141200142.jpg";
+
+    if (this.questionForm.valid) {
+      this.quizService.performQuestion(question);
+
+      this.quizService.addQuestion(this.quiz, question);
+      this.quizService.updateQuizzes(this.quiz.id);
+      this.initializeQuestionForm();
+
+    }
   }
 
   ngOnInit() {
@@ -46,12 +60,11 @@ export class QuestionFormComponent implements OnInit {
     this.answers.push(this.createAnswer());
   }
 
-  addQuestion() {
-    if(this.questionForm.valid) {
-      const question = this.questionForm.getRawValue() as Question;
-      this.quizService.addQuestion(this.quiz, question);
-      this.quizService.updateQuizzes(this.quiz.id);
-      this.initializeQuestionForm();
-    }
+  private initializeQuestionForm() {
+    this.questionForm = this.formBuilder.group({
+      label: ['', Validators.required],
+      image: ['', Validators.required],
+      answers: this.formBuilder.array([])
+    });
   }
 }

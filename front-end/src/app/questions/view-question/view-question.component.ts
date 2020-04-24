@@ -22,4 +22,8 @@ export class ViewQuestionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getImageUrl() {
+    return 'url("' + this.question.image + '")';
+  }
+
 }

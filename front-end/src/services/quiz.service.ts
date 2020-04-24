@@ -32,6 +32,8 @@ export class QuizService {
 
   public quizIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
+  public question$: Subject<Question> = new Subject();
+
   constructor(private http: HttpClient) {
 
     this.setQuizzesFromUrl();
@@ -101,6 +103,10 @@ export class QuizService {
   deleteQuestion(quiz: Quiz, question: Question) {
     const questionUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + question.id;
     this.http.delete<Question>(questionUrl, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id));
+  }
+
+  performQuestion(question) {
+    this.question$.next(question);
   }
 
   public getQuizList(): Quiz[] {

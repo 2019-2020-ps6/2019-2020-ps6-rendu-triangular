@@ -27,9 +27,77 @@
 
 .sidebar-wrapper {
   height: max-content;
-  position: fixed;
-  animation-name: expand;
-  animation-duration: 4s;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;;
+}
+
+#closeButton {
+  width: 30px;
+  height: 20px;
+  margin-left: 22vh;
+  color: #575757;
+}
+
+#closeButton:hover {
+  cursor: pointer;
+  color: whitesmoke;
+}
+
+.dropdown-container::before {
+
+}
+
+#content {
+  padding-top: 60px;
+  display: block;
+}
+
+#content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background-color: #f5f2e2;
+  left: 0;
+}
+
+#content:hover::before {
+
+}
+
+.dropdown-container a {
+  margin-left: 40px;
+  font-size: 20px;
+}
+
+.dropdown-container a::before {
+
+}
+
+.dropdown-container a:hover {
+  color: whitesmoke;
+}
+
+.dropdown-container {
+  border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+}
+
+li a {
+  padding: 20px 30px;
+  text-decoration: none;
+  color: #ccc;
+}
+
+li a:hover {
+  color: #fff;
+  transition: 0.4s;
+}
+
+li a:hover::before {
+
 }
 
 @keyframes expand {

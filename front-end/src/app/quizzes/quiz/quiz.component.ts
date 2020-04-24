@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Quiz} from '../../../models/quiz.model';
 import {Subscription} from "rxjs";
 import {QuizService} from "../../../services/quiz.service";
@@ -8,7 +8,7 @@ import {QuizService} from "../../../services/quiz.service";
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss']
 })
-export class QuizComponent implements OnInit {
+export class QuizComponent implements OnInit, AfterViewInit {
 
   @Input()
   quiz: Quiz;
@@ -28,7 +28,7 @@ export class QuizComponent implements OnInit {
   subscription: Subscription = new Subscription();
   subscriptionIndex: Subscription = new Subscription();
 
-  constructor(private quizService: QuizService) {
+  constructor(private quizService: QuizService, private elementRef: ElementRef) {
     this.subscription = this.quizService.quizSelected$.subscribe((quiz) => {
       this.quiz = quiz;
     })
@@ -38,8 +38,12 @@ export class QuizComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
+    this.elementRef.nativeElement.ownerDocument.getElementById('quiz-card').style.background = this.quiz.image;
+  }
 
+  ngOnInit() {
+    this.resizeQuizImage();
   }
 
   selectQuiz() {
@@ -54,7 +58,20 @@ export class QuizComponent implements OnInit {
     this.deleteQuiz.emit(this.quiz);
   }
 
-  modify(){
+  modify() {
     this.modifyQuiz.emit(this.quiz);
+  }
+
+  resizeQuizImage() {
+    let card = document.getElementById('quiz-card') as HTMLDivElement;
+    card.style.backgroundSize = "100px 100px";
+  }
+
+  getImageUrl() {
+    return "url(' " + this.quiz.image + " ')";
+  }
+
+  getDefaultImageUrl() {
+    return "url(' https://medias.liberation.fr/photo/1269696-p-tit-libe-les-droits-de-l-enfant-menu-quiz.png?modified_at=1573658071&ratio_x=03&ratio_y=02&width=750 ')";
   }
 }

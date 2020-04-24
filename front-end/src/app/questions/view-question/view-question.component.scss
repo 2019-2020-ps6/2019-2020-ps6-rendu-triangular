@@ -5,6 +5,7 @@
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
   border-radius: 25px;
   color: white;
+  min-height: 0vh;
 }
 
 #question-Image {
@@ -13,11 +14,11 @@
   display: flex;
 }
 
-.answer {
+#answers {
   font-family: Calibri, sans-serif;
   font-weight: bold;
   display: inline;
-  font-size: 25px;
+  font-size: 3vh;
 }
 
 

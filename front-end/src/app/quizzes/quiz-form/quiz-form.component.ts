@@ -20,7 +20,7 @@ export class QuizFormComponent implements OnInit {
     this.quizForm = this.formBuilder.group({
       name: [''],
       theme: [''],
-      //image: [null]
+      image: [''],
       questionIndex: 0
     });
   }
@@ -30,17 +30,19 @@ export class QuizFormComponent implements OnInit {
   }
 
   addQuiz() {
-    // We retrieve here the quiz object from the quizForm and we cast the type "as Quiz".
     const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
+    if (quizToCreate.image === '')
+      quizToCreate.image = 'https://medias.liberation.fr/photo/1269696-p-tit-libe-les-droits-de-l-enfant-menu-quiz.png?modified_at=1573658071&ratio_x=03&ratio_y=02&width=750'
 
     this.quizService.addQuiz(quizToCreate);
   }
 
-  takeImageUrl(event: Event) {
-    this.loadImage((event.target as HTMLInputElement).files[0]);
-  }
 
-  loadImage(file) {
+  /*takeImageUrl(event: Event) {
+    this.loadImage((event.target as HTMLInputElement).files[0]);
+  }*/
+
+  /*loadImage(file) {
     this.quizForm.get('image').patchValue(file);
     this.quizForm.get('image').updateValueAndValidity();
 
@@ -53,7 +55,7 @@ export class QuizFormComponent implements OnInit {
         //this.imageContainer.nativeElement.src = this.imagePreview;
       }
     }
-  }
+  }*/
 
 
 }
