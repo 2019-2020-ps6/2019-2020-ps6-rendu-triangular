@@ -1,0 +1,80 @@
+<div class="container emp-profile">
+  <form method="post">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-img">
+          <i class="fas fa-user-alt"></i>
+
+          <img alt="" src=""/>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="profile-head">
+          <h5>
+            {{receivedUser.firstName}} {{receivedUser.lastName}}
+          </h5>
+          <h6>
+            Type : {{receivedUser.type}}
+          </h6>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a aria-controls="home" aria-selected="true" class="nav-link active" data-toggle="tab" href="#home"
+                 id="home-tab" role="tab">Infos</a>
+            </li>
+            <li class="nav-item">
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-work">
+
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div aria-labelledby="home-tab" class="tab-pane fade show active" id="home" role="tabpanel">
+            <div class="row">
+              <div class="col-md-6">
+                <label>User Id</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{receivedUser.id}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Name</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{receivedUser.firstName}} {{receivedUser.lastName}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Age</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{receivedUser.age}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Type</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{receivedUser.type}}</p>
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </form>
