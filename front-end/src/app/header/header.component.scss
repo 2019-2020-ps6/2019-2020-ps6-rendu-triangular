@@ -104,7 +104,7 @@ li a:hover::before {
 
 }
 
-#dropdown-Content a:hover {
+#dropdown-Content a:hover, {
   background-color: lightgray;
 }
 
@@ -113,7 +113,7 @@ li a:hover::before {
   color: whitesmoke;
 }
 
-#quiz-content a:hover {
+#quiz-content a:hover, #connexion-content a:hover {
   background-color: #e2dfdf;
 }
 
@@ -128,7 +128,7 @@ li a:hover::before {
 }
 
 #header-left {
-  margin-left: 1300px;
+  margin-left: 1100px;
   align-content: flex-end;
 }
 

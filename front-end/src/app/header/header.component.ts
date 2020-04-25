@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {User} from "../../models/user.model";
+import {AuthentificationService} from "../../services/authentification.service";
 
 
 @Component({
@@ -13,13 +15,16 @@ export class HeaderComponent implements OnInit {
   GestionQuiz = 'Gestion Quiz';
   Lancement = 'Lancement';
 
+  @Input()
+  connectedUser: User;
+
   sideNavIsClicked: boolean
 
   showdropdownContent: boolean;
 
   sideBar: HTMLElement = document.getElementById("sidebar-wrapper") as HTMLElement;
 
-  constructor() {
+  constructor(private authService: AuthentificationService) {
   }
 
   ngOnInit() {
@@ -58,4 +63,7 @@ export class HeaderComponent implements OnInit {
     this.showdropdownContent = false;
   }
 
+  logOff() {
+    this.authService.logOff();
+  }
 }

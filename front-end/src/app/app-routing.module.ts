@@ -16,6 +16,10 @@ import {ViewListQuizComponent} from "./quizzes/view-list-quiz/view-list-quiz.com
 import {ResultatsComponent} from "./main/resultats/resultats.component";
 import {ResultatsRecordComponent} from "./main/resultats-record/resultats-record.component";
 import {DescriptionAccueilComponent} from "./main/acceuil/description-accueil/description-accueil.component";
+import {UserFormComponent} from "./users/user-form/user-form.component";
+import {UserSignInComponent} from "./users/user-sign-in/user-sign-in.component";
+import {UserListComponent} from "./users/user-list/user-list.component";
+import {UserProfileComponent} from "./users/user-profile/user-profile.component";
 
 
 const routes: Routes = [
@@ -35,6 +39,10 @@ const routes: Routes = [
   {path: 'resultats/:id', component: ResultatsComponent},
   {path: 'accueil', component: AcceuilComponent},
   {path: 'description', component: DescriptionAccueilComponent},
+  {path: 'user-profil', component: UserProfileComponent},
+  {path: 'user-form', component: UserFormComponent},
+  {path: 'user-sign-in', component: UserSignInComponent},
+  {path: 'user-list', component: UserListComponent},
   {path: '**', component: PageNotFoundComponent},
 ];
 
@@ -47,4 +55,4 @@ export class AppRoutingModule { }
 export const routingComponents = [QuizFormComponent, QuizListComponent, EditQuizComponent, QuestionListComponent,
   QuestionFormComponent, PageNotFoundComponent, AcceuilComponent,
   AproposComponent, ModifyQuizComponent,
-  LancementComponent, ResultatsComponent, ResultatsRecordComponent];
+  LancementComponent, ResultatsComponent, ResultatsRecordComponent, UserFormComponent, UserSignInComponent, UserListComponent];

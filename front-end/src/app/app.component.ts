@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {User} from "../models/user.model";
+import {AuthentificationService} from "../services/authentification.service";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  currentUser: User;
+
+  constructor(private authService: AuthentificationService) {
+    this.authService.loggedUser$.subscribe((user) => {
+      this.currentUser = user;
+    })
+  }
+
   title = 'starter-quiz';
 }

@@ -107,8 +107,8 @@ p {
 }
 
 .rubrique button:hover {
-  background-color: steelblue;
-  color: lightskyblue;
+  background-color: #a6ef51;
+  color: #ffffff;
   text-decoration: none;
   background-position: 0 -15px;
   -webkit-transition: background-position 0.1s linear;
@@ -136,6 +136,7 @@ p {
 }
 
 .rubrique {
+  border-radius: 20px;
   text-align: center;
   padding-right: 7%;
   padding-top: 20px;

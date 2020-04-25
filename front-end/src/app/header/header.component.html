@@ -11,7 +11,7 @@
   <div class="d-flex justify-content-end" id="header-left">
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item ">
+        <li class="nav-item " routerLinkActive="active">
           <a class="nav-link  " routerLink="accueil" routerLinkActive="active">Accueil <span
             class="sr-only">(current)</span></a>
         </li>
@@ -29,12 +29,36 @@
           </div>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" routerLinkActive="active">
           <a class="nav-link " routerLink="resultats-record" routerLinkActive="active">Resulats</a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" routerLinkActive="active">
           <a class="nav-link " routerLink="apropos" routerLinkActive="active">A Propos</a>
+        </li>
+
+        <li *ngIf="connectedUser === undefined;" class="nav-item dropdown">
+          <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle " data-toggle="dropdown"
+             href="#" id="connextion" role="button">
+            Connexion
+          </a>
+          <div aria-labelledby="navbarDropdown" class="dropdown-menu " id="connexion-content">
+            <a class="dropdown-item text-dark " routerLink="user-sign-in">Se connecter</a>
+            <a class="dropdown-item text-dark" routerLink="user-form">S'inscrire</a>
+          </div>
+        </li>
+
+        <li #connected *ngIf="connectedUser != undefined" class="nav-item dropdown">
+          <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle " data-toggle="dropdown"
+             href="#" id="connecter" role="button">
+            <i class="fas fa-arrow-down"></i>
+          </a>
+          <div aria-labelledby="navbarDropdown" class="dropdown-menu " id="connecter-content">
+            <a class="dropdown-item text-dark " routerLink="user-profil">Voir profil</a>
+            <a class="dropdown-item text-dark" routerLink="user-list">Voir liste des Users</a>
+            <a (click)="logOff()" class="dropdown-item text-dark" routerLink="accueil">Se deconnecter</a>
+
+          </div>
         </li>
 
       </ul>
@@ -61,8 +85,12 @@
     </li>
     <li><a (click)="closeNav()" routerLink="apropos" routerLinkActive="active">A propos</a>
     </li>
+    <li>
+
+    </li>
   </ul>
 </div>
+
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 

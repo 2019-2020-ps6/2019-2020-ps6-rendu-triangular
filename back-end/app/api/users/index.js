@@ -24,6 +24,7 @@ router.get('/:userId', (req, res) => {
 router.post('/', (req, res) => {
   try {
     const user = User.create({ ...req.body })
+
     res.status(201).json(user)
   } catch (err) {
     manageAllErrors(res, err)
