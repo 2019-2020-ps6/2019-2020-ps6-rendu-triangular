@@ -1,9 +1,8 @@
-
-<nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top  " id="nav">
+<nav class="navbar navbar-expand-lg navbar-light  " id="nav">
 
   <i (click)="manageNav()" class="fa fa-reorder" id="sidenavTrigger" style="font-size: 24px"></i>
 
-  <a class="navbar-brand text-white lead" id="Polyquiz" routerLink="accueil">PolyQuiz</a>
+  <a class="navbar-brand text-white lead text-right" id="Polyquiz" routerLink="accueil">PolyQuiz</a>
   <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
           class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
     <span class="navbar-toggler-icon"></span>
@@ -12,7 +11,7 @@
   <div class="d-flex justify-content-end" id="header-left">
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active ">
+        <li class="nav-item ">
           <a class="nav-link  " routerLink="accueil" routerLinkActive="active">Accueil <span
             class="sr-only">(current)</span></a>
         </li>
@@ -41,8 +40,8 @@
       </ul>
     </div>
   </div>
-
 </nav>
+
 
 <div #sidebar [ngStyle]="{'visibility': toggle()}" id="sidebar-wrapper">
   <i (click)="closeNav()" class="fas fa-times" id="closeButton" style="font-size: 24px"></i>

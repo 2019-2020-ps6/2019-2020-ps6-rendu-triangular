@@ -6,7 +6,7 @@
 
 #nav {
   background-color: #323232;
-  color: black;
+  //color: black;
 }
 
 #sidenavTrigger {
@@ -128,7 +128,8 @@ li a:hover::before {
 }
 
 #header-left {
-  padding-left: 1300px;
+  margin-left: 1300px;
+  align-content: flex-end;
 }
 
 

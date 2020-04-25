@@ -36,7 +36,6 @@ const routes: Routes = [
   {path: 'accueil', component: AcceuilComponent},
   {path: 'description', component: DescriptionAccueilComponent},
   {path: '**', component: PageNotFoundComponent},
-
 ];
 
 @NgModule({

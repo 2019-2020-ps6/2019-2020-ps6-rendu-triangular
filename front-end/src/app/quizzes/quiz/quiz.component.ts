@@ -26,15 +26,10 @@ export class QuizComponent implements OnInit, AfterViewInit {
   modifyQuiz: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
   subscription: Subscription = new Subscription();
-  subscriptionIndex: Subscription = new Subscription();
 
   constructor(private quizService: QuizService, private elementRef: ElementRef) {
     this.subscription = this.quizService.quizSelected$.subscribe((quiz) => {
       this.quiz = quiz;
-    })
-
-    this.subscriptionIndex = this.quizService.quizIndex$.subscribe((index) => {
-      this.quiz.questionIndex = index;
     })
   }
 
@@ -43,7 +38,7 @@ export class QuizComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.resizeQuizImage();
+   // this.resizeQuizImage();
   }
 
   selectQuiz() {
@@ -69,6 +64,10 @@ export class QuizComponent implements OnInit, AfterViewInit {
 
   getImageUrl() {
     return "url(' " + this.quiz.image + " ')";
+  }
+
+  getImageSrc() {
+    return this.quiz.image;
   }
 
   getDefaultImageUrl() {

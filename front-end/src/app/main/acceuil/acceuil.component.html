@@ -1,13 +1,23 @@
-<div class="container-fluid" id="Bienvenue">
-
-  <div class="header" id="message">
-    <h1 class="display-1 text-black text-center">Bienvenue</h1>
+<div class="container-fuid" id="Bienvenue">
+  <div class="text-center" id="message">
+    <div class=" container">
+      <div class="col-sm-12 my-auto">
+        <div class="rubrique text-center" style="margin-top: 100px">
+          <button class="card" routerLink="../quiz-list" style="width: 400px; height: 400px">
+            <p style="font-size: 50px; margin-left: 80px">Liste Quiz</p>
+          </button>
+          <button class="card" routerLink="../quiz-form" style="width: 400px; height: 400px">
+            <p style="font-size: 50px; margin-left: 30px">Creer un Quiz</p>
+          </button>
+        </div>
+      </div>
+    </div>
 
   </div>
-  <a #srollMe address="true" class="scroll-down" id="scroll-down"></a>
-
+  <!--<a #srollMe address="true" class="scroll-down" id="scroll-down"></a>-->
 </div>
 
 <app-description-accueil></app-description-accueil>
+
 
 <div id="bottom"></div>

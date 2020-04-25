@@ -26,6 +26,7 @@ import {ResultatsComponent} from './main/resultats/resultats.component';
 import {ResultatsRecordComponent} from './main/resultats-record/resultats-record.component';
 import {DescriptionAccueilComponent} from './main/acceuil/description-accueil/description-accueil.component';
 import {GameRecordService} from "../services/game-record.service";
+import {MDBBootstrapModule} from "angular-bootstrap-md";
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import {GameRecordService} from "../services/game-record.service";
     RouterModule,
     BrowserAnimationsModule,
     FormsModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [GameRecordService],
   bootstrap: [AppComponent]
