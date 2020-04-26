@@ -6,6 +6,11 @@
   min-height: 65vh;
 }
 
+button {
+  display: inline-block;
+}
+
+
 #scroll-down {
   opacity: 1;
   -webkit-transition: all .5s ease-in 3s;
@@ -76,7 +81,7 @@ h1 {
 }
 
 p {
-  margin-top: 150px;
+  margin-top: 0px;
   text-align: center;
 }
 

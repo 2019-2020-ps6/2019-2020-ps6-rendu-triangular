@@ -33,12 +33,14 @@ import {UserComponent} from './users/user/user.component';
 import {UserSignInComponent} from './users/user-sign-in/user-sign-in.component';
 import {UserService} from "../services/user.service";
 import {QuizService} from "../services/quiz.service";
-import {QuizColorComponent} from './quizzes/quiz-color/quiz-color.component';
-import {QuizColorFormComponent} from './quizzes/quiz-color-form/quiz-color-form.component';
 import {LancementQuizColorComponent} from './main/lancement-quiz-color/lancement-quiz-color.component';
 import {AuthentificationService} from "../services/authentification.service";
 import {UserProfileComponent} from './users/user-profile/user-profile.component';
 import {UserProfilViewComponent} from './users/user-profil-view/user-profil-view.component';
+import {QuizColorService} from "../services/quiz-color.service";
+import {QuizColorComponent} from './quizzes-color/quiz-color/quiz-color.component';
+import {QuizColorListComponent} from './quizzes-color/quiz-color-list/quiz-color-list.component';
+import {QuizColorFormComponent} from "./quizzes-color/quiz-color-form/quiz-color-form.component";
 
 
 @NgModule({
@@ -67,11 +69,12 @@ import {UserProfilViewComponent} from './users/user-profil-view/user-profil-view
     UserFormComponent,
     UserComponent,
     UserSignInComponent,
-    QuizColorComponent,
-    QuizColorFormComponent,
     LancementQuizColorComponent,
     UserProfileComponent,
     UserProfilViewComponent,
+    QuizColorComponent,
+    QuizColorListComponent,
+    QuizColorFormComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +86,7 @@ import {UserProfilViewComponent} from './users/user-profil-view/user-profil-view
     FormsModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [GameRecordService, UserService, QuizService, AuthentificationService],
+  providers: [GameRecordService, UserService, QuizService, AuthentificationService, QuizColorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

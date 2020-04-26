@@ -1,6 +1,7 @@
 import {Subject} from "rxjs";
 import {User} from "../models/user.model";
 import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class AuthentificationService {
@@ -8,26 +9,21 @@ export class AuthentificationService {
   public loggedUser$ = new Subject<User>();
   private connectedUser: User;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.getConnectedUser();
   }
 
+  getConnectedUser() {
+
+  }
+
   logIn(user: User) {
+    this.getConnectedUser();
     this.userIsAuthentified = true;
-    this.loggedUser$.next(user);
   }
 
   logOff() {
-    this.loggedUser$.next(undefined);
-    this.connectedUser = undefined;
     this.userIsAuthentified = false;
-  }
-
-  getConnectedUser() {
-    return this.loggedUser$.subscribe((connected) => {
-      this.connectedUser = connected;
-      this.updateUser();
-    })
   }
 
   updateUser() {

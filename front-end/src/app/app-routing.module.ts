@@ -20,6 +20,9 @@ import {UserFormComponent} from "./users/user-form/user-form.component";
 import {UserSignInComponent} from "./users/user-sign-in/user-sign-in.component";
 import {UserListComponent} from "./users/user-list/user-list.component";
 import {UserProfileComponent} from "./users/user-profile/user-profile.component";
+import {QuizColorListComponent} from "./quizzes-color/quiz-color-list/quiz-color-list.component";
+import {QuizColorFormComponent} from "./quizzes-color/quiz-color-form/quiz-color-form.component";
+import {QuizColorComponent} from "./quizzes-color/quiz-color/quiz-color.component";
 
 
 const routes: Routes = [
@@ -43,6 +46,9 @@ const routes: Routes = [
   {path: 'user-form', component: UserFormComponent},
   {path: 'user-sign-in', component: UserSignInComponent},
   {path: 'user-list', component: UserListComponent},
+  {path: 'quiz-color-list', component: QuizColorListComponent},
+  {path: 'quiz-color-form', component: QuizColorFormComponent},
+  {path: 'quiz-color', component: QuizColorComponent},
   {path: '**', component: PageNotFoundComponent},
 ];
 
