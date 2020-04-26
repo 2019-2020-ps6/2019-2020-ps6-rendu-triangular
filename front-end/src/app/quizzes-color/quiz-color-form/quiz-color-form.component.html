@@ -1,1 +1,60 @@
-<p>quiz-color-form works!</p>
+<div class="container">
+  <form (ngSubmit)="createSetOfQuizColor()" [formGroup]="formGroup" class="text-center" style="color: #757575;">
+
+    <div class="md-form">
+      <input [formControlName]="'name'" class="form-control" id="nom" type="text">
+      <label for="nom">Nom du quiz</label>
+    </div>
+
+    <div class="md-form">
+      <div class="row">
+        <div class="col-sm">
+          <div class="square row d-flex justify-content-center" id="square1" style="background-color: blue">
+            <p style="padding-top: 40px; color: black; font-size: 50px">{{valSquare1}}</p>
+          </div>
+          <div class="md-form">
+            <input (change)="changeInputVal1()" [formControlName]="'valSquare1'" class="form-control" id="valeurQuiz1"
+                   type="text">
+            <label for="valeurQuiz1">Valeur</label>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="square row d-flex justify-content-center" id="square2" style="background-color: yellow">
+            <p style="padding-top: 40px; color: black; font-size: 50px">{{valSquare2}}</p>
+          </div>
+          <div class="md-form">
+            <input (change)="changeInputVal2()" [formControlName]="'valSquare2'" class="form-control" id="valeurQuiz2"
+                   type="text">
+            <label for="valeurQuiz2">Valeur</label>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="square row d-flex justify-content-center" id="square3" style="background-color: greenyellow">
+            <p style="padding-top: 40px; color: black; font-size: 50px">{{valSquare3}}</p>
+          </div>
+          <div class="md-form">
+            <input (change)="changeInputVal3()" [formControlName]="'valSquare3'" class="form-control" id="valeurQuiz3"
+                   type="text">
+            <label for="valeurQuiz3">Valeur</label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="d-flex justify-content-around">
+      <div>
+        <div class="md-form">
+          <input [formControlName]="'generation'" class="form-control" id="generation" type="text">
+          <label for="generation">Nombre de générations</label>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-primary" color="primary" mdbBtn mdbWavesEffect size="lg" type="submit">
+      Creer le quiz
+    </button>
+
+  </form>
+</div>
+

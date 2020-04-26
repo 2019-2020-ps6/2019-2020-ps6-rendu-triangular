@@ -1,1 +1,3 @@
-<p>quiz-color-list works!</p>
+<div *ngFor="let quiz of quizList" class="list-group">
+  <app-quiz-color [quizColor]="quiz"></app-quiz-color>
+</div>

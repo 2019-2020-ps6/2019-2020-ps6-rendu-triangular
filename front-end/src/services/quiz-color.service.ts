@@ -10,7 +10,7 @@ export class QuizColorService {
 
   quiColorsList$: BehaviorSubject<QuizColor[]> = new BehaviorSubject<QuizColor[]>(this.quizColorList);
 
-  quizColorListUrl: string = "http://localhost:9428/api/quiz-color";
+  quizColorListUrl: string = "http://localhost:9428/api/quiz-colo";
 
   constructor(private http: HttpClient) {
     this.getAllQuizColor();
