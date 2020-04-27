@@ -27,24 +27,7 @@ export class QuizColorViewListComponent implements OnInit {
   }
 
   getData() {
-    let index2D = 0; // Store when quizzes are différents
-    let quiz2D: QuizColor[][] = [];
-    quiz2D[index2D] = [];
-    quiz2D[index2D].push(this.quizList[0]);
-    console.log(quiz2D);
-
-    for (let i = 1; i < this.quizList.length; i++) {
-      if (this.quizList[i - 1].name === this.quizList[i].name) {
-        quiz2D[index2D].push(this.quizList[i - 1]);
-      } else if (this.quizList[i - 1].name != this.quizList[i].name) {
-        index2D++;
-        quiz2D[index2D] = [];
-      }
-    }
-
-    //console.log(this.quiz2D[0].length);
-    //console.log(this.quiz2D[1].length);
-    return quiz2D;
+    return this.quizColorService.returnMapping2DArray();
   }
 
   launchQuizColor(id) {

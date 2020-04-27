@@ -78,7 +78,7 @@ export class LancementComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.quizService.setSelectedQuiz(id);
 
-    this.userArrayOfAnswer = new Array();
+    this.userArrayOfAnswer = [];
     this.nombre = 0;
 
     if (!this.isAtEnd)

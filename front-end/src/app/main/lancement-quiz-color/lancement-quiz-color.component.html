@@ -1,1 +1,8 @@
 <p>lancement-quiz-color works!</p>
+
+<div class="container">
+
+  <div *ngFor=" let i of this.quiz2D; let x = index">
+    {{this.quiz2D[this.indexes[0]][x].id}}
+  </div>
+</div>

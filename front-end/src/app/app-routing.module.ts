@@ -55,7 +55,7 @@ const routes: Routes = [
   {path: 'quiz-color-view', component: QuizColorViewComponent},
   {path: 'quiz-color-list', component: QuizColorListComponent},
   {path: 'quiz-color-view-list', component: QuizColorViewListComponent},
-  {path: 'lancement-quiz-color', component: LancementQuizColorComponent},
+  {path: 'lancement-quiz-color/:id', component: LancementQuizColorComponent},
   {path: '**', component: PageNotFoundComponent},
 ];
 
