@@ -1,6 +1,5 @@
 <div [ngStyle]="{'background': getImageUrl()}" class="card text-light">
-  <h3 class="lead">
-    <i class="fab fa-leanpub"></i>
+  <h3 class="lead" style="font-weight: bold">
     {{question.label}}
   </h3>
   <div *ngFor="let answer of question.answers; let i=index" class="answer">

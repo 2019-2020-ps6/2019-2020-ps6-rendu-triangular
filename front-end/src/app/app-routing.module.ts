@@ -23,6 +23,9 @@ import {UserProfileComponent} from "./users/user-profile/user-profile.component"
 import {QuizColorListComponent} from "./quizzes-color/quiz-color-list/quiz-color-list.component";
 import {QuizColorFormComponent} from "./quizzes-color/quiz-color-form/quiz-color-form.component";
 import {QuizColorComponent} from "./quizzes-color/quiz-color/quiz-color.component";
+import {QuizColorViewComponent} from "./quizzes-color/quiz-color-view/quiz-color-view.component";
+import {LancementQuizColorComponent} from "./main/lancement-quiz-color/lancement-quiz-color.component";
+import {QuizColorViewListComponent} from "./quizzes-color/quiz-color-view-list/quiz-color-view-list.component";
 
 
 const routes: Routes = [
@@ -49,6 +52,10 @@ const routes: Routes = [
   {path: 'quiz-color-list', component: QuizColorListComponent},
   {path: 'quiz-color-form', component: QuizColorFormComponent},
   {path: 'quiz-color', component: QuizColorComponent},
+  {path: 'quiz-color-view', component: QuizColorViewComponent},
+  {path: 'quiz-color-list', component: QuizColorListComponent},
+  {path: 'quiz-color-view-list', component: QuizColorViewListComponent},
+  {path: 'lancement-quiz-color', component: LancementQuizColorComponent},
   {path: '**', component: PageNotFoundComponent},
 ];
 

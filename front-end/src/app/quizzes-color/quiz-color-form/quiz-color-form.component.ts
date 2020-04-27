@@ -22,6 +22,7 @@ export class QuizColorFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    console.log(this.quizColorService.getQuizColorArray())
   }
 
   initForm() {
@@ -76,7 +77,6 @@ export class QuizColorFormComponent implements OnInit {
 
       this.quizColorService.addQuiztoList(quiz);
       console.log("one quiz created");
-      console.log(quiz);
     }
   }
 

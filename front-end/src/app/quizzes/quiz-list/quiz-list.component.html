@@ -9,7 +9,7 @@
       Aucun Quiz
     </div>
   </div>
-  <div *ngFor="let quiz of quizList; let i = index" class="quiz">
+  <div *ngFor="let quiz of quizList; let i = index" class="quiz d-inline-block ">
     <app-quiz (deleteQuiz)="deleteQuiz($event)" (editQuiz)="editQuiz($event)" (modifyQuiz)="modifyQuiz($event)"
               (quizSelected)="quizSelected($event)" [quiz]="quiz"></app-quiz>
     <div *ngIf="(1+1)%2 == 0">

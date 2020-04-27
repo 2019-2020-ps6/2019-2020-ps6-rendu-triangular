@@ -10,7 +10,7 @@ export class QuizColorService {
 
   quiColorsList$: BehaviorSubject<QuizColor[]> = new BehaviorSubject<QuizColor[]>(this.quizColorList);
 
-  quizColorListUrl: string = "http://localhost:9428/api/quiz-colo";
+  quizColorListUrl: string = "http://localhost:9428/api/quiz-color";
 
   constructor(private http: HttpClient) {
     this.getAllQuizColor();
@@ -28,6 +28,7 @@ export class QuizColorService {
   }
 
   addQuiztoList(quiz: QuizColor) {
+    console.log(quiz);
     this.http.post<QuizColor[]>(this.quizColorListUrl, quiz).subscribe(() => {
       this.getAllQuizColor();
     })
@@ -42,5 +43,10 @@ export class QuizColorService {
   updateQuizColorList() {
     this.quiColorsList$.next(this.quizColorList);
   }
+
+  findAllQuiz() {
+    return this.http.get(this.quizColorListUrl)
+  }
+
 
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {QuizColor} from "../../../models/quiz-color.model";
 
 @Component({
@@ -11,6 +11,9 @@ export class QuizColorComponent implements OnInit {
   @Input()
   quizColor: QuizColor;
 
+  @Output()
+  deleteEmmitter: EventEmitter<QuizColor> = new EventEmitter<QuizColor>();
+
   constructor() {
   }
 
@@ -18,9 +21,8 @@ export class QuizColorComponent implements OnInit {
 
   }
 
-  setColor() {
-    let div = document.getElementById("square") as HTMLDivElement;
-    div.style.backgroundColor = this.quizColor.color;
+  delete() {
+    this.deleteEmmitter.emit(this.quizColor);
   }
 
 }

@@ -1,0 +1,24 @@
+#oneCard {
+  width: auto;
+  max-width: 1000px;
+  display: table;
+  max-height: 500px;
+  border: solid;
+  border-radius: 100px;
+}
+
+#quizcolor {
+  width: 25px;
+}
+
+#content2 {
+  display: table;
+}
+
+#content1 {
+  max-height: 500px;
+}
+
+#content1::after {
+  clear: both;
+}

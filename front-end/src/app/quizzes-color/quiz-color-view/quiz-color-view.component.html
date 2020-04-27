@@ -1,0 +1,11 @@
+<div (click)="isclicked()" [ngStyle]="{'background-color': 'purple'}" class="card text-white" id="view">
+  <h1>
+    {{quizColor[0].name}}
+  </h1>
+  <p style="font-size: 50px">{{quizColor.length}} cartes</p>
+
+  <div *ngFor="let i of quizColor; let ind = index">
+    <div *ngIf="ind < 3">
+    </div>
+  </div>
+</div>

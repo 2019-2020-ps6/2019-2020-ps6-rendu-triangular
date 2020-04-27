@@ -1,3 +1,8 @@
-<div [ngStyle]="setColor()" class="square row d-flex justify-content-center" id="square">
-  <p>{{quizColor.value}}</p>
+<div class=" card d-flex justify-content-start" id="card">
+  <div class="square row d-flex justify-content-center" id="square"
+       style="background-color: {{quizColor.color}};border-radius: 100px;">
+    <p>{{quizColor.value}}</p>
+  </div>
+  <!--<p style="margin-left: 100px; margin-bottom: 50px"> {{quizColor.name}}</p>-->
+  <button (click)="delete()" class="btn-primary text-center" id="supprimer" type="button">delete</button>
 </div>

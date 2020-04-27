@@ -1,9 +1,36 @@
 .square {
   height: 150px;
   width: 150px;
+  display: flex;
+  margin-left: 90px;
+}
+
+#card {
+  background-color: palegoldenrod;
+  border-radius: 50px;
+  width: auto;
+  max-width: 350px;
+  //lign-content: start;
+}
+
+#card::after {
+  clear: both;
+  content: "";
+  display: table;
 }
 
 p {
   padding-top: 40px;
   font-size: 50px;
+}
+
+#supprimer {
+  height: 30px;
+  margin-right: 105px;
+  margin-left: 120px;
+}
+
+
+#card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }

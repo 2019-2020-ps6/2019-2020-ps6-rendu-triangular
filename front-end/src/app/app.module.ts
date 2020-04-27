@@ -41,6 +41,8 @@ import {QuizColorService} from "../services/quiz-color.service";
 import {QuizColorComponent} from './quizzes-color/quiz-color/quiz-color.component';
 import {QuizColorListComponent} from './quizzes-color/quiz-color-list/quiz-color-list.component';
 import {QuizColorFormComponent} from "./quizzes-color/quiz-color-form/quiz-color-form.component";
+import {QuizColorViewListComponent} from './quizzes-color/quiz-color-view-list/quiz-color-view-list.component';
+import {QuizColorViewComponent} from './quizzes-color/quiz-color-view/quiz-color-view.component';
 
 
 @NgModule({
@@ -74,7 +76,9 @@ import {QuizColorFormComponent} from "./quizzes-color/quiz-color-form/quiz-color
     UserProfilViewComponent,
     QuizColorComponent,
     QuizColorListComponent,
-    QuizColorFormComponent
+    QuizColorFormComponent,
+    QuizColorViewListComponent,
+    QuizColorViewComponent
   ],
   imports: [
     BrowserModule,

@@ -1,53 +1,54 @@
 const {Router} = require('express')
-const {QuizColor} = require('../../models')
+const {ColorQuiz} = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
 const {buildQuizz, buildQuizzes} = require('./manager')
 
 const router = new Router();
 
-router.get('/', (req, res) => {
+
+router.get('/', (request, response) => {
     try {
         const quizzes = buildQuizzes()
-        res.status(201).json(quizzes)
+        response.status(200).json(quizzes)
     } catch (err) {
-        manageAllErrors(res, err)
+        manageAllErrors(response, err)
     }
 })
 
-router.get('/:quizId', (req, res) => {
+router.get('/:quizId', (request, response) => {
     try {
-        const quizz = buildQuizz(req.params.quizId)
-        res.status(200).json(quizz)
+        const quizz = buildQuizz(request.params.quizId)
+        response.status(200).json(quizz)
     } catch (err) {
-        manageAllErrors(res, err)
+        manageAllErrors(response, err)
     }
 })
 
-router.post('/', (req, res) => {
+router.post('/', (request, response) => {
     try {
-        const quiz = QuizColor.create({...req.body})
+        const quiz = ColorQuiz.create({...request.body})
         //const quiz = QuizColor.create({name:req.body.name, color: req.body.color, value:req.body.value})
-        res.status(201).json(quiz)
+        response.status(201).json(quiz)
     } catch (err) {
-        manageAllErrors(res, err)
+        manageAllErrors(response, err)
     }
 })
 
-router.put('/:quizId', (req, res) => {
+router.put('/:quizId', (request, response) => {
     try {
-        res.status(200).json(QuizColor.update(req.params.quizId, req.body))
+        response.status(200).json(ColorQuiz.update(request.params.quizId, request.body))
     } catch (err) {
-        manageAllErrors(res, err)
+        manageAllErrors(response, err)
     }
 })
 
-router.delete('/:quizId', (req, res) => {
+router.delete('/:quizId', (request, response) => {
     try {
-        QuizColor.delete(req.params.quizId)
-        res.status(204).end()
+        ColorQuiz.delete(request.params.quizId)
+        response.status(204).end()
     } catch (err) {
-        manageAllErrors(res, err)
+        manageAllErrors(response, err)
     }
 })
 
-module.exports = router
+module.exports = router;

@@ -1,7 +1,7 @@
-import {User} from "./user.model";
-
 export class ConnectedUser {
-  info: User
+  username: string;
+  signInDate: Date;
+  signOutDate: Date;
 
   constructor() {
   }
