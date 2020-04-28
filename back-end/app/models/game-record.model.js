@@ -7,5 +7,6 @@ module.exports = new BaseModel('game-record', {
     endDate: Joi.date(),
     numberOfAttempts: Joi.number(),
     finalScore: Joi.number(),
-    duration: Joi.number()
+    duration: Joi.number(),
+    typeOfQuiz: Joi.string()
 })

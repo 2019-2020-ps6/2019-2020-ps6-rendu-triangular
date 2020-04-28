@@ -5,6 +5,7 @@
       <thead>
       <tr>
         <th scope="col">#</th>
+        <th scope="col">Type</th>
         <th scope="col">Start Date</th>
         <th scope="col">Duration</th>
         <th scope="col">Number of Attemps</th>
@@ -16,11 +17,12 @@
       <tbody *ngFor="let gameRec of gameRecordList; let i = index">
       <tr>
         <th scope="row">{{i + 1}}</th>
-        <td>{{gameRec.startDate | date:'yyyy-MM-dd'}}</td>
+        <td>{{gameRec.typeOfQuiz}} </td>
+        <td>{{gameRec.startDate | date:'MMMM d, y, HH:mm:ss '}}</td>
         <td>{{gameRec.duration}} s</td>
         <td>{{gameRec.numberOfAttempts}}</td>
         <td>{{gameRec.finalScore}}</td>
-        <td>{{gameRec.endDate | date:'yyyy-MM-dd'}}</td>
+        <td>{{gameRec.endDate | date:'HH:mm:ss'}}</td>
       </tr>
       </tbody>
     </table>

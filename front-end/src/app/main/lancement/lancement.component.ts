@@ -138,6 +138,7 @@ export class LancementComponent implements OnInit {
     this.gameRecorder.finalScore = this.scoreFinal;
     this.gameRecorder.endDate = new Date();
     this.gameRecorder.duration = this.tempsDeJeu
+    this.gameRecorder.typeOfQuiz = "Quiz Image";
 
     this.game.performGameRecorder(this.gameRecorder);
     this.game.performTempsDeJeu(this.tempsDeJeu);

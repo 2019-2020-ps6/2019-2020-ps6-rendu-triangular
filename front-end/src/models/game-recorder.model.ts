@@ -5,4 +5,5 @@ export class GameRecorder {
   numberOfAttempts: number;
   finalScore: number
   duration: number;
+  typeOfQuiz: string;
 }

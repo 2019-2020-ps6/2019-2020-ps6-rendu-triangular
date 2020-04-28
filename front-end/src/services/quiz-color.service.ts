@@ -62,7 +62,6 @@ export class QuizColorService {
     this.quiColorsList$.next(this.quizColorList);
   }
 
-
   returnMapping2DArray() {
     let index2D = 0;
     let quiz2D: QuizColor[][] = [];
@@ -76,6 +75,11 @@ export class QuizColorService {
         index2D++;
         quiz2D[index2D] = [];
       }
+      if (i === this.quizColorList.length)
+        quiz2D[index2D].push(this.quizColorList[i - 1]);
+      if (index2D === quiz2D[quiz2D.length - 1].length)
+        quiz2D[index2D].push(this.quizColorList[i - 1]);
+
     }
 
     this.quizColor2DArray = quiz2D

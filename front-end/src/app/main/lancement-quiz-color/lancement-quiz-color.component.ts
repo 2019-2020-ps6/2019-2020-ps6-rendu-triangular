@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {QuizColorService} from "../../../services/quiz-color.service";
 import {QuizColor} from "../../../models/quiz-color.model";
+import {GameRecorder} from "../../../models/game-recorder.model";
+import {GameRecordService} from "../../../services/game-record.service";
+import {interval} from "rxjs";
 
 
 @Component({
@@ -30,8 +33,16 @@ export class LancementQuizColorComponent implements OnInit {
 
   indexOfGame: number = 0;
 
+  numberOfFailures: number = 0;
 
-  constructor(private activatedRouter: ActivatedRoute, private quizColorService: QuizColorService, private route: Router) {
+  gameRecorder: GameRecorder;
+
+  tempsDeJeu: number;
+
+  hideSeeSolution: boolean = true;
+
+
+  constructor(private activatedRouter: ActivatedRoute, private quizColorService: QuizColorService, private route: Router, private recordService: GameRecordService) {
 
     this.callTimer();
 
@@ -43,6 +54,10 @@ export class LancementQuizColorComponent implements OnInit {
 
   ngOnInit(): void {
     localStorage.setItem("id", this.quizColorSelectedId);
+
+    this.gameRecorder = new GameRecorder();
+    this.gameRecorder.startDate = new Date();
+    this.launchQuizTimerCount();
   }
 
   getSnapshot() {
@@ -98,6 +113,8 @@ export class LancementQuizColorComponent implements OnInit {
       this.indexOfGame++;
       this.callTimer()
       this.scoreForQuiz++;
+      this.hideSeeSolution = true;
+      console.log("failures" + this.numberOfFailures)
 
       if (this.indexOfGame >= this.findNumberOfPossiblePlay()) {
         //Fires a modal to end
@@ -107,10 +124,19 @@ export class LancementQuizColorComponent implements OnInit {
 
       return true;
     } else {
+      this.numberOfFailures++;
       this.scoreForThreeCard = 0;
       this.showColor = false;
+      this.checkTooMuchAttempts();
       this.fireModal("modalBtn");
       return false;
+    }
+  }
+
+  checkTooMuchAttempts() {
+    if (this.numberOfFailures >= 10) {
+      this.fireModal("modalBtnForQuitting");
+      //this.seeCurrentSolution();
     }
   }
 
@@ -133,9 +159,34 @@ export class LancementQuizColorComponent implements OnInit {
     modal.click();
   }
 
+  launchQuizTimerCount() {
+    const counter = interval(1000);
+    counter.subscribe(value => {
+      this.tempsDeJeu = value;
+    })
+  }
+
   closeModal(name) {
+    this.gameRecorder.typeOfQuiz = "Quiz Color";
+    this.gameRecorder.endDate = new Date();
+    this.gameRecorder.finalScore = this.scoreForQuiz;
+    this.gameRecorder.numberOfAttempts = this.numberOfFailures;
+    this.gameRecorder.duration = this.tempsDeJeu;
+    this.recordService.performGameRecorder(this.gameRecorder);
+    this.recordService.performTempsDeJeu(this.tempsDeJeu);
     let modal = document.getElementById(name) as HTMLElement;
     modal.hidden = true;
     this.route.navigate(['quiz-color-view-list'])
+  }
+
+  seeCurrentSolution() {
+    this.hideSeeSolution = false;
+    let modal = document.getElementById(name) as HTMLElement;
+    modal.hidden = true;
+  }
+
+  navigateToThebegining() {
+    this.route.navigate(['lancement-quiz-color/' + this.quizColorSelectedId])
+    this.closeModal("modalBtnForQuitting");
   }
 }
