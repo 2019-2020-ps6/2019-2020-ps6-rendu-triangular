@@ -5,7 +5,7 @@
 
       <div *ngIf="quizName === quiz.name" class="row " id="content1">
         <div class="col-sm" id="content2">
-          <app-quiz-color (deleteEmmitter)="deleteAColorCard($event)" [quizColor]="quiz"
+          <app-quiz-color (deleteEmmitter)="deleteAColorCard($event)" [displayValues]="true" [quizColor]="quiz"
                           id="quizcolor"></app-quiz-color>
           <div *ngIf="i%1 === 0"><br></div>
         </div>

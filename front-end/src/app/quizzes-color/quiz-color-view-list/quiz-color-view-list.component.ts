@@ -30,7 +30,10 @@ export class QuizColorViewListComponent implements OnInit {
     return this.quizColorService.returnMapping2DArray();
   }
 
-  launchQuizColor(id) {
+  launchQuizColor(id, i: QuizColor[]) {
+    console.log("Index of this quiz :", i);
+    this.quizColorService.setSelectedQuizColor(i);
+
     this.route.navigate(['lancement-quiz-color/' + id])
   }
 

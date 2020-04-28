@@ -11,6 +11,9 @@ export class QuizColorComponent implements OnInit {
   @Input()
   quizColor: QuizColor;
 
+  @Input()
+  displayValues: boolean = false
+
   @Output()
   deleteEmmitter: EventEmitter<QuizColor> = new EventEmitter<QuizColor>();
 

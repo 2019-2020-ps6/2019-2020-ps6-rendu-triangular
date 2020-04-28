@@ -1,15 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {QuizColorService} from "../../../services/quiz-color.service";
 import {QuizColor} from "../../../models/quiz-color.model";
-import {filter} from "rxjs/operators";
+
 
 @Component({
   selector: 'app-lancement-quiz-color',
   templateUrl: './lancement-quiz-color.component.html',
   styleUrls: ['./lancement-quiz-color.component.scss']
 })
-
 
 export class LancementQuizColorComponent implements OnInit {
 
@@ -19,36 +18,40 @@ export class LancementQuizColorComponent implements OnInit {
 
   quiz2D: QuizColor[][] = this.quizColorService.getQuizColor2DArray();
 
-  indexes: number[] = this.checkIfIdIsInAnIndex();
+  quizSelected: QuizColor[];
 
-  constructor(private router: ActivatedRoute, private quizColorService: QuizColorService, private route: Router) {
+  indexOfPlay: number = 0;
 
+  showColor: boolean = true;
+
+  scoreForQuiz: number[] = [];
+
+  scoreForThreeCard: number = 0;
+
+  indexOfGame: number = 0;
+
+
+  constructor(private activatedRouter: ActivatedRoute, private quizColorService: QuizColorService, private route: Router) {
+
+    setTimeout(() => {
+        this.showColor = false;
+      }, 5000
+    )
+
+    this.getSnapshot();
+    this.retrieveDataFromServer();
+    this.retrieve2DArray();
+    this.retrieveSelectedQuiz();
   }
 
   ngOnInit(): void {
-    // Nest them together and
-    this.router.queryParams.subscribe(queryParams => {
-      this.router.params.subscribe(routeParams => {
-        this.quizColorSelectedId = routeParams.id;
-      });
-    });
-
-    this.route.events
-      .pipe(
-        filter(event => event instanceof NavigationEnd)
-      )
-      .subscribe((event: NavigationEnd) => {
-        console.log('Got the Event URL as ', event.url);
-        if (event.urlAfterRedirects.includes('project')) {
-          console.log('This was redirected to the Project Component');
-        }
-      });
-
-    console.log("localstorage :" + localStorage.getItem("id"));
     localStorage.setItem("id", this.quizColorSelectedId);
+  }
 
-    this.retrieveDataFromServer();
-    this.retrieve2DArray();
+  getSnapshot() {
+    const id = this.activatedRouter.snapshot.paramMap.get('id');
+    this.quizColorSelectedId = id;
+    this.quizColorService.setSelectedQuizID(id);
   }
 
   retrieveDataFromServer() {
@@ -64,21 +67,64 @@ export class LancementQuizColorComponent implements OnInit {
     })
   }
 
-  checkIfIdIsInAnIndex() {
-    let lengthRow = this.quiz2D.length;
-    let lengthcolumn = this.quiz2D[this.quiz2D.length - 1].length;
-    let indexesOfLast = [];
-
-    for (let i = 0; i < lengthRow; i++) {
-      for (let j = 0; j < lengthcolumn; j++) {
-        if (this.quiz2D[i][j].id.toString().localeCompare(this.quizColorSelectedId)) {
-          indexesOfLast.push(i);
-          indexesOfLast.push(j);
-          return indexesOfLast;
-        }
-      }
-    }
-    return null;
+  retrieveSelectedQuiz() {
+    this.quizColorService.selectedQuiColor$.subscribe((quizColor) => {
+      this.quizSelected = quizColor;
+    })
   }
 
+  findNumberOfPossiblePlay() {
+    return this.quizSelected.length / 3;
+  }
+
+  trheeByThreeArray() {
+    const copy = this.quizSelected;
+    this.callTimer()
+    clearTimeout(this.callTimer());
+
+    return copy.slice(this.indexOfPlay, this.indexOfPlay + 3);
+  }
+
+  callTimer() {
+
+    return <any>setTimeout(() => {
+        this.showColor = false;
+      }, 5000
+    )
+  }
+
+  next() {
+    if (this.checkUserInput()) {
+      this.indexOfPlay += 3;
+      this.showColor = true;
+      this.scoreForThreeCard = 0;
+      this.indexOfGame++;
+      this.callTimer()
+      return true;
+    } else {
+      this.scoreForThreeCard = 0;
+      this.showColor = false;
+      this.fireModal();
+      return false;
+    }
+  }
+
+  operateScore() {
+    let array = this.trheeByThreeArray();
+
+    for (let a of array)
+      this.scoreForThreeCard = Number(this.scoreForThreeCard) + Number(a.value);
+  }
+
+  checkUserInput() {
+    let input = document.getElementById("réponse") as HTMLInputElement;
+    this.operateScore();
+    console.log(this.scoreForThreeCard)
+    return Number(input.value) === this.scoreForThreeCard;
+  }
+
+  fireModal() {
+    let modal = document.getElementById("modalBtn") as HTMLButtonElement;
+    modal.click();
+  }
 }

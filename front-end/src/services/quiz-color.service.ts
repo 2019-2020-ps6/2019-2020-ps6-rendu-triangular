@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {QuizColor} from "../models/quiz-color.model";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 
 @Injectable()
 export class QuizColorService {
@@ -10,9 +10,15 @@ export class QuizColorService {
 
   private quizColor2DArray: QuizColor[][] = [];
 
-  quiColorsList$: BehaviorSubject<QuizColor[]> = new BehaviorSubject<QuizColor[]>(this.quizColorList);
+  public selectedQuizColor: QuizColor[];
 
-  quizColor2D$: BehaviorSubject<QuizColor[][]> = new BehaviorSubject<QuizColor[][]>(this.quizColor2DArray);
+  public selectedQuiColor$: BehaviorSubject<QuizColor[]> = new BehaviorSubject<QuizColor[]>(this.selectedQuizColor)
+
+  public quiColorsList$: BehaviorSubject<QuizColor[]> = new BehaviorSubject<QuizColor[]>(this.quizColorList);
+
+  public quizColor2D$: BehaviorSubject<QuizColor[][]> = new BehaviorSubject<QuizColor[][]>(this.quizColor2DArray);
+
+  public singleQuiz$: Subject<QuizColor> = new Subject<QuizColor>();
 
   quizColorListUrl: string = "http://localhost:9428/api/quiz-color";
 
@@ -46,9 +52,16 @@ export class QuizColorService {
     })
   }
 
+  setSelectedQuizID(id: string) {
+    this.http.get<QuizColor>(this.quizColorListUrl + '/' + id).subscribe((singleQuiz) => {
+      this.singleQuiz$.next(singleQuiz);
+    })
+  }
+
   updateQuizColorList() {
     this.quiColorsList$.next(this.quizColorList);
   }
+
 
   returnMapping2DArray() {
     let index2D = 0;
@@ -65,18 +78,25 @@ export class QuizColorService {
       }
     }
 
+    this.quizColor2DArray = quiz2D
+    this.quizColor2D$.next(this.quizColor2DArray);
+
     return quiz2D;
   }
 
   getQuizColor2DArray() {
-    console.log("retrieving 2d array" + this.quizColor2DArray)
     this.quizColor2D$.next(this.quizColor2DArray);
     return this.quizColor2DArray;
   }
 
-  setQuizColor2DArray(quiz2D) {
-    this.quizColor2DArray = quiz2D;
-    this.quizColor2D$.next(quiz2D);
+  setSelectedQuizColor(qui) {
+    this.selectedQuizColor = qui;
+    this.selectedQuiColor$.next(this.selectedQuizColor);
+  }
+
+  getSelectedQuizColor() {
+    this.selectedQuiColor$.next(this.selectedQuizColor);
+    return this.selectedQuizColor;
   }
 
   update2DArray() {

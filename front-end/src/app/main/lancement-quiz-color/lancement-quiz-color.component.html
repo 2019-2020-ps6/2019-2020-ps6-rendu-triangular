@@ -1,8 +1,70 @@
-<p>lancement-quiz-color works!</p>
+<div *ngIf="showColor" id="colorDisplayer">
+  <div *ngFor="let quiz of this.trheeByThreeArray(); let i = index">
+    <div>
+      <div *ngIf="quiz.color === 'blue'">
+        <app-quiz-color [displayValues]="true" [quizColor]="quiz"></app-quiz-color>
+      </div>
+      <div *ngIf="quiz.color === 'greenyellow'">
+        <app-quiz-color [displayValues]="true" [quizColor]="quiz"></app-quiz-color>
 
-<div class="container">
+      </div>
+      <div *ngIf="quiz.color === 'yellow'">
+        <app-quiz-color [displayValues]="true" [quizColor]="quiz"></app-quiz-color>
+      </div>
+    </div>
 
-  <div *ngFor=" let i of this.quiz2D; let x = index">
-    {{this.quiz2D[this.indexes[0]][x].id}}
+  </div>
+
+</div>
+
+<div *ngIf="!showColor" class="container text-center">
+  <div class="display-1">
+    {{quizSelected[0].name}}
+  </div>
+
+  <div *ngFor="let quiz of this.trheeByThreeArray();" class="text-center" style="margin-left: 390px">
+    <div>
+      <app-quiz-color [displayValues]="false" [quizColor]="quiz"></app-quiz-color>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm">
+      <label for="réponse" style="margin-top: 20px">
+        Réponse :
+        <input id="réponse" type="text">
+      </label>
+    </div>
+    <div class="col-sm">
+      <button (click)="next()" class="btn-primary" mdbBtn type="button">Suivant</button>
+      <button (click)="basicModal.show()" [hidden]="true" id="modalBtn" type="button"></button>
+    </div>
+  </div>
+  {{findNumberOfPossiblePlay()}}
+
+</div>
+
+<!------------------------Modal----------------------->
+<div #basicModal="mdbModal" aria-hidden="true" aria-labelledby="myBasicModalLabel" class="modal fade" mdbModal
+     role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button (click)="basicModal.hide()" aria-label="Close" class="close pull-right" type="button">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Warning</h4>
+      </div>
+      <div class="modal-body">
+        Mauvaise réponse recommencer
+      </div>
+      <div class="modal-footer">
+        <button (click)="basicModal.hide()" aria-label="Close" class="waves-light" color="secondary" mdbBtn
+                mdbWavesEffect type="button">Close
+        </button>
+      </div>
+    </div>
   </div>
 </div>
+
+

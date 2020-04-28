@@ -11,6 +11,9 @@ export class QuizColorViewComponent implements OnInit {
   @Input()
   quizColor: QuizColor[];
 
+  @Input()
+  quiz2D: QuizColor[][];
+
   @Output()
   clickedEvent: EventEmitter<string> = new EventEmitter<string>();
 
@@ -21,6 +24,7 @@ export class QuizColorViewComponent implements OnInit {
   }
 
   isclicked() {
+
     this.clickedEvent.emit(this.quizColor[0].id);
   }
 
