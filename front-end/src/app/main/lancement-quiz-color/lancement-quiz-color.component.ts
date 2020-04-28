@@ -136,6 +136,8 @@ export class LancementQuizColorComponent implements OnInit {
 
   checkTooMuchAttempts() {
     if (this.numberOfFailures >= 10) {
+      let modal = document.getElementById("errorModal") as HTMLElement;
+      modal.hidden = true;
       this.fireModal("modalBtnForQuitting");
       //this.seeCurrentSolution();
     }
@@ -182,8 +184,13 @@ export class LancementQuizColorComponent implements OnInit {
 
   seeCurrentSolution() {
     this.hideSeeSolution = false;
-    let modal = document.getElementById(name) as HTMLElement;
-    modal.hidden = true;
+    this.fireModal("modalQuithide")
+    this.fireModal("modalendBtn")
+    this.fireModal("basic")
+
+
+    let modal2 = document.getElementById("modalEnd") as HTMLElement;
+    modal2.hidden = true;
   }
 
   navigateToThebegining() {

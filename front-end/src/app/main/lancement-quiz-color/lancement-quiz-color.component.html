@@ -41,6 +41,9 @@
       <button (click)="basicModal.show()" [hidden]="true" id="modalBtn" type="button"></button>
       <button (click)="basicModalEnd.show()" [hidden]="true" id="modalBtnForEnding" type="button"></button>
       <button (click)="basicModalQuit.show()" [hidden]="true" id="modalBtnForQuitting" type="button"></button>
+      <button (click)="basicModalQuit.hide()" [hidden]="true" id="modalQuithide" type="button"></button>
+      <button (click)="basicModalEnd.hide()" [hidden]="true" id="modalendBtn" type="button"></button>
+      <button (click)="basicModal.hide()" [hidden]="true" id="basic" type="button"></button>
 
     </div>
   </div>
@@ -53,7 +56,7 @@
 
 <!------------------------Modal For right or wrong answer----------------------->
 <div #basicModal="mdbModal" aria-hidden="true" aria-labelledby="myBasicModalLabel" class="modal fade" mdbModal
-     role="dialog" tabindex="-1">
+     id="errorModal" role="dialog" tabindex="-1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
