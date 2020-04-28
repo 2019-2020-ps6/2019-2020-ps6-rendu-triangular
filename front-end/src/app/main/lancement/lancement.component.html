@@ -22,6 +22,11 @@
           </button>
         </div>
       </form>
+      <div [hidden]="hideSeeSolution" class="alert alert-warning text-center" role="alert">
+        La réponse était la question  {{this.findRightAnswer(question)}}
+      </div>
+      <button (click)="basicModalQuit.show()" [hidden]="true" id="modalBtnForQuitting" type="button"></button>
+
 
       <div *ngIf="quiz.questionIndex!=quiz.questions.length-1; else last" class="row">
         <div class="col">
@@ -97,6 +102,33 @@
         <button (click)="emptyLocalStorage()" class="btn btn-primary" data-dismiss="modal"
                 routerLink="../../view-list-quiz" routerLinkActive="true"
                 type="button">Arreter
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!------------------------Modal For too many Attemtps----------------------->
+<div #basicModalQuit="mdbModal" aria-hidden="true" aria-labelledby="myBasicModalLabel" class="modal fade" id="modalQuit"
+     mdbModal
+     role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button (click)="basicModalQuit.hide()" aria-label="Close" class="close pull-right" type="button">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel2">?</h4>
+      </div>
+      <div class="modal-body">
+        Vous n'avez pas reussi à trouver la solution. <br>
+      </div>
+      <div class="modal-footer">
+        <button (click)="navigateToThebegining()" aria-label="Close" class="waves-light" color="secondary" mdbBtn
+                mdbWavesEffect type="button">Recommencer
+        </button>
+        <button (click)="this.seeCurrentSolution()" aria-label="Close" class="waves-light" color="primary" mdbBtn
+                mdbWavesEffect type="button">Voir la Réponse
         </button>
       </div>
     </div>

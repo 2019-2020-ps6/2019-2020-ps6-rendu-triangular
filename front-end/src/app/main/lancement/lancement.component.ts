@@ -6,6 +6,7 @@ import {GameRecorder} from "../../../models/game-recorder.model";
 import {GameRecordService} from "../../../services/game-record.service";
 import {interval} from "rxjs";
 import {FormBuilder} from "@angular/forms";
+import {Question} from "../../../models/question.model";
 
 
 @Component({
@@ -40,6 +41,8 @@ export class LancementComponent implements OnInit {
   gameRecorders: GameRecorder[];
 
   questionIndex: number
+
+  hideSeeSolution: boolean = true;
 
   @Output()
   scoreFinal: number;
@@ -133,6 +136,11 @@ export class LancementComponent implements OnInit {
 
       }
     }
+    this.hideSeeSolution = true;
+
+    if (this.numberOfFails >= 10) {
+
+    }
 
     this.gameRecorder.numberOfAttempts = this.numberOfFails;
     this.gameRecorder.finalScore = this.scoreFinal;
@@ -183,7 +191,16 @@ export class LancementComponent implements OnInit {
     {
       this.answerIsCorrect = false;
       this.numberOfFails++;
+      if (this.numberOfFails >= 10) {
+        this.fireModal("modalBtnForQuitting");
+      }
     }
+
+  }
+
+  fireModal(name) {
+    let modal = document.getElementById(name) as HTMLButtonElement;
+    modal.click();
   }
 
   refreshComponent() {
@@ -206,5 +223,25 @@ export class LancementComponent implements OnInit {
     this.update(0);
   }
 
+  navigateToThebegining() {
+    this.quiz.questionIndex = 0;
+    this.scoreFinal = 0;
+    this.update(this.quiz.questionIndex);
+    window.location.reload();
+  }
 
+  seeCurrentSolution() {
+    this.hideSeeSolution = false;
+  }
+
+  findRightAnswer(question: Question) {
+    let index = 1;
+    for (let rep of question.answers) {
+      if (rep.isCorrect) {
+        return index;
+      }
+      index++;
+    }
+    return index;
+  }
 }

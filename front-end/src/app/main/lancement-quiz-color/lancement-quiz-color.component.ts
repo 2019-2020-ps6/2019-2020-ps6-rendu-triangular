@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {QuizColorService} from "../../../services/quiz-color.service";
 import {QuizColor} from "../../../models/quiz-color.model";
@@ -29,6 +29,7 @@ export class LancementQuizColorComponent implements OnInit {
 
   scoreForQuiz: number = 0;
 
+  @Output()
   scoreForThreeCard: number = 0;
 
   indexOfGame: number = 0;

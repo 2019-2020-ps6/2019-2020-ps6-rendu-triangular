@@ -51,7 +51,7 @@
 
 </div>
 
-<!------------------------Modal----------------------->
+<!------------------------Modal For right or wrong answer----------------------->
 <div #basicModal="mdbModal" aria-hidden="true" aria-labelledby="myBasicModalLabel" class="modal fade" mdbModal
      role="dialog" tabindex="-1">
   <div class="modal-dialog" role="document">
@@ -73,6 +73,7 @@
     </div>
   </div>
 </div>
+<!------------------------Modal For Final Score----------------------->
 
 <div #basicModalEnd="mdbModal" aria-hidden="true" aria-labelledby="myBasicModalLabel" class="modal fade" id="modalEnd"
      mdbModal
@@ -97,7 +98,7 @@
     </div>
   </div>
 </div>
-
+<!------------------------Modal For too many Attemtps----------------------->
 <div #basicModalQuit="mdbModal" aria-hidden="true" aria-labelledby="myBasicModalLabel" class="modal fade" id="modalQuit"
      mdbModal
      role="dialog" tabindex="-1">
@@ -113,9 +114,6 @@
         Vous n'avez pas reussi à trouver la solution. <br>
       </div>
       <div class="modal-footer">
-        <!--<button (click)="this.closeModal('modalEnd')" aria-label="Close" class="waves-light" color="danger" mdbBtn
-                mdbWavesEffect type="button">Routourner au menu
-        </button>-->
         <button (click)="navigateToThebegining()" aria-label="Close" class="waves-light" color="secondary" mdbBtn
                 mdbWavesEffect type="button">Recommencer
         </button>
