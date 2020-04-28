@@ -38,6 +38,7 @@
     <div class="col-sm">
       <button (click)="next()" class="btn-primary" mdbBtn type="button">Suivant</button>
       <button (click)="basicModal.show()" [hidden]="true" id="modalBtn" type="button"></button>
+      <button (click)="basicModalEnd.show()" [hidden]="true" id="modalBtnForEnding" type="button"></button>
     </div>
   </div>
   {{findNumberOfPossiblePlay()}}
@@ -53,14 +54,38 @@
         <button (click)="basicModal.hide()" aria-label="Close" class="close pull-right" type="button">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title w-100" id="myModalLabel">Warning</h4>
+        <h4 class="modal-title w-100" id="myModalLabel">Erreur</h4>
       </div>
       <div class="modal-body">
         Mauvaise réponse recommencer
       </div>
       <div class="modal-footer">
         <button (click)="basicModal.hide()" aria-label="Close" class="waves-light" color="secondary" mdbBtn
-                mdbWavesEffect type="button">Close
+                mdbWavesEffect type="button">Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div #basicModalEnd="mdbModal" aria-hidden="true" aria-labelledby="myBasicModalLabel" class="modal fade" id="modalEnd"
+     mdbModal
+     role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button (click)="basicModal.hide()" aria-label="Close" class="close pull-right" type="button">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel1">FIN</h4>
+      </div>
+      <div class="modal-body">
+        Fin Du jeu <br>
+        Score : {{this.scoreForQuiz}}
+      </div>
+      <div class="modal-footer">
+        <button (click)="this.closeModal('modalEnd')" aria-label="Close" class="waves-light" color="secondary" mdbBtn
+                mdbWavesEffect type="button">Fermer
         </button>
       </div>
     </div>

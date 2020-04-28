@@ -24,7 +24,7 @@ export class LancementQuizColorComponent implements OnInit {
 
   showColor: boolean = true;
 
-  scoreForQuiz: number[] = [];
+  scoreForQuiz: number = 0;
 
   scoreForThreeCard: number = 0;
 
@@ -33,10 +33,7 @@ export class LancementQuizColorComponent implements OnInit {
 
   constructor(private activatedRouter: ActivatedRoute, private quizColorService: QuizColorService, private route: Router) {
 
-    setTimeout(() => {
-        this.showColor = false;
-      }, 5000
-    )
+    this.callTimer();
 
     this.getSnapshot();
     this.retrieveDataFromServer();
@@ -100,11 +97,19 @@ export class LancementQuizColorComponent implements OnInit {
       this.scoreForThreeCard = 0;
       this.indexOfGame++;
       this.callTimer()
+      this.scoreForQuiz++;
+
+      if (this.indexOfGame >= this.findNumberOfPossiblePlay()) {
+        //Fires a modal to end
+        this.fireModal("modalBtnForEnding");
+      }
+
+
       return true;
     } else {
       this.scoreForThreeCard = 0;
       this.showColor = false;
-      this.fireModal();
+      this.fireModal("modalBtn");
       return false;
     }
   }
@@ -123,8 +128,14 @@ export class LancementQuizColorComponent implements OnInit {
     return Number(input.value) === this.scoreForThreeCard;
   }
 
-  fireModal() {
-    let modal = document.getElementById("modalBtn") as HTMLButtonElement;
+  fireModal(name) {
+    let modal = document.getElementById(name) as HTMLButtonElement;
     modal.click();
+  }
+
+  closeModal(name) {
+    let modal = document.getElementById(name) as HTMLElement;
+    modal.hidden = true;
+    this.route.navigate(['quiz-color-view-list'])
   }
 }
