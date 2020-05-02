@@ -3,8 +3,24 @@ const morgan = require('morgan')
 const express = require('express')
 const bodyParser = require('body-parser')
 const api = require('./api')
+const mongoose = require('mongoose')
+require('dotenv/config')
+
+const mongoUrl = "mongodb+srv://Admin:admin@polyquiz-brgcu.gcp.mongodb.net/test?retryWrites=true&w=majority"
+
 
 module.exports = (cb) => {
+
+    mongoose.connect(mongoUrl, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }).then(() => {
+        console.log("Database Connected")
+
+    }).catch((err) => {
+        console.log(err);
+    })
+
     const app = express()
     app.disable('x-powered-by')
     app.use(cors())
