@@ -1,6 +1,5 @@
 const {Router} = require("express")
 const Patient = require('../../../models/patient.model')
-const mongoose = require('mongoose')
 
 const router = new Router({mergeParams: true});
 
@@ -25,10 +24,10 @@ router.post('/', async (req, res) => {
     });
 })
 
-router.delete('/:id', async (req, res) => {
-    const cuurentId = await router.params.id;
-    Patient.deleteOne({
-        _id: cuurentId
+router.delete('/:id', (req, res) => {
+    const curentId = req.params.id;
+    Patient.findOneAndDelete({
+        _id: curentId
     }).then(() => {
         res.status(204).json({message: "deleted"})
     })

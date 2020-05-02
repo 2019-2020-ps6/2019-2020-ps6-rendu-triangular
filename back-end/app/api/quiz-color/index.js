@@ -14,9 +14,9 @@ router.get('/', (request, response) => {
             console.log(quiz);
             response.status(200).json(quiz)
         })
-        response.status(200).json(quizzes)
-    } catch (err) {
-        manageAllErrors(response, err)
+        response.status(200).json(quizzes);
+    } catch (e) {
+        response.status(404).json(e);
     }
 })
 
@@ -33,9 +33,9 @@ router.get('/:quizId', (request, response) => {
     }
 })
 
-router.post('/', (request, response) => {
+router.post('/', async (request, response) => {
     try {
-        const quiz = ColorQuiz.create({...request.body})
+        const quiz = await ColorQuiz.create({...request.body})
         const quizColor = new QuizColor({
             ...request.body
         })
@@ -54,6 +54,18 @@ router.post('/', (request, response) => {
 
 router.put('/:quizId', (request, response) => {
     try {
+        QuizColor.updateOne({
+            _id: request.params.quizId
+        }, {
+            ...request.body,
+            _id: request.params.quizId
+        }).then(() => {
+            response.status(200).json({"message": "updated"})
+        }).catch((err) => {
+            response.status(404).json(err)
+        })
+
+
         response.status(200).json(ColorQuiz.update(request.params.quizId, request.body))
     } catch (err) {
         manageAllErrors(response, err)
@@ -62,6 +74,14 @@ router.put('/:quizId', (request, response) => {
 
 router.delete('/:quizId', (request, response) => {
     try {
+        QuizColor.findOneAndDelete({
+            _id: request.params.quizId
+        }).then(() => {
+            response.status(200).json({"message": "deleted"})
+        }).catch((err) => {
+            response.status(404).json(err)
+        })
+
         ColorQuiz.delete(request.params.quizId)
         response.status(204).end()
     } catch (err) {

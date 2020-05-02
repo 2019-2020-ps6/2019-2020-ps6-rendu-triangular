@@ -12,6 +12,7 @@ const mongoUrl = "mongodb+srv://Admin:admin@polyquiz-brgcu.gcp.mongodb.net/test?
 module.exports = (cb) => {
 
     mongoose.connect(mongoUrl, {
+        dbName: 'PolyqQuiz',
         useNewUrlParser: true,
         useUnifiedTopology: true
     }).then(() => {
