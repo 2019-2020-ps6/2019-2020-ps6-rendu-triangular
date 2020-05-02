@@ -4,6 +4,7 @@ const UserRouter = require('./users')
 const GameRecorderRouter = require('./game-record')
 const ConnectedUserRouter = require('./connected-user')
 const QuizColorRouter = require('./quiz-color')
+const PatientRouter = require('./users/patient')
 
 const router = new Router()
 router.get('/status', (req, res) => res.status(200).json('ok'))

@@ -1,16 +1,18 @@
-const { Router } = require('express')
-
-const { User } = require('../../models')
+const {Router} = require('express')
+const {User} = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
+const Patient = require('./patient')
 
 const router = new Router()
 
+router.use('/patients', Patient)
+
 router.get('/', (req, res) => {
-  try {
-    res.status(200).json(User.get())
-  } catch (err) {
-    manageAllErrors(res, err)
-  }
+    try {
+        res.status(200).json(User.get())
+    } catch (err) {
+        manageAllErrors(res, err)
+    }
 })
 
 router.get('/:userId', (req, res) => {

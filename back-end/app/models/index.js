@@ -5,6 +5,7 @@ const User = require('./user.model.js')
 const GameRecorder = require('./game-record.model')
 const ColorQuiz = require('./quiz-color.model')
 const ConnectedUser = require('./connected-user.model')
+const Patient = require('./patient.model')
 
 module.exports = {
     Answer,
@@ -13,5 +14,6 @@ module.exports = {
     User,
     GameRecorder,
     ColorQuiz,
-    ConnectedUser
+    ConnectedUser,
+    Patient
 }
