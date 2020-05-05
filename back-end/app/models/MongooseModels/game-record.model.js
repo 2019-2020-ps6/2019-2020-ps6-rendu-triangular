@@ -2,8 +2,12 @@ const mongoose = require('mongoose')
 
 const GameRecord = mongoose.Schema({
     id: Number,
-    startDate: String,
-    endDate: String,
+    startDate: {
+        type : Date
+    },
+    endDate: {
+        type : Date
+    },
     numberOfAttempts: Number,
     finalScore: Number,
     duration: Number,

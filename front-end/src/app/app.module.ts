@@ -43,6 +43,12 @@ import {QuizColorListComponent} from './quizzes-color/quiz-color-list/quiz-color
 import {QuizColorFormComponent} from "./quizzes-color/quiz-color-form/quiz-color-form.component";
 import {QuizColorViewListComponent} from './quizzes-color/quiz-color-view-list/quiz-color-view-list.component';
 import {QuizColorViewComponent} from './quizzes-color/quiz-color-view/quiz-color-view.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatButtonModule} from "@angular/material/button";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatIconModule} from "@angular/material/icon";
+import {MatListModule} from "@angular/material/list";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 
 @NgModule({
@@ -78,7 +84,7 @@ import {QuizColorViewComponent} from './quizzes-color/quiz-color-view/quiz-color
     QuizColorListComponent,
     QuizColorFormComponent,
     QuizColorViewListComponent,
-    QuizColorViewComponent
+    QuizColorViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +94,13 @@ import {QuizColorViewComponent} from './quizzes-color/quiz-color-view/quiz-color
     RouterModule,
     BrowserAnimationsModule,
     FormsModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    MatSidenavModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatButtonToggleModule
   ],
   providers: [GameRecordService, UserService, QuizService, AuthentificationService, QuizColorService],
   bootstrap: [AppComponent]
