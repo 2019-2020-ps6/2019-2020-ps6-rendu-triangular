@@ -55,7 +55,7 @@
         <li #connected *ngIf="connectedUser != undefined" class="nav-item dropdown">
           <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle " data-toggle="dropdown"
              href="#" id="connecter" role="button">
-            <i class="fas fa-arrow-down"></i>
+            <i class="fas fa-arrow-down">{{connectedUser.firstName}}</i>
           </a>
           <div aria-labelledby="navbarDropdown" class="dropdown-menu " id="connecter-content">
             <a class="dropdown-item text-dark " routerLink="user-profil">Voir profil</a>

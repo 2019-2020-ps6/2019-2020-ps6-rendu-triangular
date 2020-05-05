@@ -17,5 +17,5 @@ export class AppComponent {
     })
   }
 
-  title = 'starter-quiz';
+  title = 'Poly-Quiz';
 }

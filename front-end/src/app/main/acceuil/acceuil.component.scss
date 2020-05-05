@@ -1,13 +1,19 @@
-
 #Bienvenue {
   height: auto;
   //background: url("https://irp-cdn.multiscreensite.com/b4cfc617/dms3rep/multi/desktop/slide-2-1920x1200.jpg");
   font-family: Georgia, sans-serif;
-  min-height: 65vh;
+  min-height: 85vh;
+  background-color: navajowhite;
 }
 
 button {
   display: inline-block;
+}
+
+#button-container {
+  margin-top: 100vh;
+  right: 10vh;
+  bottom: 15vh;
 }
 
 
@@ -112,14 +118,15 @@ p {
 }
 
 .rubrique button:hover {
-  background-color: #a6ef51;
-  color: #ffffff;
+  background-color: #e0e7e0;
+  color: #0e0707;
   text-decoration: none;
   background-position: 0 -15px;
   -webkit-transition: background-position 0.1s linear;
   -moz-transition: background-position 0.1s linear;
   -o-transition: background-position 0.1s linear;
   transition: background-position 0.1s linear;
+  height: 100px;
 }
 
 .rubrique button {

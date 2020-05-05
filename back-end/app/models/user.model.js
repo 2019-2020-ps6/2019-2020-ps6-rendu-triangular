@@ -8,3 +8,4 @@ module.exports = new BaseModel('User', {
     password: Joi.string(),
     age: Joi.number()
 })
+

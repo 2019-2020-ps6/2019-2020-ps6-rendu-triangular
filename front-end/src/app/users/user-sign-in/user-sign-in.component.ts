@@ -14,7 +14,7 @@ import {AuthentificationService} from "../../../services/authentification.servic
 export class UserSignInComponent implements OnInit {
 
   @Output()
-  accountLoggedEmitter: EventEmitter<any> = new EventEmitter<any>();
+  accountLoggedEmitter: EventEmitter<User> = new EventEmitter<User>();
 
   userList: User[] = this.userService.getAllUsers();
 
@@ -50,7 +50,7 @@ export class UserSignInComponent implements OnInit {
     console.log(userLogIn);
     for (let user of this.userList) {
       if (user.firstName === userLogIn.firstName && user.password === userLogIn.password) {
-        this.accountLoggedEmitter.emit(true);
+        this.accountLoggedEmitter.emit(user);
         this.router.navigate(['../accueil']);
         console.log("succefully Connected")
         this.authService.logIn(userLogIn);
