@@ -64,6 +64,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logOff() {
-    this.authService.logOff();
+    this.authService.logOff(this.connectedUser);
   }
 }

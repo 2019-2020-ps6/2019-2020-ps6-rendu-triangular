@@ -27,36 +27,52 @@ import {QuizColorViewComponent} from "./quizzes-color/quiz-color-view/quiz-color
 import {LancementQuizColorComponent} from "./main/lancement-quiz-color/lancement-quiz-color.component";
 import {QuizColorViewListComponent} from "./quizzes-color/quiz-color-view-list/quiz-color-view-list.component";
 import {LoginGuard} from "./users/authentification/login-guard.service";
+import {LogoutGuard} from "./users/authentification/logout.guard";
 
 
 const routes: Routes = [
-  {path: 'quiz-list', component: QuizListComponent, canActivate: [LoginGuard]},
-  {path: 'quiz-form', component: QuizFormComponent, canActivate: [LoginGuard]},
-  {path: 'edit-quiz/:id', component: EditQuizComponent, canActivate: [LoginGuard]},
-  {path: 'quiz', component: QuizComponent, canActivate: [LoginGuard]},
-  {path: 'modify-quiz/:id', component: ModifyQuizComponent, canActivate: [LoginGuard]},
-  {path: 'question-list', component: QuestionListComponent, canActivate: [LoginGuard]},
-  {path: 'question-form', component: QuestionFormComponent, canActivate: [LoginGuard]},
-  {path: 'question', component: QuestionComponent, canActivate: [LoginGuard]},
+  {path: 'quiz-list', component: QuizListComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
+  {path: 'quiz-form', component: QuizFormComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
+  {path: 'edit-quiz/:id', component: EditQuizComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
+  {path: 'quiz', component: QuizComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
+  {path: 'modify-quiz/:id', component: ModifyQuizComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
+  {path: 'question-list', component: QuestionListComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
+  {path: 'question-form', component: QuestionFormComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
+  {path: 'question', component: QuestionComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
   {path: 'apropos', component: AproposComponent},
-  {path: 'view-list-quiz', component: ViewListQuizComponent, canActivate: [LoginGuard]},
-  {path: 'lancement/:id', component: LancementComponent, canActivate: [LoginGuard]},
+  {path: 'view-list-quiz', component: ViewListQuizComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
+  {path: 'lancement/:id', component: LancementComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
   {path: '', redirectTo: '/accueil', pathMatch: 'full'},
-  {path: 'resultats-record', component: ResultatsRecordComponent, canActivate: [LoginGuard]},
+  {
+    path: 'resultats-record',
+    component: ResultatsRecordComponent,
+    canActivate: [LoginGuard],
+    canDeactivate: [LogoutGuard]
+  },
   {path: 'resultats/:id', component: ResultatsComponent},
   {path: 'accueil', component: AcceuilComponent},
   {path: 'description', component: DescriptionAccueilComponent},
-  {path: 'user-profil', component: UserProfileComponent, canActivate: [LoginGuard]},
+  {path: 'user-profile/:id', component: UserProfileComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
   {path: 'user-form', component: UserFormComponent},
   {path: 'user-sign-in', component: UserSignInComponent},
-  {path: 'user-list', component: UserListComponent, canActivate: [LoginGuard]},
-  {path: 'quiz-color-list', component: QuizColorListComponent, canActivate: [LoginGuard]},
-  {path: 'quiz-color-form', component: QuizColorFormComponent, canActivate: [LoginGuard]},
+  {path: 'user-list', component: UserListComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
+  {path: 'quiz-color-list', component: QuizColorListComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
+  {path: 'quiz-color-form', component: QuizColorFormComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
   {path: 'quiz-color', component: QuizColorComponent, canActivate: [LoginGuard]},
-  {path: 'quiz-color-view', component: QuizColorViewComponent, canActivate: [LoginGuard]},
-  {path: 'quiz-color-list', component: QuizColorListComponent, canActivate: [LoginGuard]},
-  {path: 'quiz-color-view-list', component: QuizColorViewListComponent, canActivate: [LoginGuard]},
-  {path: 'lancement-quiz-color/:id', component: LancementQuizColorComponent, canActivate: [LoginGuard]},
+  {path: 'quiz-color-view', component: QuizColorViewComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
+  {path: 'quiz-color-list', component: QuizColorListComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
+  {
+    path: 'quiz-color-view-list',
+    component: QuizColorViewListComponent,
+    canActivate: [LoginGuard],
+    canDeactivate: [LogoutGuard]
+  },
+  {
+    path: 'lancement-quiz-color/:id',
+    component: LancementQuizColorComponent,
+    canActivate: [LoginGuard],
+    canDeactivate: [LogoutGuard]
+  },
   {path: '**', component: PageNotFoundComponent},
 ];
 

@@ -1,4 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AuthentificationService} from "../../../services/authentification.service";
 
 @Component({
   selector: 'app-acceuil',
@@ -7,12 +8,32 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 })
 export class AcceuilComponent implements OnInit {
 
-  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+  hid: boolean = true;
+  @ViewChild('alert', {static: false}) private alertContainer: ElementRef;
 
-  constructor() {
+  constructor(private auth: AuthentificationService) {
   }
 
   ngOnInit(): void {
+  }
+
+  async hideAlert() {
+    this.alertContainer.nativeElement.hidden = true;
+    this.hid = true;
+  }
+
+  showAlert() {
+    this.alertContainer.nativeElement.hidden = false;
+    this.hid = false
+    setTimeout(function () {
+    }, 3000);
+    this.hideAlert().then(r => console.log("hidden"));
+    this.hid = true;
+  }
+
+  checkIfConnected() {
+    if (!this.auth.userIsAuthentified)
+      this.showAlert()
   }
 
 }

@@ -1,26 +1,40 @@
 <div class="container-fuid" id="Bienvenue">
   <div class="text-center" id="message">
     <div class=" container">
+      <!--<div #alert [hidden]="hid" class="alert alert-danger" role="alert">
+        User Not Connected
+      </div>-->
       <div class="col-sm-12 my-auto" id="button-container">
-        <div class="rubrique text-center container" style="margin-top: 100px">
-          <p class="lead text-dark text-center"
-             style="font-size: 100px; background-color: #00c6ff;margin-bottom: 200px; margin-left: 250px">PolyQuiz</p>
-          <button class="card" routerLink="../quiz-list" style="width: 300px; height: 200px">
+        <div class="rubrique text-center container">
+          <p class="display-4 text-dark text-center card"
+             style="font-size: 75px; background-color: #00c6ff;margin-bottom: 200px; margin-left: 250px; margin-top: 125px; height: 90px">
+            PolyQuiz</p>
+          <button (click)="checkIfConnected()" class="card" routerLink="../quiz-list"
+                  style="width: 300px; height: 200px">
             <p style="font-size: 25px; margin-left: 25px">Liste Quiz Image</p>
           </button>
-          <button class="card" routerLink="../quiz-form" style="width: 300px; height: 200px">
+          <button (click)="checkIfConnected()" class="card" routerLink="../quiz-form"
+                  style="width: 300px; height: 200px">
             <p style="font-size: 25px; margin-left: 25px">Création Quiz Image</p>
           </button>
-          <button class="card" routerLink="../quiz-color-form" style="width: 300px; height: 200px">
+          <button (click)="checkIfConnected()" class="card" routerLink="../quiz-color-form"
+                  style="width: 300px; height: 200px">
             <p style="font-size: 25px; margin-left: 15px"> Création Quiz Couleur</p>
           </button>
-          <button class="card" routerLink="../quiz-color-view-list" style="width: 300px; height: 200px">
+          <button (click)="checkIfConnected()" class="card" routerLink="../quiz-color-view-list"
+                  style="width: 300px; height: 200px">
             <p style="font-size: 25px; margin-left: 15px">Liste Quiz Couleur</p>
           </button>
+
         </div>
       </div>
     </div>
 
+
+
   </div>
   <!--<a #srollMe address="true" class="scroll-down" id="scroll-down"></a>-->
 </div>
+
+
+
