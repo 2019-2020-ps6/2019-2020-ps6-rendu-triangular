@@ -46,14 +46,12 @@ export class UserSignInComponent implements OnInit {
 
   onConnectUser() {
     const userLogIn: User = this.userForm.getRawValue() as User;
-    console.log(this.userList);
-    console.log(userLogIn);
     for (let user of this.userList) {
       if (user.firstName === userLogIn.firstName && user.password === userLogIn.password) {
         this.accountLoggedEmitter.emit(user);
         this.router.navigate(['../accueil']);
-        console.log("succefully Connected")
         this.authService.logIn(userLogIn);
+
         return;
       }
     }

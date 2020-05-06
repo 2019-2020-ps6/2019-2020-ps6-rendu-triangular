@@ -21,8 +21,8 @@
         <ul class="footer-links">
           <li><a routerLink="accueil">Accueil</a></li>
           <li><a routerLink="description">Description</a></li>
-          <li><a routerLink="user-sign-in">Sign In</a></li>
-          <li><a routerLink="user-form">Sign up</a></li>
+          <li><a *ngIf="!this.auth.userIsAuthentified" routerLink="user-sign-in">Sign In</a></li>
+          <li><a *ngIf="!this.auth.userIsAuthentified" routerLink="user-form">Sign up</a></li>
         </ul>
       </div>
 

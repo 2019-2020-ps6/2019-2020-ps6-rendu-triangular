@@ -6,7 +6,7 @@
     <div style="margin-left: 500px"></div>
 
     <!--accueil-->
-    <a class="nav-link  " routerLink="accueil" routerLinkActive="active">Accueil <span
+    <a class="nav-link" routerLink="accueil" routerLinkActive="active">Accueil <span
       class="sr-only">(current)</span></a>
 
     <div style="margin-left: 300px"></div>
@@ -35,15 +35,33 @@
     <a class="nav-link " routerLink="apropos" routerLinkActive="active">A Propos</a>
 
     <!--Connexion-->
-    <div *ngIf="connectedUser === undefined;" class="nav-item dropdown">
-      <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle " data-toggle="dropdown"
-         href="#" id="connextion" role="button">
-        Connexion
-      </a>
-      <div aria-labelledby="navbarDropdown" class="dropdown-menu " id="connexion-content">
-        <a class="dropdown-item text-dark " routerLink="user-sign-in">Se connecter</a>
-        <a class="dropdown-item text-dark" routerLink="user-form">S'inscrire</a>
+    <div class="btn-group btn-group-inline">
+      <div *ngIf="connectedUser === null; else After" class="nav-item dropdown">
+        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle " data-toggle="dropdown"
+           href="#" id="connextion" role="button">
+          Connexion
+        </a>
+        <div aria-labelledby="connextion" class="dropdown-menu " id="connexion-content">
+          <a class="dropdown-item text-dark " routerLink="user-sign-in">Se connecter</a>
+          <a class="dropdown-item text-dark" routerLink="user-form">S'inscrire</a>
+        </div>
       </div>
+    </div>
+
+    <!--Après Connexion Administarteur-->
+    <div class="btn-group btn-group-inline">
+      <ng-template #After class="nav-item dropdown">
+        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle " data-toggle="dropdown"
+           href="#" id="arrow-down" role="button">
+          {{this.connectedUser.firstName}}
+          <i class="fas fa-arrow-down"></i>
+        </a>
+        <div aria-labelledby="arrow-down" class="dropdown-menu " id="user-data">
+          <a class="dropdown-item text-dark " routerLink="user-profile/{{this.connectedUser.firstName}}">Voir Profil</a>
+          <a class="dropdown-item text-dark" routerLink="user-list">Listes des comptes</a>
+          <a (click)="logOutUser()" class="dropdown-item text-dark" routerLink="accueil">Déconnexion</a>
+        </div>
+      </ng-template>
     </div>
 
   </mat-toolbar>

@@ -1,5 +1,4 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {SafeHtml} from "@angular/platform-browser";
 import {AuthentificationService} from "../../../services/authentification.service";
 
 @Component({
@@ -9,24 +8,32 @@ import {AuthentificationService} from "../../../services/authentification.servic
 })
 export class AcceuilComponent implements OnInit {
 
-  @ViewChild('alert', { static : false}) private alertContainer: ElementRef;
+  hid: boolean = true;
+  @ViewChild('alert', {static: false}) private alertContainer: ElementRef;
 
-  constructor(private auth : AuthentificationService) {
+  constructor(private auth: AuthentificationService) {
   }
 
   ngOnInit(): void {
-    console.log(this.alertContainer.nativeElement.value)
   }
 
-  async hideAlert(){
+  async hideAlert() {
     this.alertContainer.nativeElement.hidden = true;
+    this.hid = true;
   }
 
-  showAlert(){
+  showAlert() {
     this.alertContainer.nativeElement.hidden = false;
-    setTimeout(function(){
-    },3000);
+    this.hid = false
+    setTimeout(function () {
+    }, 3000);
     this.hideAlert().then(r => console.log("hidden"));
+    this.hid = true;
+  }
+
+  checkIfConnected() {
+    if (!this.auth.userIsAuthentified)
+      this.showAlert()
   }
 
 }
