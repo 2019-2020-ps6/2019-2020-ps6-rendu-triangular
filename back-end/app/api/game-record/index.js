@@ -12,7 +12,6 @@ router.get('/', (request, response) => {
             response.status(404).json(err);
         })
 
-        response.status(200).json(GameRecordMongo.get());
     } catch (err) {
         response.status(500).json(err)
     }
@@ -30,8 +29,6 @@ router.post('/', (request, response) => {
             response.status(404).json(err)
         })
 
-        const game = GameRecorder.create(request.body);
-        response.status(200).json(game)
     } catch (err) {
         response.status(500).json(err);
     }
@@ -48,8 +45,6 @@ router.delete('/:id', (request, response) => {
             response.status(404).json(err)
         })
 
-        GameRecorder.delete(request.params.id);
-        response.status(200).json(game);
     } catch (err) {
         response.status(500).json(err);
     }

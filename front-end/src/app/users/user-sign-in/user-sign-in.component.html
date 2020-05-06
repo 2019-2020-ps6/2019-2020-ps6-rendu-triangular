@@ -1,46 +1,51 @@
-<div class="card container">
+<div class="container" >
 
-  <h5 class="card-header info-color white-text text-center py-4">
-    <strong>Se connecter</strong>
-  </h5>
 
-  <div class="card-body px-lg-5 pt-0">
+  <div class="card container" id="signin">
+    <h5 style="border-radius: 20px" class="card-header info-color white-text text-center py-4">
+      <strong class="mat-display-1">Se connecter</strong>
+    </h5>
 
-    <form (ngSubmit)="onConnectUser()" [formGroup]="userForm" action="#!" class="text-center" style="color: #757575;">
+    <div class="card-body px-lg-5 pt-0">
 
-      <div class="md-form">
-        <input [formControlName]="'firstName'" class="form-control" id="materialLoginFormEmail" type="text">
-        <label for="materialLoginFormEmail">Prénon</label>
-      </div>
+      <form (ngSubmit)="onConnectUser()" [formGroup]="userForm" action="#!" class="text-center" style="color: #757575;">
 
-      <div class="md-form">
-        <input [formControlName]="'password'" class="form-control" id="materialLoginFormPassword" type="password">
-        <label for="materialLoginFormPassword">Mot de passe</label>
-      </div>
+        <div class="md-form">
+          <input [formControlName]="'firstName'" class="form-control" id="materialLoginFormEmail" type="text">
+          <label for="materialLoginFormEmail">Prénon</label>
+        </div>
 
-      <div class="d-flex justify-content-around">
-        <div>
-          <div class="form-check">
-            <input class="form-check-input" id="materialLoginFormRemember" type="checkbox">
-            <label class="form-check-label" for="materialLoginFormRemember">Se rappeler</label>
+        <div class="md-form">
+          <input [formControlName]="'password'" class="form-control" id="materialLoginFormPassword" type="password">
+          <label for="materialLoginFormPassword">Mot de passe</label>
+        </div>
+
+        <div class="d-flex justify-content-around">
+          <div>
+            <div class="form-check">
+              <input class="form-check-input" id="materialLoginFormRemember" type="checkbox">
+              <label class="form-check-label" for="materialLoginFormRemember">Se rappeler</label>
+            </div>
           </div>
         </div>
-      </div>
 
-      <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">se
-        connecter
-      </button>
+        <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">se
+          connecter
+        </button>
 
-      <div *ngIf="accountNotFound" class="alert alert-danger" role="alert">
-        Mot de passe incorrect. Réessayez.
-      </div>
+        <div *ngIf="accountNotFound" class="alert alert-danger" role="alert">
+          Mot de passe incorrect. Réessayez.
+        </div>
 
-      <p>Vous n'avez pas de compte?
-        <a routerLink="../user-form">Inscrivez vous</a>
-      </p>
+        <p>Vous n'avez pas de compte?
+          <a routerLink="../user-form">Inscrivez vous</a>
+        </p>
 
-    </form>
+      </form>
+
+    </div>
 
   </div>
 
 </div>
+

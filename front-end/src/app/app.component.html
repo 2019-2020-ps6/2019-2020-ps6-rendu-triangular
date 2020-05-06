@@ -1,6 +1,80 @@
-<app-header [connectedUser]="currentUser"></app-header>
-<!--<div class="main-content bg-secondary">
-</div>-->
-<app-main-content></app-main-content>
+<div class="example-container " [class.example-is-mobile]="mobileQuery.matches" >
+  <mat-toolbar class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <h1 class="example-app-name">Polyquiz</h1>
 
-<app-footer></app-footer>
+    <div style="margin-left: 500px"></div>
+
+    <!--accueil-->
+    <a class="nav-link" routerLink="accueil" routerLinkActive="active">Accueil <span
+      class="sr-only">(current)</span></a>
+
+    <div style="margin-left: 300px"></div>
+
+    <!--Quiz-->
+      <a aria-expanded="false" aria-haspopup="true" class=" dropdown-toggle " data-toggle="dropdown"
+          id="navbarDropdown" href="#" role="button">
+        Quiz
+      </a>
+      <div aria-labelledby="navbarDropdown" class="dropdown-menu " id="quiz-content">
+        <a class="dropdown-item text-dark " routerLink="quiz-form">Créer un quiz Image</a>
+        <a class="dropdown-item text-dark" routerLink="view-list-quiz">Lancer un quiz Image</a>
+        <a class="dropdown-item text-dark" routerLink="quiz-list">Liste Quizzes Images</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item text-dark " routerLink="quiz-color-form">Créer un quiz Couleur</a>
+        <a class="dropdown-item text-dark" routerLink="quiz-color-view-list">Lancer un quiz Couleur</a>
+        <a class="dropdown-item text-dark" routerLink="quiz-color-list">Liste Quizzes Couleur</a>
+      </div>
+
+    <div style="margin-left: 20px"></div>
+
+    <!--résultat-->
+    <a class="nav-link " routerLink="resultats-record" routerLinkActive="active">Resulats</a>
+
+    <!--aPropos-->
+    <a class="nav-link " routerLink="apropos" routerLinkActive="active">A Propos</a>
+
+    <!--Connexion-->
+    <div class="btn-group btn-group-inline">
+      <div *ngIf="connectedUser === null; else After" class="nav-item dropdown">
+        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle " data-toggle="dropdown"
+           href="#" id="connextion" role="button">
+          Connexion
+        </a>
+        <div aria-labelledby="connextion" class="dropdown-menu " id="connexion-content">
+          <a class="dropdown-item text-dark " routerLink="user-sign-in">Se connecter</a>
+          <a class="dropdown-item text-dark" routerLink="user-form">S'inscrire</a>
+        </div>
+      </div>
+    </div>
+
+    <!--Après Connexion Administarteur-->
+    <div class="btn-group btn-group-inline">
+      <ng-template #After class="nav-item dropdown">
+        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle " data-toggle="dropdown"
+           href="#" id="arrow-down" role="button">
+          {{this.connectedUser.firstName}}
+          <i class="fas fa-arrow-down"></i>
+        </a>
+        <div aria-labelledby="arrow-down" class="dropdown-menu " id="user-data">
+          <a class="dropdown-item text-dark " routerLink="user-profile/{{this.connectedUser.firstName}}">Voir Profil</a>
+          <a class="dropdown-item text-dark" routerLink="user-list">Listes des comptes</a>
+          <a (click)="logOutUser()" class="dropdown-item text-dark" routerLink="accueil">Déconnexion</a>
+        </div>
+      </ng-template>
+    </div>
+
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav id="sidenav" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <a style="font-size:25px; margin-top: 150px">Accueil</a>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <app-main-content></app-main-content>
+      <app-footer></app-footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

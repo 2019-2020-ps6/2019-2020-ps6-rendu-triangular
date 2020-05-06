@@ -15,6 +15,7 @@ export class UserService {
   private usersUrl: string = 'http://localhost:9428/api/users';
 
   constructor(private http: HttpClient, private auth: AuthentificationService) {
+    this.getUsersFromServer();
   }
 
   getUsersFromServer() {
