@@ -1,4 +1,6 @@
-const { Quiz, Question } = require('../../../models')
+const {Quiz, Question} = require('../../../models')
+//const QuizMongo = require('../../models/MongooseModels/quiz.model')
+const QuestionMongo = require('../../../models/MongooseModels/question.model')
 
 /**
  * Questions Manager.
@@ -14,6 +16,11 @@ const filterQuestionsFromQuizz = (quizId) => {
   const questions = Question.get()
   const parsedId = parseInt(quizId, 10)
   return questions.filter((question) => question.quizId === parsedId)
+}
+
+const filterQuestionsFromMongoQuizz = (quizId) => {
+  const questions = QuestionMongo.find();
+
 }
 
 /**

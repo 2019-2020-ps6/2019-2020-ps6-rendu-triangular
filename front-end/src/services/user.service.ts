@@ -1,18 +1,22 @@
 import {User} from "../models/user.model";
-import {Subject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {httpOptionsBase} from "../configs/server.config";
 import {AuthentificationService} from "./authentification.service";
+import {Patient} from "../models/Patient.model";
 
 @Injectable()
 export class UserService {
   public usersSubject$ = new Subject<User[]>();
   public singleUserSubject$ = new Subject<User>();
+  private patients: Patient[] = [];
+  public patients$: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>(this.patients);
   private users: User[] = [];
   private httpOptions = httpOptionsBase;
 
   private usersUrl: string = 'http://localhost:9428/api/users';
+  private patientUrl: string = 'http://localhost:9428/api/users/patients'
 
   constructor(private http: HttpClient, private auth: AuthentificationService) {
     this.getUsersFromServer();
@@ -66,5 +70,23 @@ export class UserService {
       if (id.toString().localeCompare(user.id.toString()))
         return user;
     }
+  }
+
+  getPatientsFromServer() {
+    this.http.get<Patient[]>(this.patientUrl).subscribe((patients) => {
+      this.patients = patients;
+    })
+    this.patients$.next(this.patients);
+  }
+
+  addPatient(user: User) {
+    const patient = new Patient();
+    patient.age = user.age;
+    patient.firstName = user.firstName;
+    patient.lastName = user.lastName;
+
+    this.http.post<Patient>(this.patientUrl, patient).subscribe((patient) => {
+      console.log("Patient Succesfully Added" + patient)
+    })
   }
 }

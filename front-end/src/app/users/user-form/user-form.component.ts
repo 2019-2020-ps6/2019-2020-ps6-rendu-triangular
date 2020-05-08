@@ -50,6 +50,11 @@ export class UserFormComponent implements OnInit {
     newUser.age = Number(this.userForm.value['age']);
 
     this.userService.addUser(newUser);
+
+    if (newUser.type === 'Patient') {
+      this.userService.addPatient(newUser);
+    }
+
     this.accountSuccessfulEmitter.emit(newUser);
     console.log(this.accountSuccessfulEmitter);
     this.router.navigate(['/accueil']);

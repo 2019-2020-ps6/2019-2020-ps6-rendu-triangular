@@ -55,7 +55,6 @@ export class AuthentificationService {
       this.loggedUser$.next(user);
       this.userIsAuthentified = true;
     }
-
   }
 
   logOff(user: User) {
@@ -96,5 +95,9 @@ export class AuthentificationService {
       }
     }
     return null;
+  }
+
+  getAllDataUser(): User {
+    return this.allDataUser;
   }
 }

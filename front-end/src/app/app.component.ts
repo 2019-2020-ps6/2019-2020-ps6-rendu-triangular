@@ -53,4 +53,16 @@ export class AppComponent implements OnDestroy, OnInit {
     window.location.reload();
     console.log("userIsAuthenficated : ", this.authService.userIsAuthentified);
   }
+
+  mouseLeaveQuizDropdown() {
+
+  }
+
+  closeNav() {
+
+  }
+
+  mouseEnterQuizDropdown() {
+
+  }
 }

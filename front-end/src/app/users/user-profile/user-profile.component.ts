@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../../../models/user.model";
-import {ActivatedRoute} from "@angular/router";
-import {UserService} from "../../../services/user.service";
+import {AuthentificationService} from "../../../services/authentification.service";
 
 @Component({
   selector: 'app-user-profile',
@@ -11,26 +10,13 @@ import {UserService} from "../../../services/user.service";
 export class UserProfileComponent implements OnInit {
 
   receivedUser: User;
-  listOfUsers: User[];
 
-  constructor(private route: ActivatedRoute, private userService: UserService) {
-    this.listOfUsers = this.userService.getAllUsers();
+  constructor(private auth: AuthentificationService) {
   }
 
   ngOnInit(): void {
-    this.setMatchingUser();
+    this.receivedUser = this.auth.getAllDataUser();
+    console.log(this.receivedUser);
   }
-
-  setMatchingUser() {
-    let name = this.route.snapshot.paramMap.get('id');
-
-    for (let user of this.listOfUsers) {
-      if (user.firstName === name)
-        this.receivedUser = user;
-      console.log(name)
-
-    }
-  }
-
 
 }

@@ -10,7 +10,11 @@ const Quiz = mongoose.Schema({
         required: true
     },
     image: String,
-    questionIndex: Number
+    questionIndex: {
+        type: Number,
+        required: true
+    },
+    assigneeList: []
 })
 
 module.exports = mongoose.model('Quiz', Quiz, 'Quiz')

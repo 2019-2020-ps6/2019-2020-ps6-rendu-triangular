@@ -1,5 +1,6 @@
 const { Router } = require('express')
-const { Answer } = require('../../../../models')
+const {Answer} = require('../../../../models')
+const AnswerMongo = require('../../../../models/MongooseModels/answer.model')
 
 const { getQuestionFromQuiz } = require('../manager')
 const { filterAnswersFromQuestion, getAnswerFromQuestion } = require('./manager')

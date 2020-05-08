@@ -58,6 +58,7 @@
         </a>
         <div aria-labelledby="arrow-down" class="dropdown-menu " id="user-data">
           <a class="dropdown-item text-dark " routerLink="user-profile/{{this.connectedUser.firstName}}">Voir Profil</a>
+          <a class="dropdown-item text-dark" routerLink="user-list">Assigner un quiz</a>
           <a class="dropdown-item text-dark" routerLink="user-list">Listes des comptes</a>
           <a (click)="logOutUser()" class="dropdown-item text-dark" routerLink="accueil">Déconnexion</a>
         </div>
@@ -69,7 +70,11 @@
   <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
     <mat-sidenav id="sidenav" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
                  [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-      <a style="font-size:25px; margin-top: 150px">Accueil</a>
+      <mat-nav-list>
+        <h2 matSubheader></h2>
+        <a style="font-size:25px; top: 100px">Accueil</a>
+
+      </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>

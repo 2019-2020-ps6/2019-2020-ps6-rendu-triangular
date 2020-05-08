@@ -51,7 +51,6 @@ export class UserSignInComponent implements OnInit {
         this.accountLoggedEmitter.emit(user);
         this.router.navigate(['../accueil']);
         this.authService.logIn(userLogIn);
-
         return;
       }
     }

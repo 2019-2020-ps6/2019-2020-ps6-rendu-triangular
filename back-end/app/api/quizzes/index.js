@@ -11,14 +11,14 @@ router.use('/:quizId/questions', QuestionsRouter)
 
 router.get('/', (req, res) => {
   try {
-    QuizMongo.find().exec().then((patients) => {
+    QuizMongo.find().then((patients) => {
       res.status(200).json(patients)
     }).catch((err) => {
       res.status(404).json(err)
     })
 
-    const quizzes = buildQuizzes()
-    res.status(200).json(quizzes)
+    /*const quizzes = buildQuizzes()
+    res.status(200).json(quizzes)*/
   } catch (err) {
     manageAllErrors(res, err)
   }
@@ -29,10 +29,11 @@ router.get('/:quizId', (req, res) => {
 
     QuizMongo.findOne({_id: req.params.quizId}, (err, quiz) => {
       console.log(quiz);
+      res.status(200).json(quiz)
     });
 
-    const quizz = buildQuizz(req.params.quizId)
-    res.status(200).json(quizz)
+    /*const quizz = buildQuizz(req.params.quizId)
+    res.status(200).json(quizz)*/
   } catch (err) {
     manageAllErrors(res, err)
   }
@@ -52,8 +53,8 @@ router.post('/', (req, res) => {
       res.status(400).json(err);
     });
 
-    const quiz = Quiz.create({...req.body})
-    res.status(201).json(quiz)
+    /*const quiz = Quiz.create({...req.body})
+    res.status(201).json(quiz)*/
   } catch (err) {
     manageAllErrors(res, err)
   }
@@ -72,7 +73,7 @@ router.put('/:quizId', (req, res) => {
       res.status(404).json(err)
     })
 
-    res.status(200).json(Quiz.update(req.params.quizId, req.body))
+    //res.status(200).json(Quiz.update(req.params.quizId, req.body))
   } catch (err) {
     manageAllErrors(res, err)
   }
@@ -88,8 +89,8 @@ router.delete('/:quizId', (req, res) => {
       res.status(404).json(err)
     });
 
-    Quiz.delete(req.params.quizId)
-    res.status(204).end()
+    /*Quiz.delete(req.params.quizId)
+    res.status(204).end()*/
   } catch (err) {
     manageAllErrors(res, err)
   }
