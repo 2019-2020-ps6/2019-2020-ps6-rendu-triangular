@@ -19,8 +19,9 @@ const filterQuestionsFromQuizz = (quizId) => {
 }
 
 const filterQuestionsFromMongoQuizz = (quizId) => {
-  const questions = QuestionMongo.find();
-
+    const questions = QuestionMongo.find();
+    const parseId = parseInt(quizId, 10)
+    return questions.filter((questions) => questions.quizId === parseId)
 }
 
 /**
@@ -39,6 +40,7 @@ const getQuestionFromQuiz = (quizId, questionId) => {
 }
 
 module.exports = {
-  filterQuestionsFromQuizz,
-  getQuestionFromQuiz,
+    filterQuestionsFromMongoQuizz,
+    filterQuestionsFromQuizz,
+    getQuestionFromQuiz,
 }

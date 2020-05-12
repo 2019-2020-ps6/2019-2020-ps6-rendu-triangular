@@ -1,5 +1,5 @@
 export class GameRecorder {
-  id: number;
+  _id: number;
   startDate: Date;
   endDate: Date;
   numberOfAttempts: number;

@@ -25,7 +25,7 @@ export class QuizColorViewComponent implements OnInit {
 
   isclicked() {
 
-    this.clickedEvent.emit(this.quizColor[0].id);
+    this.clickedEvent.emit(this.quizColor[0]._id);
   }
 
 }

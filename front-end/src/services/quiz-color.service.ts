@@ -46,7 +46,7 @@ export class QuizColorService {
   }
 
   deleteOnequiz(quiz: QuizColor) {
-    this.http.delete(this.quizColorListUrl + "/" + quiz.id).subscribe(() => {
+    this.http.delete(this.quizColorListUrl + "/" + quiz._id).subscribe(() => {
       this.getAllQuizColor();
       this.update2DArray();
     })

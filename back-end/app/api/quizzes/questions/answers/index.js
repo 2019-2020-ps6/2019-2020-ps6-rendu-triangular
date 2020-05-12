@@ -10,7 +10,7 @@ const router = new Router({ mergeParams: true })
 router.get('/', (req, res) => {
   try {
     const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId)
-    const answers = filterAnswersFromQuestion(question.id)
+    const answers = filterAnswersFromQuestion(question._id)
     res.status(200).json(answers)
   } catch (err) {
     if (err.name === 'NotFoundError') {
@@ -37,7 +37,7 @@ router.get('/:answerId', (req, res) => {
 router.post('/', (req, res) => {
   try {
     const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId)
-    const answer = Answer.create({ ...req.body, questionId: question.id })
+    const answer = Answer.create({...req.body, questionId: question._id})
     res.status(201).json(answer)
   } catch (err) {
     if (err.name === 'NotFoundError') {

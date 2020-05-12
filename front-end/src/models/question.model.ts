@@ -5,8 +5,9 @@ export interface Answer {
 }
 
 export class Question {
-  id: string;
+  _id: string;
   label: string;
   image?: string;
+  quizId: string;
   answers: Answer[];
 }

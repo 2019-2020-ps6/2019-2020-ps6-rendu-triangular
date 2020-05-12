@@ -42,7 +42,6 @@ const routes: Routes = [
   {path: 'apropos', component: AproposComponent},
   {path: 'view-list-quiz', component: ViewListQuizComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
   {path: 'lancement/:id', component: LancementComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
-  {path: '', redirectTo: '/accueil', pathMatch: 'full'},
   {
     path: 'resultats-record',
     component: ResultatsRecordComponent,
@@ -73,6 +72,7 @@ const routes: Routes = [
     canActivate: [LoginGuard],
     canDeactivate: [LogoutGuard]
   },
+  {path: '', redirectTo: '/accueil', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent},
 ];
 

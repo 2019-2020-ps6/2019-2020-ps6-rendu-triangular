@@ -4,6 +4,7 @@ const manageAllErrors = require('../../../utils/routes/error-management')
 const AnswersRouter = require('./answers')
 const {filterQuestionsFromQuizz, getQuestionFromQuiz} = require('./manager')
 const QuestionMongo = require('../../../models/MongooseModels/question.model')
+const QuizMongo = require('../../../models/MongooseModels/quiz.model')
 
 const router = new Router({ mergeParams: true })
 
@@ -14,6 +15,15 @@ router.get('/', (req, res) => {
   } catch (err) {
     manageAllErrors(res, err)
   }
+
+  /*QuizMongo.findOne({
+    _id: req.params.quizId,
+  }, (err, quiz) => {
+    QuestionMongo.find().exec().then((questions) => {
+      res.status(200).json(questions)
+    })
+  });*/
+
 })
 
 router.get('/:questionId', (req, res) => {
@@ -23,6 +33,17 @@ router.get('/:questionId', (req, res) => {
   } catch (err) {
     manageAllErrors(res, err)
   }
+
+  /*QuizMongo.findOne({
+    _id : req.params.quizId
+  }, (quiz) =>{
+    QuestionMongo.findOne({
+      _id : req.params.questionId
+    }, (question) =>{
+      res.status(200).json(question)
+    })
+  })*/
+
 })
 
 router.post('/', (req, res) => {
@@ -31,13 +52,31 @@ router.post('/', (req, res) => {
     const quizId = parseInt(req.params.quizId, 10)
     let question = Question.create({label: req.body.label, image: req.body.image, quizId})
     if (req.body.answers && req.body.answers.length > 0) {
-      const answers = req.body.answers.map((answer) => Answer.create({ ...answer, questionId: question.id }))
-      question = { ...question, answers }
+      const answers = req.body.answers.map((answer) => Answer.create({...answer, questionId: question.id}))
+      question = {...question, answers}
     }
     res.status(201).json(question)
   } catch (err) {
     manageAllErrors(res, err)
   }
+
+  /*QuizMongo.findOne({
+    _id : req.params.quizId
+  }, (quiz) =>{
+    const question = new QuestionMongo({
+      label : req.body.label,
+      image : req.body.image,
+      quizId : req.params.quizId,
+      answers : req.body.answers
+    })
+
+    question.save().then( () =>{
+      res.status(201).json(question)
+    }).catch( err =>{
+      res.status(400).json(err);
+    })
+  })*/
+
 })
 
 router.put('/:questionId', (req, res) => {

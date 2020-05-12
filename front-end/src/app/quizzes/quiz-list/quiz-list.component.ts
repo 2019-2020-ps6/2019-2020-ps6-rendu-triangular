@@ -10,24 +10,17 @@ import {Quiz} from '../../../models/quiz.model';
 })
 export class QuizListComponent implements OnInit {
 
-  public quizList: Quiz[] = this.quizService.getQuizList();
+  quizList: Quiz[];
   nombre: number;
 
   constructor(private router: Router, public quizService: QuizService) {
-    this.quizService.quizzes$.subscribe((quizzes: Quiz[]) => {
-      this.quizList = quizzes;
-    });
-
-    /*or (let i = 0; i < this.quizList.length; i++) {
-      this.quizService.updateQuizzes(this.quizList[i].id);
-    }*/
   }
 
   ngOnInit() {
-    this.quizService.quizzes$.next(this.quizService.getQuizList());
-    /*for (let i = 0; i < this.quizList.length; i++) {
-      this.quizService.updateQuizzes(this.quizList[i].id);
-    }*/
+    this.quizService.quizzes$.subscribe((quizzes) => {
+      this.quizList = quizzes;
+    });
+
     this.nombre = 0;
   }
 

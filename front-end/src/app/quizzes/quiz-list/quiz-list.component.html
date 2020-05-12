@@ -2,6 +2,7 @@
 
   <div class="display-1 font-weight-bolder" style="color: #dddddd">
     Les Quizzes
+    {{quizList.length}}
   </div>
 
   <div *ngIf="quizList.length === 0">
@@ -9,13 +10,10 @@
       Aucun Quiz
     </div>
   </div>
-  <div *ngFor="let quiz of quizList; let i = index" class="quiz d-inline-block ">
+  <ng-template [ngForOf]="this.quizList" class="quiz d-inline-block " let-quiz ngFor>
     <app-quiz (deleteQuiz)="deleteQuiz($event)" (editQuiz)="editQuiz($event)" (modifyQuiz)="modifyQuiz($event)"
               (quizSelected)="quizSelected($event)" [quiz]="quiz"></app-quiz>
-    <div *ngIf="(1+1)%2 == 0">
-      <br>
-    </div>
-  </div>
+  </ng-template>
 </div>
 
 

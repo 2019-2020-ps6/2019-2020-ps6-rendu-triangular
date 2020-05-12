@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const question = require('../MongooseModels/question.model')
 
 const Quiz = mongoose.Schema({
     theme: {
@@ -13,6 +14,9 @@ const Quiz = mongoose.Schema({
     questionIndex: {
         type: Number,
         required: true
+    },
+    questions: {
+        type: Array
     },
     assigneeList: []
 })

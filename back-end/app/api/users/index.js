@@ -10,9 +10,9 @@ router.use('/patients', Patient)
 
 router.get('/', (req, res) => {
     try {
-        UserMongo.find().exec().then((quiz) => {
-            console.log(quiz);
-            res.status(200).json(quiz)
+        UserMongo.find().exec().then((user) => {
+
+            res.status(200).json(user)
         })
 
     } catch (err) {

@@ -39,7 +39,7 @@
         <label for="select">Liste </label>
         <br>
         <select id="select">
-          <option *ngFor="let user of users; let i = index" [value]="user.id">
+          <option *ngFor="let user of users; let i = index" [value]="user._id">
             {{user.firstName}} {{user.lastName}}
           </option>
         </select>

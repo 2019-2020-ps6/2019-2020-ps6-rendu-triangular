@@ -5,7 +5,7 @@ const Question = mongoose.Schema({
         type: String,
         required: true
     },
-    quizId: Number,
+    quizId: mongoose.Types.ObjectId,
     image: String,
     answers: Array
 })

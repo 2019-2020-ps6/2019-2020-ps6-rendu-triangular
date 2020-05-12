@@ -32,7 +32,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     let selector = document.getElementById("select") as HTMLOptionElement;
 
     for (let user of this.users) {
-      if (user.id.toString() === selector.value.toString()) {
+      if (user._id.toString() === selector.value.toString()) {
         console.log('userFound :' + user);
         this.userService.deleteUser(user);
         break;

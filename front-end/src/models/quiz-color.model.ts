@@ -1,5 +1,5 @@
 export class QuizColor {
-  id: string;
+  _id: string;
   name: string;
   color: string;
   value: number;

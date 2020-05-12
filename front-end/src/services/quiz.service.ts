@@ -35,13 +35,7 @@ export class QuizService {
   public question$: Subject<Question> = new Subject();
 
   constructor(private http: HttpClient) {
-
     this.setQuizzesFromUrl();
-
-    this.getJSON().subscribe(data => {
-      console.log(data);
-    });
-
   }
 
   public quizSelectedUpdater(quiz: Quiz) {
@@ -54,7 +48,8 @@ export class QuizService {
 
   setQuizzesFromUrl() {
     this.http.get<Quiz[]>(this.quizUrl).subscribe((quizList) => {
-      this.quizzes = quizList;
+      this.quizzes = quizList //this.parseObjectToQuiz(quizList);
+      console.log(this.quizzes)
       this.quizzes$.next(this.quizzes);
     });
   }
@@ -75,7 +70,11 @@ export class QuizService {
 
   setSelectedQuiz(quizId: string) {
     const urlWithId = this.quizUrl + '/' + quizId;
+    const questionUrl = this.quizUrl + '/' + quizId + '/' + this.questionsPath;
     this.http.get<Quiz>(urlWithId).subscribe((quiz) => {
+      this.http.get<Question[]>(questionUrl).subscribe((liste) => {
+        quiz.questions = liste
+      })
       this.quizSelected$.next(quiz);
     });
   }
@@ -101,7 +100,7 @@ export class QuizService {
   }
 
   deleteQuestion(quiz: Quiz, question: Question) {
-    const questionUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + question.id;
+    const questionUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + question._id;
     this.http.delete<Question>(questionUrl, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id));
   }
 
@@ -123,4 +122,38 @@ export class QuizService {
     this.setQuizzesFromUrl();
   }
 
+  parseObjectToQuiz(obj: Object) {
+    let tempQuiz = obj as Quiz[];
+    let newQuiz: Quiz[] = []
+
+    for (let quiz of tempQuiz) {
+      const formedQuiz = new Quiz();
+      formedQuiz.id = quiz.id;
+      formedQuiz.image = quiz.image;
+      formedQuiz.questionIndex = quiz.questionIndex;
+      formedQuiz.questions = quiz.questions;
+
+      //assign question to quiz
+      const urlPath = this.quizUrl + '/' + formedQuiz.id + '/' + this.questionsPath;
+      let tempArr: Question[] = [];
+      this.http.get<Question[]>(urlPath).subscribe((liste) => {
+        tempArr = liste;
+
+        if (tempArr != undefined) {
+          for (let question of tempArr) {
+            if (question.quizId === formedQuiz.id)
+              formedQuiz.questions.push(question);
+          }
+        } else
+          formedQuiz.questions = quiz.questions;
+
+      })
+
+
+      formedQuiz.theme = quiz.theme;
+      formedQuiz.name = quiz.name;
+      newQuiz.push(formedQuiz);
+    }
+    return newQuiz;
+  }
 }

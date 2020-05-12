@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Quiz} from '../../../models/quiz.model';
-import {Subscription} from "rxjs";
 import {QuizService} from "../../../services/quiz.service";
 
 @Component({
@@ -25,12 +24,10 @@ export class QuizComponent implements OnInit, AfterViewInit {
   @Output()
   modifyQuiz: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
-  subscription: Subscription = new Subscription();
+  defautlurlImage = "https://medias.liberation.fr/photo/1269696-p-tit-libe-les-droits-de-l-enfant-menu-quiz.png?modified_at=1573658071&ratio_x=03&ratio_y=02&width=750"
 
   constructor(private quizService: QuizService, private elementRef: ElementRef) {
-    this.subscription = this.quizService.quizSelected$.subscribe((quiz) => {
-      this.quiz = quiz;
-    })
+
   }
 
   ngAfterViewInit(): void {
@@ -38,7 +35,6 @@ export class QuizComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-   // this.resizeQuizImage();
   }
 
   selectQuiz() {
@@ -57,20 +53,11 @@ export class QuizComponent implements OnInit, AfterViewInit {
     this.modifyQuiz.emit(this.quiz);
   }
 
-  resizeQuizImage() {
-    let card = document.getElementById('quiz-card') as HTMLDivElement;
-    card.style.backgroundSize = "100px 100px";
-  }
-
   getImageUrl() {
-    return "url(' " + this.quiz.image + " ')";
-  }
 
-  getImageSrc() {
-    return this.quiz.image;
-  }
+    if (this.quiz.image !== undefined)
+      return "url(' " + this.quiz.image + " ')";
 
-  getDefaultImageUrl() {
-    return "url(' https://medias.liberation.fr/photo/1269696-p-tit-libe-les-droits-de-l-enfant-menu-quiz.png?modified_at=1573658071&ratio_x=03&ratio_y=02&width=750 ')";
+    return "url(' " + this.defautlurlImage + " ')";
   }
 }

@@ -25,6 +25,7 @@ export class UserService {
   getUsersFromServer() {
     this.http.get<User[]>(this.usersUrl).subscribe((userList) => {
       this.users = userList;
+      console.log(this.users)
       this.emitUsers();
     })
   }
@@ -45,7 +46,7 @@ export class UserService {
   }
 
   deleteUser(user: User) {
-    const pathTodeletion = this.usersUrl + '/' + user.id;
+    const pathTodeletion = this.usersUrl + '/' + user._id;
     console.log('user')
     this.http.delete<User>(pathTodeletion, this.httpOptions).subscribe(() => {
       this.getUsersFromServer();
@@ -67,7 +68,7 @@ export class UserService {
 
   getUserbyId(id: number) {
     for (let user of this.users) {
-      if (id.toString().localeCompare(user.id.toString()))
+      if (id.toString().localeCompare(user._id.toString()))
         return user;
     }
   }
