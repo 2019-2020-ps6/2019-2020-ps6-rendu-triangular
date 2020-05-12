@@ -16,6 +16,9 @@ export class QuestionComponent implements OnInit {
   @Output()
   deleteQuestion: EventEmitter<Question> = new EventEmitter<Question>();
 
+  @Output()
+  clickedQuestion: EventEmitter<Question> = new EventEmitter<Question>();
+
   sub: Subscription = new Subscription()
 
   constructor(private quizService: QuizService) {
@@ -32,6 +35,10 @@ export class QuestionComponent implements OnInit {
 
   delete() {
     this.deleteQuestion.emit(this.question);
+  }
+
+  clicked() {
+    this.clickedQuestion.emit(this.question);
   }
 
   getImageUrl() {

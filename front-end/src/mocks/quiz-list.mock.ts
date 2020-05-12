@@ -3,6 +3,7 @@ import {Question} from '../models/question.model';
 
 export const QUESTION_ACTOR: Question = {
   _id: '1',
+  quizId: '1',
   label: 'Jean Gabin a joué dans...',
   answers: [
     {
@@ -19,6 +20,7 @@ export const QUESTION_ACTOR: Question = {
 export const QUESTION_SPORT: Question = {
   _id: '1',
   label: 'Qui est Usain Bolt ?',
+  quizId: '1',
   answers: [
     {
       value: 'Un footballer',
@@ -33,10 +35,10 @@ export const QUESTION_SPORT: Question = {
 
 export const QUIZ_LIST: Quiz[] = [
   {
-    id: '1',
+    _id: '1',
     name: 'Les Cinéastes', // What's happening if I change this value..?
     theme: 'Actor',
     questions: [QUESTION_ACTOR],
-    questionIndex: 0
+    questionIndex: 0,
   },
   ];

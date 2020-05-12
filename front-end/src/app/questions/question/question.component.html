@@ -1,4 +1,4 @@
-<div [ngStyle]="{'background': getImageUrl()}" class="card text-light">
+<div (click)="clicked()" [ngStyle]="{'background': getImageUrl()}" class="card text-justify" id="card">
   <h3 class="lead" style="font-weight: bold">
     {{question.label}}
   </h3>

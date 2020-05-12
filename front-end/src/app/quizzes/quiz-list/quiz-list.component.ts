@@ -29,7 +29,7 @@ export class QuizListComponent implements OnInit {
   }
 
   editQuiz(quiz: Quiz) {
-    this.router.navigate(['/edit-quiz/' + quiz.id]);
+    this.router.navigate(['/edit-quiz/' + quiz._id]);
   }
 
   deleteQuiz(quiz: Quiz) {
@@ -37,7 +37,7 @@ export class QuizListComponent implements OnInit {
   }
 
   modifyQuiz(quiz: Quiz) {
-    this.router.navigate(['/modify-quiz/' + quiz.id]);
+    this.router.navigate(['/modify-quiz/' + quiz._id]);
   }
 
   increment() {

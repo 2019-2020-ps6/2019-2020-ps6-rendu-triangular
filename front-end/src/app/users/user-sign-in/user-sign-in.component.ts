@@ -56,6 +56,4 @@ export class UserSignInComponent implements OnInit {
     }
     this.accountNotFound = true;
   }
-
-
 }

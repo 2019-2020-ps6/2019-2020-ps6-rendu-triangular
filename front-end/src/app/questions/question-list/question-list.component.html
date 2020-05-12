@@ -1,5 +1,39 @@
 <div class="question-list">
-    <div class="question" *ngFor="let question of quiz.questions">
-        <app-question [question]="question" (deleteQuestion)="deleteQuestion($event)"></app-question>
-    </div>
+  <div class="question" *ngFor="let question of quiz.questions">
+    <app-question (clickedQuestion)="displayClickedQuestion($event)" (deleteQuestion)="deleteQuestion($event)"
+                  *ngIf="question.quizId === quiz._id"
+                  [question]="question"></app-question>
   </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button (click)="modal.dismiss('Cross click')" aria-label="Close" class="close" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="dateOfBirth">Date of birth</label>
+        <div class="input-group">
+          <input #dp="ngbDatepicker" class="form-control" id="dateOfBirth" name="dp" ngbDatepicker
+                 placeholder="yyyy-mm-dd">
+          <div class="input-group-append">
+            <button (click)="dp.toggle()" class="btn btn-outline-secondary calendar" type="button"></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modal.close('Save click')" class="btn btn-outline-dark" type="button">Save</button>
+  </div>
+</ng-template>
+
+<button (click)="open(content)" class="btn btn-lg btn-outline-primary">Launch demo modal</button>
+
+<hr>
+
+

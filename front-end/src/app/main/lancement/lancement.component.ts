@@ -158,7 +158,7 @@ export class LancementComponent implements OnInit {
 
   update(index: number) {
     const quizze = new Quiz();
-    quizze.id = this.quiz.id;
+    quizze._id = this.quiz._id;
     quizze.name = this.quiz.name;
     quizze.theme = this.quiz.theme;
     console.log(quizze);

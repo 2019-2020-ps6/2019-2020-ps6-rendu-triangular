@@ -26,7 +26,7 @@ import {ResultatsComponent} from './main/resultats/resultats.component';
 import {ResultatsRecordComponent} from './main/resultats-record/resultats-record.component';
 import {DescriptionAccueilComponent} from './main/acceuil/description-accueil/description-accueil.component';
 import {GameRecordService} from "../services/game-record.service";
-import {MDBBootstrapModule} from "angular-bootstrap-md";
+import {MDBBootstrapModule, ModalModule} from "angular-bootstrap-md";
 import {UserListComponent} from './users/user-list/user-list.component';
 import {UserFormComponent} from './users/user-form/user-form.component';
 import {UserComponent} from './users/user/user.component';
@@ -100,9 +100,10 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
     MatToolbarModule,
     MatIconModule,
     MatListModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
   ],
-  providers: [GameRecordService, UserService, QuizService, AuthentificationService, QuizColorService],
-  bootstrap: [AppComponent]
+  providers: [GameRecordService, UserService, QuizService, AuthentificationService, QuizColorService, ModalModule],
+  bootstrap: [AppComponent],
+  entryComponents: []
 })
 export class AppModule { }

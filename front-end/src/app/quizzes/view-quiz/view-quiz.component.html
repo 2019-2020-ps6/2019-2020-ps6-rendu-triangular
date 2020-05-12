@@ -5,13 +5,13 @@
 
   <div *ngIf="quiz.questions.length === 0; else second">
     <button (click)="selectQuiz()" class="button-card btn btn-primary btn-lg " disabled
-            routerLink="/lancement/{{quiz.id}}" routerLinkActive="active">Selectionner
+            routerLink="/lancement/{{quiz._id}}" routerLinkActive="active">Jouer
     </button>
   </div>
 
   <ng-template #second>
-    <button (click)="selectQuiz()" class="button-card btn btn-primary btn-lg " routerLink="/lancement/{{quiz.id}}"
-            routerLinkActive="active">Selectionner
+    <button (click)="selectQuiz()" class="button-card btn btn-primary btn-lg " routerLink="/lancement/{{quiz._id}}"
+            routerLinkActive="active">Jouer
     </button>
   </ng-template>
 </div>

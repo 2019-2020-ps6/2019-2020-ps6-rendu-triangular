@@ -22,9 +22,6 @@ export class QuestionFormComponent implements OnInit {
   constructor(public formBuilder: FormBuilder, private quizService: QuizService) {
     // Form creation
     this.initializeQuestionForm();
-    this.sub = this.quizService.question$.subscribe((question) => {
-
-    })
   }
 
   addQuestion() {
@@ -36,10 +33,18 @@ export class QuestionFormComponent implements OnInit {
       this.quizService.performQuestion(question);
 
       this.quizService.addQuestion(this.quiz, question);
-      this.quizService.updateQuizzes(this.quiz.id);
+      this.quizService.updateQuizzes(this.quiz._id);
       this.initializeQuestionForm();
 
     }
+  }
+
+  private initializeQuestionForm() {
+    this.questionForm = this.formBuilder.group({
+      label: ['', Validators.required],
+      image: [''],
+      answers: this.formBuilder.array([])
+    });
   }
 
   ngOnInit() {
@@ -60,11 +65,5 @@ export class QuestionFormComponent implements OnInit {
     this.answers.push(this.createAnswer());
   }
 
-  private initializeQuestionForm() {
-    this.questionForm = this.formBuilder.group({
-      label: ['', Validators.required],
-      image: ['', Validators.required],
-      answers: this.formBuilder.array([])
-    });
-  }
+
 }

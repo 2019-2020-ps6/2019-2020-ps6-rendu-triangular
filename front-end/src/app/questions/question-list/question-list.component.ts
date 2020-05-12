@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, TemplateRef} from '@angular/core';
 import {Quiz} from 'src/models/quiz.model';
 import {QuizService} from 'src/services/quiz.service';
 import {Question} from 'src/models/question.model';
-import {ActivatedRoute} from "@angular/router";
+import {ModalModule} from "angular-bootstrap-md";
 
 @Component({
   selector: 'app-question-list',
@@ -14,16 +14,21 @@ export class QuestionListComponent implements OnInit {
   @Input()
   quiz: Quiz;
 
-  constructor(private quizService: QuizService, private router: ActivatedRoute) {
+  constructor(private quizService: QuizService, private modalService: ModalModule) {
   }
 
   ngOnInit() {
-    //this.quizService.setSelectedQuiz(this.router.snapshot.paramMap.get('id'))
-    console.log(this.quiz.questions[0].image);
   }
 
   deleteQuestion(question: Question) {
     this.quizService.deleteQuestion(this.quiz, question);
   }
 
+  displayClickedQuestion(question: Question) {
+  }
+
+
+  open(content: TemplateRef<any>) {
+
+  }
 }

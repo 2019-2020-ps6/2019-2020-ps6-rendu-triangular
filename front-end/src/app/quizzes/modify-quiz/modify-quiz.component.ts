@@ -37,7 +37,7 @@ export class ModifyQuizComponent implements OnInit {
 
   modifyQuiz() {
     const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
-    quizToCreate.id = this.quiz.id;
+    quizToCreate._id = this.quiz._id;
     quizToCreate.questionIndex = 0;
     this.quizService.editQuiz(quizToCreate);
   }

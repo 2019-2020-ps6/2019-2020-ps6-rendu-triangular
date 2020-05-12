@@ -14,11 +14,6 @@ export class AppComponent implements OnDestroy, OnInit {
 
   connectedUser: User;
 
-  sideNavIsClicked: boolean
-
-  showdropdownContent: boolean;
-
-
   mobileQuery: MediaQueryList;
 
   fillerNav = Array.from({length: 1}, (_, i) => `Accueil`);
@@ -47,22 +42,10 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   logOutUser() {
-
     this.authService.logOff(this.connectedUser);
     this.authService.userIsAuthentified = false;
     window.location.reload();
     console.log("userIsAuthenficated : ", this.authService.userIsAuthentified);
   }
 
-  mouseLeaveQuizDropdown() {
-
-  }
-
-  closeNav() {
-
-  }
-
-  mouseEnterQuizDropdown() {
-
-  }
 }

@@ -12,10 +12,10 @@
   </h2>
 
   <button (click)="edit()" class="button-card bg-primary text-white" id="lastButton"
-          routerLink="/edit-quiz/{{quiz.id}}">
+          routerLink="/edit-quiz/{{quiz._id}}">
     Ajouter une question
   </button>
   <button (click)="delete()" class="button-card bg-primary text-white">Supprimer</button>
-  <button (click)="modify()" class="button-card bg-primary text-white " routerLink="/modify-quiz/{{quiz.id}}">Modifier
+  <button (click)="modify()" class="button-card bg-primary text-white " routerLink="/modify-quiz/{{quiz._id}}">Modifier
   </button>
 </div>

@@ -1,5 +1,5 @@
 <div *ngIf="quiz" id="question">
-  <button (click)="quizService.updateQuizzes(this.quiz.id)" class="button-card" routerLink="/quiz-list">Back</button>
+  <button (click)="quizService.updateQuizzes(this.quiz._id)" class="button-card" routerLink="/quiz-list">Back</button>
   <h2 class="display-4 text-center text-white">{{quiz.name}}</h2>
   <app-question-form [quiz]="quiz"></app-question-form>
   <app-question-list [quiz]="quiz"></app-question-list>

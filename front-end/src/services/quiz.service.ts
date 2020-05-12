@@ -55,13 +55,13 @@ export class QuizService {
   }
 
   getQuizById(quiz: Quiz) {
-    const url = this.quizUrl + '/' + quiz.id;
+    const url = this.quizUrl + '/' + quiz._id;
     return this.http.get<Quiz>(url);
   }
 
   addQuiz(quiz: Quiz) {
     this.http.post<Quiz>(this.quizUrl, quiz, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
-    this.updateQuizzes(quiz.id);
+    this.updateQuizzes(quiz._id);
   }
 
   public getJSON(): Observable<any> {
@@ -80,7 +80,7 @@ export class QuizService {
   }
 
   deleteQuiz(quiz: Quiz) {
-    const urlWithId = this.quizUrl + '/' + quiz.id;
+    const urlWithId = this.quizUrl + '/' + quiz._id;
     this.http.delete<Quiz>(urlWithId, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < quiz.questions.length; i++) {
@@ -89,19 +89,23 @@ export class QuizService {
   }
 
   editQuiz(oldQuiz: Quiz) {
-    console.log(oldQuiz.id);
-    const urlWithId = this.quizUrl + '/' + oldQuiz.id;
+    console.log(oldQuiz._id);
+    const urlWithId = this.quizUrl + '/' + oldQuiz._id;
     this.http.put<Quiz>(urlWithId, oldQuiz).subscribe(() => this.setQuizzesFromUrl());
   }
 
   addQuestion(quiz: Quiz, question: Question) {
-    const questionUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath;
-    this.http.post<Question>(questionUrl, question, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id));
+    const questionUrl = this.quizUrl + '/' + quiz._id + '/' + this.questionsPath;
+    this.http.post<Question>(questionUrl, question, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz._id));
+
+    quiz.questions.push(question);
+    this.editQuiz(quiz);
+
   }
 
   deleteQuestion(quiz: Quiz, question: Question) {
-    const questionUrl = this.quizUrl + '/' + quiz.id + '/' + this.questionsPath + '/' + question._id;
-    this.http.delete<Question>(questionUrl, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz.id));
+    const questionUrl = this.quizUrl + '/' + quiz._id + '/' + this.questionsPath + '/' + question._id;
+    this.http.delete<Question>(questionUrl, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz._id));
   }
 
   performQuestion(question) {
@@ -128,20 +132,20 @@ export class QuizService {
 
     for (let quiz of tempQuiz) {
       const formedQuiz = new Quiz();
-      formedQuiz.id = quiz.id;
+      formedQuiz._id = quiz._id;
       formedQuiz.image = quiz.image;
       formedQuiz.questionIndex = quiz.questionIndex;
       formedQuiz.questions = quiz.questions;
 
       //assign question to quiz
-      const urlPath = this.quizUrl + '/' + formedQuiz.id + '/' + this.questionsPath;
+      const urlPath = this.quizUrl + '/' + formedQuiz._id + '/' + this.questionsPath;
       let tempArr: Question[] = [];
       this.http.get<Question[]>(urlPath).subscribe((liste) => {
         tempArr = liste;
 
         if (tempArr != undefined) {
           for (let question of tempArr) {
-            if (question.quizId === formedQuiz.id)
+            if (question.quizId === formedQuiz._id)
               formedQuiz.questions.push(question);
           }
         } else

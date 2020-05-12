@@ -13,7 +13,7 @@ const Quiz = mongoose.Schema({
     image: String,
     questionIndex: {
         type: Number,
-        required: true
+        //required: true
     },
     questions: {
         type: Array

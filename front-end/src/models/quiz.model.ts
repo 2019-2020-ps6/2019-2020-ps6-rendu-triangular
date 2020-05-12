@@ -1,7 +1,7 @@
 import {Question} from './question.model';
 
 export class Quiz {
-  id: string;
+  _id: string;
   name: string;
   theme?: string;
   questions: Question[];
