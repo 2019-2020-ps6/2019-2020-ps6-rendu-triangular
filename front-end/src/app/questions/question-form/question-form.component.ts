@@ -24,6 +24,10 @@ export class QuestionFormComponent implements OnInit {
     this.initializeQuestionForm();
   }
 
+  get answers() {
+    return this.questionForm.get('answers') as FormArray;
+  }
+
   addQuestion() {
     const question = this.questionForm.getRawValue() as Question;
     if (question.image === '')
@@ -39,6 +43,13 @@ export class QuestionFormComponent implements OnInit {
     }
   }
 
+  ngOnInit() {
+  }
+
+  addAnswer() {
+    this.answers.push(this.createAnswer());
+  }
+
   private initializeQuestionForm() {
     this.questionForm = this.formBuilder.group({
       label: ['', Validators.required],
@@ -47,22 +58,11 @@ export class QuestionFormComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
-
-  get answers() {
-    return this.questionForm.get('answers') as FormArray;
-  }
-
   private createAnswer() {
     return this.formBuilder.group({
       value: '',
       isCorrect: false,
     });
-  }
-
-  addAnswer() {
-    this.answers.push(this.createAnswer());
   }
 
 

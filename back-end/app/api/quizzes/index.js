@@ -1,5 +1,5 @@
-const { Router } = require('express')
-const { Quiz } = require('../../models')
+const {Router} = require('express')
+const {Quiz} = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
 const QuestionsRouter = require('./questions')
 const {buildQuizz, buildQuizzes} = require('./manager')
@@ -10,12 +10,12 @@ const router = new Router()
 router.use('/:quizId/questions', QuestionsRouter)
 
 router.get('/', (req, res) => {
-  /*try {
-    const quizzes = buildQuizzes()
-    res.status(200).json(quizzes)
-  } catch (err) {
-    manageAllErrors(res, err)
-  }*/
+    /*try {
+      const quizzes = buildQuizzes()
+      res.status(200).json(quizzes)
+    } catch (err) {
+      manageAllErrors(res, err)
+    }*/
 
     QuizMongo.find().exec().then((quizzes) => {
         res.status(200).json(quizzes)
@@ -47,9 +47,9 @@ router.post('/', (req, res) => {
     }*/
 
     delete req.params._id;
-  const quiz1 = new QuizMongo({
-    ...req.body
-  })
+    const quiz1 = new QuizMongo({
+        ...req.body
+    })
 
     quiz1.save().then(() => {
         res.status(201).json(quiz1)
@@ -68,11 +68,11 @@ router.put('/:quizId', (req, res) => {
     QuizMongo.updateOne({
         _id: req.params.quizId
     }, {
-        ...req.body,
-        _id: req.params.quizId
+        ...req.body
+        //_id: req.params.quizId
     }).then(() => {
-     res.status(200).json({"message": "updated"})
-   }).catch((err) => {
+        res.status(200).json({"message": "updated"})
+    }).catch((err) => {
         res.status(404).json(err)
     })
 })

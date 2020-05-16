@@ -84,7 +84,9 @@ const routes: Routes = [
   declarations: [],
   imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
+
 // tslint:disable-next-line:max-line-length
 export const routingComponents = [QuizFormComponent, QuizListComponent, EditQuizComponent, QuestionListComponent,
   QuestionFormComponent, PageNotFoundComponent, AcceuilComponent,

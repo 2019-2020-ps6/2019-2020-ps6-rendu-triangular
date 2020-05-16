@@ -1,6 +1,8 @@
-<div class="example-container " [class.example-is-mobile]="mobileQuery.matches" >
+<div [class.example-is-mobile]="mobileQuery.matches" class="example-container ">
   <mat-toolbar class="example-toolbar">
-    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <button (click)="snav.toggle()" mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
     <h1 class="example-app-name">Polyquiz</h1>
 
     <div style="margin-left: 500px"></div>
@@ -70,9 +72,9 @@
 
   </mat-toolbar>
 
-  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav id="sidenav" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+  <mat-sidenav-container [style.marginTop.px]="mobileQuery.matches ? 56 : 0" class="example-sidenav-container">
+    <mat-sidenav #snav [fixedInViewport]="mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 fixedTopGap="56" id="sidenav">
       <mat-nav-list>
         <h2 matSubheader></h2>
         <a style="font-size:25px; top: 100px">Accueil</a>

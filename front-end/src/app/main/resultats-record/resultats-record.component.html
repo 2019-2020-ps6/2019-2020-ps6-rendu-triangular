@@ -6,6 +6,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Type de quiz</th>
+        <th scope="col">Patient</th>
         <th scope="col">Date de début</th>
         <th scope="col">Durée</th>
         <th scope="col">Nombre de ratés</th>
@@ -18,6 +19,7 @@
       <tr>
         <th scope="row">{{i + 1}}</th>
         <td>{{gameRec.typeOfQuiz}} </td>
+        <td>{{gameRec.patient}} </td>
         <td>{{gameRec.startDate | date:'MMMM d, y, HH:mm:ss '}}</td>
         <td>{{gameRec.duration}} s</td>
         <td>{{gameRec.numberOfAttempts}}</td>
@@ -27,7 +29,7 @@
       </tbody>
     </table>
     <!-- <button (click)="deleteGameRecorder()" class="btn-primary" id="supr" style="width: 100px;height: 100px">delete</button>-->
-    <button (click)="deleteGameRecorder()" color="primary" mdbBtn mdbWavesEffect type="button">Delete</button>
+    <button (click)="deleteGameRecorder()" color="primary" mdbBtn mdbWavesEffect type="button">Supprimer</button>
 
   </div>
 

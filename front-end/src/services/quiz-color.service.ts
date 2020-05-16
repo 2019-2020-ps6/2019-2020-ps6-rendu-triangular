@@ -7,20 +7,13 @@ import {BehaviorSubject, Subject} from "rxjs";
 export class QuizColorService {
 
   quizColorList: QuizColor[];
-
-  private quizColor2DArray: QuizColor[][] = [];
-
   public selectedQuizColor: QuizColor[];
-
   public selectedQuiColor$: BehaviorSubject<QuizColor[]> = new BehaviorSubject<QuizColor[]>(this.selectedQuizColor)
-
   public quiColorsList$: BehaviorSubject<QuizColor[]> = new BehaviorSubject<QuizColor[]>(this.quizColorList);
-
-  public quizColor2D$: BehaviorSubject<QuizColor[][]> = new BehaviorSubject<QuizColor[][]>(this.quizColor2DArray);
-
   public singleQuiz$: Subject<QuizColor> = new Subject<QuizColor>();
-
   quizColorListUrl: string = "http://localhost:9428/api/quiz-color";
+  private quizColor2DArray: QuizColor[][] = [];
+  public quizColor2D$: BehaviorSubject<QuizColor[][]> = new BehaviorSubject<QuizColor[][]>(this.quizColor2DArray);
 
   constructor(private http: HttpClient) {
     this.getAllQuizColor();

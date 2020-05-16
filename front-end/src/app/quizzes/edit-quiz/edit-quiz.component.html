@@ -1,6 +1,26 @@
 <div *ngIf="quiz" id="question">
-  <button (click)="quizService.updateQuizzes(this.quiz._id)" class="button-card" routerLink="/quiz-list">Back</button>
-  <h2 class="display-4 text-center text-white">{{quiz.name}}</h2>
+
+  <mat-grid-list cols="2" rowHeight="60px">
+    <mat-grid-tile>
+      <div class="text-left">
+        <button (click)="quizService.updateQuizzes(this.quiz._id)" class="button-card bg-info" mat-button
+                routerLink="/quiz-list">Retour
+        </button>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-right">
+        <button (click)="quizService.updateQuizzes(this.quiz._id)" class="button-card bg-info" mat-button
+                routerLink="/view-list-quiz">Lancer le Quiz
+        </button>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <h2 class="mat-display-3 text-center text-white">Quiz :{{quiz.name}}</h2>
   <app-question-form [quiz]="quiz"></app-question-form>
   <app-question-list [quiz]="quiz"></app-question-list>
 </div>
+
+
+

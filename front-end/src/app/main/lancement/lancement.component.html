@@ -1,5 +1,5 @@
 <div *ngIf="quiz" class="container-fluid text-white" id="quiz">
-  <h2 class="text-center display-4">Thème : {{quiz.name}}</h2>
+  <h2 class="text-center mat-display-3">Thème : {{quiz.name}}</h2>
 
   <div *ngFor="let question of quiz.questions; index as i">
 
@@ -25,7 +25,6 @@
       <div [hidden]="hideSeeSolution" class="alert alert-warning text-center" role="alert">
         La réponse était la question  {{this.findRightAnswer(question)}}
       </div>
-      <button (click)="basicModalQuit.show()" [hidden]="true" id="modalBtnForQuitting" type="button"></button>
 
 
       <div *ngIf="quiz.questionIndex!=quiz.questions.length-1; else last" class="row">
@@ -57,7 +56,7 @@
 </div>
 
 <!-- Modal pour réponses -->
-<div class="modal fade" id="modalRéponse" role="dialog">
+<!--<div class="modal fade" id="modalRéponse" role="dialog">
   <div class="modal-dialog">
 
     <div class="modal-content">
@@ -79,10 +78,10 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
 
 <!-- Modal pour Rejouer la partie -->
-<div class="modal fade" id="ModalRejouer" role="dialog">
+<!--<div class="modal fade" id="ModalRejouer" role="dialog">
   <div class="modal-dialog">
 
     <div class="modal-content">
@@ -90,26 +89,26 @@
         <button class="close" data-dismiss="modal" type="button">&times;</button>
         <h4 class="modal-title text-left">Voulez Vous continuer ?</h4>
       </div>
-      <div class="modal-body">
-        <!-- Affichage des résulats du quiz -->
-        <p> Score : {{scoreFinal}} / {{quiz.questions.length}}</p>
-        <p>Number of Failures : {{numberOfFails}}</p>
-      </div>
-      <div class="modal-footer">
-        <button (click)="refreshComponent()" class="btn btn-warning" data-dismiss="modal"
-                routerLink="../../lancement/{{quiz._id}}" routerLinkActive="true" type="button">Rejouer
-        </button>
-        <button (click)="emptyLocalStorage()" class="btn btn-primary" data-dismiss="modal"
-                routerLink="../../view-list-quiz" routerLinkActive="true"
-                type="button">Arreter
-        </button>
-      </div>
-    </div>
-  </div>
+      <div class="modal-body">-->
+<!-- Affichage des résulats du quiz -->
+<!--<p> Score : {{scoreFinal}} / {{quiz.questions.length}}</p>
+<p>Number of Failures : {{numberOfFails}}</p>
 </div>
+<div class="modal-footer">
+<button (click)="refreshComponent()" class="btn btn-warning" data-dismiss="modal"
+        routerLink="../../lancement/{{quiz._id}}" routerLinkActive="true" type="button">Rejouer
+</button>
+<button (click)="emptyLocalStorage()" class="btn btn-primary" data-dismiss="modal"
+        routerLink="../../view-list-quiz" routerLinkActive="true"
+        type="button">Arreter
+</button>
+</div>
+</div>
+</div>
+</div>-->
 
 <!------------------------Modal For too many Attemtps----------------------->
-<div #basicModalQuit="mdbModal" aria-hidden="true" aria-labelledby="myBasicModalLabel" class="modal fade" id="modalQuit"
+<!--<div #basicModalQuit="mdbModal" aria-hidden="true" aria-labelledby="myBasicModalLabel" class="modal fade" id="modalQuit"
      mdbModal
      role="dialog" tabindex="-1">
   <div class="modal-dialog" role="document">
@@ -133,4 +132,4 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->

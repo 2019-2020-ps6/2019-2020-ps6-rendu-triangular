@@ -49,6 +49,12 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatListModule} from "@angular/material/list";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatGridListModule} from "@angular/material/grid-list";
+import {WrongAnswerDialogComponent} from './matDialogs/wrong-answer-dialog/wrong-answer-dialog.component';
+import {CorrectAnswerDialogComponent} from './matDialogs/correct-answer-dialog/correct-answer-dialog.component';
+import {TooManyAnswerDialogComponent} from './matDialogs/too-many-answer-dialog/too-many-answer-dialog.component';
+import {OnEndingQuizComponent} from './matDialogs/on-ending-quiz/on-ending-quiz.component';
 
 
 @NgModule({
@@ -85,6 +91,10 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
     QuizColorFormComponent,
     QuizColorViewListComponent,
     QuizColorViewComponent,
+    WrongAnswerDialogComponent,
+    CorrectAnswerDialogComponent,
+    TooManyAnswerDialogComponent,
+    OnEndingQuizComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,9 +111,12 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
     MatIconModule,
     MatListModule,
     MatButtonToggleModule,
+    MatDialogModule,
+    MatGridListModule
   ],
   providers: [GameRecordService, UserService, QuizService, AuthentificationService, QuizColorService, ModalModule],
   bootstrap: [AppComponent],
-  entryComponents: []
+  entryComponents: [QuestionComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

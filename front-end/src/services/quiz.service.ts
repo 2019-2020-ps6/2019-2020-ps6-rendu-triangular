@@ -12,30 +12,25 @@ import {LancementComponent} from "../app/main/lancement/lancement.component";
 })
 export class QuizService {
 
-  private quizzes: Quiz[] = QUIZ_LIST;
-
   userAnswers: LancementComponent;
-
-  getAnswerArray() {
-    return this.userAnswers.getUserArrayOfAnswercopy();
-  }
-
-  public quizzes$: BehaviorSubject<Quiz[]>
-    = new BehaviorSubject(this.quizzes);
-
   public quizSelected$: Subject<Quiz> = new Subject();
-
   public quizUrl = 'http://localhost:9428/api/quizzes';
-  private questionsPath = 'questions';
-
-  private httpOptions = httpOptionsBase;
-
   public quizIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-
   public question$: Subject<Question> = new Subject();
+  public voirLaReponseState: Subject<boolean> = new Subject<boolean>();
+  public rejouerLaPartieState: Subject<boolean> = new Subject<boolean>();
+  public finalScore$: Subject<Number> = new Subject<Number>();
+  private quizzes: Quiz[] = QUIZ_LIST;
+  public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
+  private questionsPath = 'questions';
+  private httpOptions = httpOptionsBase;
 
   constructor(private http: HttpClient) {
     this.setQuizzesFromUrl();
+  }
+
+  getAnswerArray() {
+    return this.userAnswers.getUserArrayOfAnswercopy();
   }
 
   public quizSelectedUpdater(quiz: Quiz) {
@@ -82,14 +77,13 @@ export class QuizService {
   deleteQuiz(quiz: Quiz) {
     const urlWithId = this.quizUrl + '/' + quiz._id;
     this.http.delete<Quiz>(urlWithId, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
-    // tslint:disable-next-line:prefer-for-of
+
     for (let i = 0; i < quiz.questions.length; i++) {
       this.deleteQuestion(quiz, quiz.questions[i]);
     }
   }
 
   editQuiz(oldQuiz: Quiz) {
-    console.log(oldQuiz._id);
     const urlWithId = this.quizUrl + '/' + oldQuiz._id;
     this.http.put<Quiz>(urlWithId, oldQuiz).subscribe(() => this.setQuizzesFromUrl());
   }

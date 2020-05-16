@@ -1,12 +1,17 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {Quiz} from "../../../models/quiz.model";
 import {QuizService} from 'src/services/quiz.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {GameRecorder} from "../../../models/game-recorder.model";
 import {GameRecordService} from "../../../services/game-record.service";
 import {interval} from "rxjs";
 import {FormBuilder} from "@angular/forms";
 import {Question} from "../../../models/question.model";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {WrongAnswerDialogComponent} from "../../matDialogs/wrong-answer-dialog/wrong-answer-dialog.component";
+import {CorrectAnswerDialogComponent} from "../../matDialogs/correct-answer-dialog/correct-answer-dialog.component";
+import {TooManyAnswerDialogComponent} from "../../matDialogs/too-many-answer-dialog/too-many-answer-dialog.component";
+import {OnEndingQuizComponent} from "../../matDialogs/on-ending-quiz/on-ending-quiz.component";
 
 
 @Component({
@@ -48,8 +53,13 @@ export class LancementComponent implements OnInit {
   scoreFinal: number;
   numberOfFails: number;
 
+  wrongAnswerDialog: MatDialogRef<WrongAnswerDialogComponent>;
+  tooManyFailureDialog: MatDialogRef<TooManyAnswerDialogComponent>;
+  correctAnswerDialog: MatDialogRef<CorrectAnswerDialogComponent>;
+  onEndingDialog: MatDialogRef<OnEndingQuizComponent>;
 
-  constructor(private route: ActivatedRoute, protected formBuilder: FormBuilder, private quizService: QuizService, private game: GameRecordService) {
+
+  constructor(private route: ActivatedRoute, private router: Router, protected formBuilder: FormBuilder, private quizService: QuizService, private game: GameRecordService, private dialog: MatDialog) {
     this.quizService.quizSelected$.subscribe((quiz) => {
         this.quiz = quiz;
       }
@@ -126,26 +136,29 @@ export class LancementComponent implements OnInit {
 
       this.userArrayOfAnswer = [];
       this.answerIsCorrect = false;
-    } else if (this.nombre === this.quiz.questions.length - 1) {
+    } else if (this.quiz.questionIndex === this.quiz.questions.length - 1) {
       finalBtn.disabled = true;
 
-
-    } else if (this.nombre === this.quiz.questions.length) {
+    } else if (this.quiz.questionIndex === this.quiz.questions.length) {
       if (this.answerIsCorrect) {
         this.isAtEnd = true;
-
       }
     }
     this.hideSeeSolution = true;
 
-    if (this.numberOfFails >= 10) {
-
+    if (this.quiz.questionIndex === this.quiz.questions.length) {
+      this.fireOnEndingQuiz();
+      this.update(0);
+      localStorage.clear();
+      return;
     }
+
+    console.log("questionIndex :" + this.quiz.questionIndex)
 
     this.gameRecorder.numberOfAttempts = this.numberOfFails;
     this.gameRecorder.finalScore = this.scoreFinal;
     this.gameRecorder.endDate = new Date();
-    this.gameRecorder.duration = this.tempsDeJeu
+    this.gameRecorder.duration = this.tempsDeJeu;
     this.gameRecorder.typeOfQuiz = "Quiz Image";
 
     this.game.performGameRecorder(this.gameRecorder);
@@ -161,7 +174,6 @@ export class LancementComponent implements OnInit {
     quizze._id = this.quiz._id;
     quizze.name = this.quiz.name;
     quizze.theme = this.quiz.theme;
-    console.log(quizze);
     quizze.questionIndex = index;
     this.quizService.editQuiz(quizze);
   }
@@ -180,6 +192,7 @@ export class LancementComponent implements OnInit {
     //Check if the player is correct or not
     if (this.userArrayOfAnswer[0] == this.rightAnswerIndex + 1) {
       this.answerIsCorrect = true;
+      this.fireCorrectAnswerDialog();
 
       let inputToDisable = (<HTMLInputElement>document.getElementById("Réponse"));
       inputToDisable.disabled = true;
@@ -187,20 +200,59 @@ export class LancementComponent implements OnInit {
       if (finalBtn.disabled)
         finalBtn.disabled = false;
 
+
     } else //Make a pop up wrong answer
     {
       this.answerIsCorrect = false;
       this.numberOfFails++;
+      this.fireWrongAnswerDialog();
       if (this.numberOfFails >= 10) {
-        this.fireModal("modalBtnForQuitting");
+        this.wrongAnswerDialog.close();
+        this.fireTooManyAnswerDialog();
       }
     }
 
   }
 
-  fireModal(name) {
-    let modal = document.getElementById(name) as HTMLButtonElement;
-    modal.click();
+  fireWrongAnswerDialog() {
+    this.wrongAnswerDialog = this.dialog.open(WrongAnswerDialogComponent, {
+      hasBackdrop: true
+    });
+  }
+
+  fireCorrectAnswerDialog() {
+    this.correctAnswerDialog = this.dialog.open(CorrectAnswerDialogComponent, {
+      hasBackdrop: true
+    })
+  }
+
+  fireTooManyAnswerDialog() {
+    this.tooManyFailureDialog = this.dialog.open(TooManyAnswerDialogComponent, {
+      hasBackdrop: true
+    });
+
+    this.quizService.rejouerLaPartieState.subscribe((state) => {
+      if (state) {
+        this.navigateToThebegining();
+      }
+    })
+    this.quizService.rejouerLaPartieState.next(false);
+
+    this.quizService.voirLaReponseState.subscribe((state) => {
+      if (state) {
+        this.seeCurrentSolution();
+      }
+    })
+    this.quizService.voirLaReponseState.next(false);
+  }
+
+  fireOnEndingQuiz() {
+    this.onEndingDialog = this.dialog.open(OnEndingQuizComponent, {
+      hasBackdrop: true
+    })
+
+    this.onEndingDialog.componentInstance.scoreFinal = this.scoreFinal;
+    this.onEndingDialog.componentInstance.quiz = this.quiz;
   }
 
   refreshComponent() {
@@ -227,11 +279,15 @@ export class LancementComponent implements OnInit {
     this.quiz.questionIndex = 0;
     this.scoreFinal = 0;
     this.update(this.quiz.questionIndex);
+    localStorage.clear();
     window.location.reload();
   }
 
   seeCurrentSolution() {
     this.hideSeeSolution = false;
+    this.tooManyFailureDialog.afterClosed().subscribe(result => {
+      console.log(result);
+    })
   }
 
   findRightAnswer(question: Question) {

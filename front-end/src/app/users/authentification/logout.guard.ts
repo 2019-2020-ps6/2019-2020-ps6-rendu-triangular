@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanDeactivate} from '@angular/router';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {Observable} from 'rxjs';
 import {AuthentificationService} from "../../../services/authentification.service";
 
 @Injectable({
@@ -8,7 +8,7 @@ import {AuthentificationService} from "../../../services/authentification.servic
 })
 export class LogoutGuard implements CanDeactivate<boolean> {
 
-  constructor(private auth : AuthentificationService) {
+  constructor(private auth: AuthentificationService) {
   }
 
   canDeactivate(component: boolean,

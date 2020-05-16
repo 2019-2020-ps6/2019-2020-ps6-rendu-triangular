@@ -15,9 +15,7 @@ const Quiz = mongoose.Schema({
         type: Number,
         //required: true
     },
-    questions: {
-        type: Array
-    },
+    questions: [],
     assigneeList: []
 })
 

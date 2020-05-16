@@ -1,3 +1,5 @@
+import {User} from "./user.model";
+
 export class GameRecorder {
   _id: number;
   startDate: Date;
@@ -6,4 +8,5 @@ export class GameRecorder {
   finalScore: number
   duration: number;
   typeOfQuiz: string;
+  patient: User;
 }

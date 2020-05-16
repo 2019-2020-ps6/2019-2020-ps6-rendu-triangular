@@ -1,5 +1,5 @@
-const { Answer } = require('../../../../models')
-const { getQuestionFromQuiz } = require('../manager')
+const {Answer} = require('../../../../models')
+const {getQuestionFromQuiz} = require('../manager')
 
 /**
  * filterAnswersFromQuestion.
@@ -16,13 +16,13 @@ const filterAnswersFromQuestion = (questionId) => Answer.get().filter((answer) =
  * @param answerId
  */
 const getAnswerFromQuestion = (quizId, questionId, answerId) => {
-  const question = getQuestionFromQuiz(quizId, questionId)
-  const answer = Answer.getById(answerId)
-  if (answer.questionId !== question._id) throw new NotFoundError(`${answer.name} id=${answerId} was not found for ${question.name} id=${question._id} : not found`)
-  return answer
+    const question = getQuestionFromQuiz(quizId, questionId)
+    const answer = Answer.getById(answerId)
+    if (answer.questionId !== question._id) throw new NotFoundError(`${answer.name} id=${answerId} was not found for ${question.name} id=${question._id} : not found`)
+    return answer
 }
 
 module.exports = {
-  getAnswerFromQuestion,
-  filterAnswersFromQuestion,
+    getAnswerFromQuestion,
+    filterAnswersFromQuestion,
 }
