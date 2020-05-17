@@ -15,8 +15,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.receivedUser = this.auth.getAllDataUser();
-    console.log(this.receivedUser);
+    this.auth.loggedUser$.subscribe((user) => {
+      this.receivedUser = user;
+    })
   }
 
 }

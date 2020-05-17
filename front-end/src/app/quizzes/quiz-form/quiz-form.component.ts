@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from '../../../models/quiz.model';
@@ -18,8 +18,8 @@ export class QuizFormComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
     this.quizForm = this.formBuilder.group({
-      name: [''],
-      theme: [''],
+      name: ['', Validators.required],
+      theme: ['', Validators.required],
       image: [''],
       questionIndex: 0
     });

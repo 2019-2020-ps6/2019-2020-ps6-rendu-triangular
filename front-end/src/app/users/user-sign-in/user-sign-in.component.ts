@@ -35,6 +35,8 @@ export class UserSignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getUsersFromServer();
+    if (this.authService.getAllDataUser() != undefined)
+      this.router.navigate(['/accueil']);
   }
 
   initForm() {
@@ -49,11 +51,16 @@ export class UserSignInComponent implements OnInit {
     for (let user of this.userList) {
       if (user.firstName === userLogIn.firstName && user.password === userLogIn.password) {
         this.accountLoggedEmitter.emit(user);
-        this.router.navigate(['../accueil']);
+        this.authService.loggedUser$.next(user);
         this.authService.logIn(userLogIn);
+        this.router.navigate(['/accueil'])
         return;
       }
     }
     this.accountNotFound = true;
+  }
+
+  reload() {
+    window.location.reload();
   }
 }

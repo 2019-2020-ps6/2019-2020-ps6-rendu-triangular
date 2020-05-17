@@ -1,5 +1,5 @@
 import {User} from "../models/user.model";
-import {BehaviorSubject, Subject} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {httpOptionsBase} from "../configs/server.config";
@@ -8,11 +8,12 @@ import {Patient} from "../models/Patient.model";
 
 @Injectable()
 export class UserService {
-  public usersSubject$ = new Subject<User[]>();
-  public singleUserSubject$ = new Subject<User>();
+  public usersSubject$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(null);
+  public singleUserSubject$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   private patients: Patient[] = [];
   public patients$: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>(this.patients);
   private users: User[] = [];
+  public pageObservable$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   private httpOptions = httpOptionsBase;
 
   private usersUrl: string = 'http://localhost:9428/api/users';
@@ -25,7 +26,6 @@ export class UserService {
   getUsersFromServer() {
     this.http.get<User[]>(this.usersUrl).subscribe((userList) => {
       this.users = userList;
-      console.log(this.users)
       this.emitUsers();
     })
   }

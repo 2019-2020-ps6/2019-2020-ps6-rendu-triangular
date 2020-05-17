@@ -73,9 +73,6 @@ export class LancementComponent implements OnInit {
       this.tempsDeJeu = sm;
     })
 
-    this.quizService.quizIndex$.subscribe((index) => {
-      this.quiz.questionIndex = index;
-    })
 
     this.quizService.perfomQuiz(this.quiz);
   }

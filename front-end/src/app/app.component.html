@@ -14,7 +14,7 @@
     <div style="margin-left: 300px"></div>
 
     <!--Quiz-->
-    <div *ngIf="connectedUser != null">
+    <div *ngIf="connectedUser != null && connectedUser.type === 'Admin'">
       <a aria-expanded="false" aria-haspopup="true" class=" dropdown-toggle " data-toggle="dropdown"
          href="#" id="navbarDropdown" role="button">
         Quiz
@@ -77,14 +77,21 @@
                  fixedTopGap="56" id="sidenav">
       <mat-nav-list>
         <h2 matSubheader></h2>
-        <a style="font-size:25px; top: 100px">Accueil</a>
-
+        <section class="tp-section mat-display-1">
+          <a>Accueil</a>
+        </section>
+        <section class="tp-section mat-display-1">
+          <a>Résultats</a>
+        </section>
+        <section class="tp-section mat-display-1">
+          <a>Quiz</a>
+        </section>
       </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
       <app-main-content></app-main-content>
-      <app-footer></app-footer>
+      <app-footer *ngIf="pageChecker()"></app-footer>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

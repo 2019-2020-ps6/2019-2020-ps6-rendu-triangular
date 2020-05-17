@@ -1,4 +1,4 @@
-import {Subject} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.model";
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
@@ -7,7 +7,7 @@ import {ConnectedUser} from "../models/connected-user.model";
 @Injectable()
 export class AuthentificationService {
   userIsAuthentified: boolean = false;
-  public loggedUser$ = new Subject<User>();
+  public loggedUser$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   private allDataUser: User = null;
   private connectedUser: ConnectedUser;
   private connectedUserList: ConnectedUser[];
@@ -46,13 +46,12 @@ export class AuthentificationService {
   logIn(user: User) {
     //convert User to Connected User
     const connectedU = this.parseToConnectedUser(user);
-    this.loggedUser$.next(user);
 
     if (this.allDataUser === null) {
       this.http.post<ConnectedUser>(this.url, connectedU).subscribe((arg) => {
         this.allDataUser = user;
       })
-      this.loggedUser$.next(user);
+
       this.userIsAuthentified = true;
     }
   }
@@ -79,6 +78,7 @@ export class AuthentificationService {
     connectedU.username = user.firstName;
     connectedU.signInDate = new Date();
     connectedU.signOutDate = null;
+    connectedU.type = user.type;
 
     for (let connectedUser of this.connectedUserList) {
       if (user.firstName === connectedUser.username)

@@ -24,6 +24,10 @@ export class QuestionFormComponent implements OnInit {
     this.initializeQuestionForm();
   }
 
+  ngOnInit() {
+    console.log('quiz name' + this.quiz.name)
+  }
+
   get answers() {
     return this.questionForm.get('answers') as FormArray;
   }
@@ -32,6 +36,7 @@ export class QuestionFormComponent implements OnInit {
     const question = this.questionForm.getRawValue() as Question;
     if (question.image === '')
       question.image = "https://images.assetsdelivery.com/compings_v2/will46/will461412/will46141200142.jpg";
+    question.quizId = this.quiz._id;
 
     if (this.questionForm.valid) {
       this.quizService.performQuestion(question);
@@ -39,11 +44,9 @@ export class QuestionFormComponent implements OnInit {
       this.quizService.addQuestion(this.quiz, question);
       this.quizService.updateQuizzes(this.quiz._id);
       this.initializeQuestionForm();
-
+      this.quiz.questions.push(question);
+      this.quizService.editQuiz(this.quiz);
     }
-  }
-
-  ngOnInit() {
   }
 
   addAnswer() {
@@ -64,6 +67,4 @@ export class QuestionFormComponent implements OnInit {
       isCorrect: false,
     });
   }
-
-
 }

@@ -20,6 +20,7 @@ export class QuizService {
   public voirLaReponseState: Subject<boolean> = new Subject<boolean>();
   public rejouerLaPartieState: Subject<boolean> = new Subject<boolean>();
   public finalScore$: Subject<Number> = new Subject<Number>();
+  public questionsOfQuiz$: BehaviorSubject<Question[]> = new BehaviorSubject<Question[]>(null);
   private quizzes: Quiz[] = QUIZ_LIST;
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
   private questionsPath = 'questions';
@@ -44,9 +45,9 @@ export class QuizService {
   setQuizzesFromUrl() {
     this.http.get<Quiz[]>(this.quizUrl).subscribe((quizList) => {
       this.quizzes = quizList //this.parseObjectToQuiz(quizList);
-      console.log(this.quizzes)
       this.quizzes$.next(this.quizzes);
     });
+
   }
 
   getQuizById(quiz: Quiz) {
@@ -68,7 +69,7 @@ export class QuizService {
     const questionUrl = this.quizUrl + '/' + quizId + '/' + this.questionsPath;
     this.http.get<Quiz>(urlWithId).subscribe((quiz) => {
       this.http.get<Question[]>(questionUrl).subscribe((liste) => {
-        quiz.questions = liste
+        quiz.questions = liste;
       })
       this.quizSelected$.next(quiz);
     });
@@ -76,11 +77,13 @@ export class QuizService {
 
   deleteQuiz(quiz: Quiz) {
     const urlWithId = this.quizUrl + '/' + quiz._id;
-    this.http.delete<Quiz>(urlWithId, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
-
     for (let i = 0; i < quiz.questions.length; i++) {
       this.deleteQuestion(quiz, quiz.questions[i]);
     }
+
+    this.http.delete<Quiz>(urlWithId, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
+
+
   }
 
   editQuiz(oldQuiz: Quiz) {
@@ -88,18 +91,34 @@ export class QuizService {
     this.http.put<Quiz>(urlWithId, oldQuiz).subscribe(() => this.setQuizzesFromUrl());
   }
 
+  getQuestion(quizId: string) {
+    const questionUrl = this.quizUrl + '/' + quizId + '/' + this.questionsPath;
+    this.http.get<Question[]>(questionUrl).subscribe((d) => {
+      this.questionsOfQuiz$.next(d);
+    });
+  }
+
   addQuestion(quiz: Quiz, question: Question) {
     const questionUrl = this.quizUrl + '/' + quiz._id + '/' + this.questionsPath;
-    this.http.post<Question>(questionUrl, question, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz._id));
+    if (question.quizId === quiz._id)
+      this.http.post<Question>(questionUrl, question, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz._id));
 
-    quiz.questions.push(question);
-    this.editQuiz(quiz);
-
+    /*if(!this.checkifQuestionAlreadyExist(question, quiz)){
+      quiz.questions.push(question);
+      this.editQuiz(quiz);
+    }*/
   }
 
   deleteQuestion(quiz: Quiz, question: Question) {
     const questionUrl = this.quizUrl + '/' + quiz._id + '/' + this.questionsPath + '/' + question._id;
     this.http.delete<Question>(questionUrl, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz._id));
+
+
+    const url = this.quizUrl + '/' + quiz._id + '/' + this.questionsPath;
+    this.http.get<Question[]>(url).subscribe((questions) => {
+      quiz.questions = questions;
+    })
+    this.quizSelected$.next(quiz);
   }
 
   performQuestion(question) {
@@ -147,11 +166,19 @@ export class QuizService {
 
       })
 
-
       formedQuiz.theme = quiz.theme;
       formedQuiz.name = quiz.name;
       newQuiz.push(formedQuiz);
     }
     return newQuiz;
   }
+
+  private checkifQuestionAlreadyExist(question: Question, quiz: Quiz) {
+    for (let q of quiz.questions) {
+      if (question._id === q._id && question.quizId === quiz._id)
+        return true;
+    }
+    return false;
+  }
+
 }

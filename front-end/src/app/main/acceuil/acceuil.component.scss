@@ -2,7 +2,8 @@
   height: auto;
   //background: url("https://irp-cdn.multiscreensite.com/b4cfc617/dms3rep/multi/desktop/slide-2-1920x1200.jpg");
   font-family: Georgia, sans-serif;
-  min-height: 85vh;
+  min-height: 83vh;
+  max-height: 85vh;
   background-color: navajowhite;
 }
 
@@ -100,8 +101,9 @@ p {
 }
 
 p {
-  margin-bottom: 100px;
+  //margin-bottom: 100px;
   text-align: center;
+  margin-top: 60px;
 }
 
 .lead {
@@ -126,7 +128,8 @@ p {
   -moz-transition: background-position 0.1s linear;
   -o-transition: background-position 0.1s linear;
   transition: background-position 0.1s linear;
-  height: 100px;
+  height: 200px;
+  width: 300px;
 }
 
 .rubrique button {
@@ -144,6 +147,8 @@ p {
   margin-right: 50px;
   text-decoration: none;
   float: right;
+  height: 200px;
+  width: 300px;
   position: relative;
 }
 
@@ -152,5 +157,16 @@ p {
   text-align: center;
   padding-right: 7%;
   padding-top: 20px;
+}
+
+mat-grid-list {
+  position: relative;
+  left: 14vh;
+}
+
+button {
+  height: 200px;
+  width: 300px;
+  padding: 5px;
 }
 

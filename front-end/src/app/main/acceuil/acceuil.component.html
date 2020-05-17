@@ -7,32 +7,64 @@
       <div class="col-sm-12 my-auto" id="button-container">
         <div class="rubrique text-center container">
           <p class="display-4 text-dark text-center card"
-             style="font-size: 75px; background-color: #00c6ff;margin-bottom: 200px; margin-left: 250px; margin-top: 125px; height: 90px">
+             style="font-size: 75px; background-color: #00c6ff;margin-bottom: 20px; margin-left: 250px; margin-top: 125px; height: 90px">
             PolyQuiz</p>
-          <div *ngIf="auth.userIsAuthentified; else con">
-            <button (click)="checkIfConnected()" class="card" routerLink="../quiz-list"
-                    style="width: 300px; height: 200px">
-              <p style="font-size: 25px; margin-left: 25px">Liste Quiz Image</p>
-            </button>
-            <button (click)="checkIfConnected()" class="card" routerLink="../quiz-form"
-                    style="width: 300px; height: 200px">
-              <p style="font-size: 25px; margin-left: 25px">Création Quiz Image</p>
-            </button>
-            <button (click)="checkIfConnected()" class="card" routerLink="../quiz-color-form"
-                    style="width: 300px; height: 200px">
-              <p style="font-size: 25px; margin-left: 15px"> Création Quiz Couleur</p>
-            </button>
-            <button (click)="checkIfConnected()" class="card" routerLink="../quiz-color-view-list"
-                    style="width: 300px; height: 200px">
-              <p style="font-size: 25px; margin-left: 15px">Liste Quiz Couleur</p>
-            </button>
+
+          <div>
+            <div *ngIf="auth.userIsAuthentified ; else con">
+              <mat-grid-list cols="3" rowHeight="3:3">
+                <mat-grid-tile *ngIf="connectedUser.type === 'Admin'">
+                  <button (click)="checkIfConnected()" class="card" routerLink="../quiz-form"
+                  >
+                    <p style="font-size: 25px; margin-left: 25px">Création Quiz Image</p>
+                  </button>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <button (click)="checkIfConnected()" *ngIf="connectedUser.type === 'Admin'" class="card"
+                          routerLink="../quiz-list"
+                  >
+                    <p style="font-size: 25px; margin-left: 25px">Liste Quiz Image</p>
+                  </button>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <button (click)="checkIfConnected()" class="card" routerLink="../view-list-quiz"
+                  >
+                    <p style="font-size: 25px; margin-left: 25px">Lancer un Quiz Image </p>
+                  </button>
+                </mat-grid-tile>
+              </mat-grid-list>
+
+              <mat-grid-list cols="3" rowHeight="5:5">
+                <mat-grid-tile>
+                  <button (click)="checkIfConnected()" *ngIf="connectedUser.type === 'Admin'" class="card"
+                          routerLink="../quiz-color-form"
+                  >
+                    <p style="font-size: 25px; margin-left: 15px"> Création Quiz Couleur</p>
+                  </button>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <button (click)="checkIfConnected()" class="card" routerLink="../quiz-color-view-list"
+                  >
+                    <p style="font-size: 25px; margin-left: 15px"> Lancer Quiz Couleur</p>
+                  </button>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <button (click)="checkIfConnected()" *ngIf="connectedUser.type === 'Admin'" class="card"
+                          routerLink="../quiz-color-list"
+                  >
+                    <p style="font-size: 25px; margin-left: 25px">Liste Quiz Couleur</p>
+                  </button>
+                </mat-grid-tile>
+
+              </mat-grid-list>
+            </div>
           </div>
 
           <ng-template #con>
-            <div class="mat-display-4 text-center" style="margin-left: 220px">Veuillez vous connecter pour continuer
+            <div class="mat-display-4 text-center" style="margin-left: 220px; padding-top: 100px">Veuillez vous
+              connecter pour continuer
             </div>
           </ng-template>
-
         </div>
       </div>
     </div>

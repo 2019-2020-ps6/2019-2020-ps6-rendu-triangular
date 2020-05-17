@@ -8,7 +8,6 @@ import {AuthentificationService} from "../../../services/authentification.servic
 })
 
 export class LoginGuard implements CanActivate {
-  hid: Boolean = true
 
   constructor(private router: Router, private auth: AuthentificationService) {
   }
@@ -21,8 +20,7 @@ export class LoginGuard implements CanActivate {
       return true;
     }
 
-    this.hid = false;
-    this.router.navigate(['/accueil']);
+    //this.router.navigate(['/accueil']);
     return false;
   }
 

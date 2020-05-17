@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from "../../../models/quiz.model";
 import {ActivatedRoute} from "@angular/router";
@@ -18,8 +18,8 @@ export class ModifyQuizComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, public formBuilder: FormBuilder, public quizService: QuizService) {
     this.quizForm = this.formBuilder.group({
-      name: [''],
-      theme: [''],
+      name: ['', Validators.required],
+      theme: ['', Validators.required],
       image: ['']
     });
 
@@ -37,9 +37,12 @@ export class ModifyQuizComponent implements OnInit {
 
   modifyQuiz() {
     const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
-    quizToCreate._id = this.quiz._id;
-    quizToCreate.questionIndex = 0;
-    this.quizService.editQuiz(quizToCreate);
+    if (this.quizForm.valid) {
+      quizToCreate._id = this.quiz._id;
+      quizToCreate.questionIndex = 0;
+      this.quizService.editQuiz(quizToCreate);
+    }
+
   }
 
 }

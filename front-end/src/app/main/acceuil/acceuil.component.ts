@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthentificationService} from "../../../services/authentification.service";
+import {User} from "../../../models/user.model";
 
 @Component({
   selector: 'app-acceuil',
@@ -8,13 +9,22 @@ import {AuthentificationService} from "../../../services/authentification.servic
 })
 export class AcceuilComponent implements OnInit {
 
+  connectedUser: User;
   hid: boolean = true;
+  count: number = 0;
   @ViewChild('alert', {static: false}) private alertContainer: ElementRef;
 
   constructor(private auth: AuthentificationService) {
+
   }
 
   ngOnInit(): void {
+    this.auth.loggedUser$.subscribe((user) => {
+      this.connectedUser = user;
+      console.log(this.connectedUser)
+    })
+
+
   }
 
   async hideAlert() {
