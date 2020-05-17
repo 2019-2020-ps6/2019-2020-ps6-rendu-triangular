@@ -39,8 +39,6 @@ export class AppComponent implements OnDestroy, OnInit {
         this.userService.pageObservable$.next(event.url);
       }
     })
-
-
   }
 
   ngOnInit(): void {

@@ -3,9 +3,9 @@
     <button (click)="snav.toggle()" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
-    <h1 class="example-app-name">Polyquiz</h1>
+    <div class="example-app-name">Polyquiz</div>
 
-    <div style="margin-left: 500px"></div>
+    <div style="margin-left: 400px"></div>
 
     <!--accueil-->
     <a class="nav-link" routerLink="accueil" routerLinkActive="active">Accueil <span
@@ -63,8 +63,10 @@
         </a>
         <div aria-labelledby="arrow-down" class="dropdown-menu " id="user-data">
           <a class="dropdown-item text-dark " routerLink="user-profile/{{this.connectedUser.firstName}}">Voir Profil</a>
-          <a class="dropdown-item text-dark" routerLink="user-list">Assigner un quiz</a>
-          <a class="dropdown-item text-dark" routerLink="user-list">Listes des comptes</a>
+          <a *ngIf="connectedUser != null && connectedUser.type === 'Admin'" class="dropdown-item text-dark"
+             routerLink="user-list">Assigner un quiz</a>
+          <a *ngIf="connectedUser != null && connectedUser.type === 'Admin'" class="dropdown-item text-dark"
+             routerLink="user-list">Listes des comptes</a>
           <a (click)="logOutUser()" class="dropdown-item text-dark" routerLink="accueil">Déconnexion</a>
         </div>
       </ng-template>
@@ -75,18 +77,60 @@
   <mat-sidenav-container [style.marginTop.px]="mobileQuery.matches ? 56 : 0" class="example-sidenav-container">
     <mat-sidenav #snav [fixedInViewport]="mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'"
                  fixedTopGap="56" id="sidenav">
-      <mat-nav-list>
-        <h2 matSubheader></h2>
-        <section class="tp-section mat-display-1">
-          <a>Accueil</a>
-        </section>
-        <section class="tp-section mat-display-1">
-          <a>Résultats</a>
-        </section>
-        <section class="tp-section mat-display-1">
-          <a>Quiz</a>
-        </section>
-      </mat-nav-list>
+      <div class="all">
+        <div class="wrapper d-flex align-items-stretch">
+          <nav id="sidebar" style="height: 93vh">
+            <div class="p-4 pt-5">
+              <a class="image rounded-circle mb-5" routerLink="/user-profile/{{this.connectedUser.firstName}}"
+                 style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f4/User_Avatar_2.png')"></a>
+              <ul class="list-unstyled components mb-5">
+                <li>
+                  <a routerLink="/accueil">Accueil</a>
+                </li>
+                <li class="active">
+                  <a aria-expanded="false" class="dropdown-toggle text-white" data-toggle="collapse"
+                     href="#homeSubmenu">Quiz Image</a>
+                  <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                      <a routerLink="quiz-form">Créer Quiz Image</a>
+                    </li>
+                    <li>
+                      <a routerLink="quiz-list">Liste Quiz Image</a>
+                    </li>
+                    <li>
+                      <a routerLink="view-list-quiz">Lancer un Quiz Image</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" href="#pageSubmenu">Quiz
+                    Couleur</a>
+                  <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                      <a routerLink="quiz-color-form">Créer Quiz Couleur</a>
+                    </li>
+                    <li>
+                      <a routerLink="quiz-color-list">Liste Quiz Couleur</a>
+                    </li>
+                    <li>
+                      <a routerLink="quiz-color-view-list">Lancer un Quiz Couleur</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a routerLink="resultats-record">Tutoriel</a>
+                </li>
+                <li>
+                  <a routerLink="apropos">Résultats</a>
+                </li>
+              </ul>
+
+            </div>
+          </nav>
+
+        </div>
+
+      </div>
     </mat-sidenav>
 
     <mat-sidenav-content>

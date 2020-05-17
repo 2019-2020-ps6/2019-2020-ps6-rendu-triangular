@@ -28,6 +28,7 @@ import {LancementQuizColorComponent} from "./main/lancement-quiz-color/lancement
 import {QuizColorViewListComponent} from "./quizzes-color/quiz-color-view-list/quiz-color-view-list.component";
 import {LoginGuard} from "./users/authentification/login-guard.service";
 import {LogoutGuard} from "./users/authentification/logout.guard";
+import {QuizAssignComponent} from "./main/quiz-assign/quiz-assign.component";
 
 
 const routes: Routes = [
@@ -66,6 +67,7 @@ const routes: Routes = [
   {path: 'quiz-color', component: QuizColorComponent},
   {path: 'quiz-color-view', component: QuizColorViewComponent, canDeactivate: [LogoutGuard]},
   {path: 'quiz-color-list', component: QuizColorListComponent, canDeactivate: [LogoutGuard]},
+  {path: 'quiz-assign', component: QuizAssignComponent, canDeactivate: [LogoutGuard]},
   {
     path: 'quiz-color-view-list',
     component: QuizColorViewListComponent,

@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Voulez Vous continuer ?</h2>
+<mat-dialog-content class="text">
+  <div class="mat-display-1">
+    Score : {{scoreFinal}} / {{quiz.questions.length}}
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="rejouer()" [mat-dialog-close]="true" color="primary" mat-raised-button>Rejouer</button>
+  <button (click)="arreter()" [mat-dialog-close]="true" color="primary" mat-raised-button>Arreter</button>
+</mat-dialog-actions>

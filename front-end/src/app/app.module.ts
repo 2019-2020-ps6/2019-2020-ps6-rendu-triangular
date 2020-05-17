@@ -55,6 +55,7 @@ import {WrongAnswerDialogComponent} from './matDialogs/wrong-answer-dialog/wrong
 import {CorrectAnswerDialogComponent} from './matDialogs/correct-answer-dialog/correct-answer-dialog.component';
 import {TooManyAnswerDialogComponent} from './matDialogs/too-many-answer-dialog/too-many-answer-dialog.component';
 import {OnEndingQuizComponent} from './matDialogs/on-ending-quiz/on-ending-quiz.component';
+import {QuizAssignComponent} from './main/quiz-assign/quiz-assign.component';
 
 
 @NgModule({
@@ -95,6 +96,7 @@ import {OnEndingQuizComponent} from './matDialogs/on-ending-quiz/on-ending-quiz.
     CorrectAnswerDialogComponent,
     TooManyAnswerDialogComponent,
     OnEndingQuizComponent,
+    QuizAssignComponent,
   ],
   imports: [
     BrowserModule,
