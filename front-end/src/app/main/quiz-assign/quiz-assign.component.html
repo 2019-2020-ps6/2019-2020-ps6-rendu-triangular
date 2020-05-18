@@ -1,0 +1,77 @@
+<div class="container" id="glob">
+  <div class="container-fluid" id="banner">
+    <p class="text-left" id="banner-message">Assigner un ou plusieurs quiz à des utilisateurs</p>
+  </div>
+  <div id="form-container">
+    <div class="text-center" id="content">
+      <mat-form-field appearance="standard">
+        <mat-label id="patient-label">Patient</mat-label>
+        <mat-select id="patient-select-list">
+          <mat-option *ngFor="let patient of patientList" [value]="patient.firstName">
+            {{patient.firstName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-divider></mat-divider>
+
+      <mat-accordion>
+
+        <mat-expansion-panel>
+
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Liste des Quiz Images
+            </mat-panel-title>
+            <mat-panel-description>
+              Cliquez pour voir la liste
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div id="quizzesImage-container">
+            <span *ngFor="let quiz of quizzesImages">
+              <div class="row">
+                <div class="col-sm">
+                  <mat-checkbox #checkboxImage (change)="getCheckBoxImage()"></mat-checkbox>
+                </div>
+                   <div class="col-sm">
+                     <app-view-quiz [hideButton]="true" [quiz]="quiz"></app-view-quiz>
+                </div>
+              </div>
+            </span>
+          </div>
+        </mat-expansion-panel>
+
+
+        <mat-expansion-panel>
+
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Liste des Quiz Couleur
+            </mat-panel-title>
+            <mat-panel-description>
+              Cliquez pour voir la liste
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div id="quizzesColor-container">
+            <div *ngFor="let quiz of quizzesColor">
+              <div class="row">
+                <div class="col-sm">
+                  <mat-checkbox #checkboxColor (change)="getCheckBoxColor()"></mat-checkbox>
+                </div>
+                <div class="col-sm">
+                  <app-quiz-color-view [quizColor]="quiz"></app-quiz-color-view>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </mat-expansion-panel>
+
+      </mat-accordion>
+
+    </div>
+
+    <button #validation (click)="assignToPatient()" class="text-white" mat-button>Assigner</button>
+
+  </div>
+</div>

@@ -13,7 +13,7 @@ export class QuizColorService {
   public singleQuiz$: Subject<QuizColor> = new Subject<QuizColor>();
   quizColorListUrl: string = "http://localhost:9428/api/quiz-color";
   private quizColor2DArray: QuizColor[][] = [];
-  public quizColor2D$: BehaviorSubject<QuizColor[][]> = new BehaviorSubject<QuizColor[][]>(this.quizColor2DArray);
+  public quizColor2D$: BehaviorSubject<QuizColor[][]> = new BehaviorSubject<QuizColor[][]>(null);
 
   constructor(private http: HttpClient) {
     this.getAllQuizColor();

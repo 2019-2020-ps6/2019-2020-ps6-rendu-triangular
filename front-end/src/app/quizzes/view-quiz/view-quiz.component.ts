@@ -11,6 +11,9 @@ export class ViewQuizComponent implements OnInit {
   @Input()
   quiz: Quiz;
 
+  @Input()
+  hideButton = false;
+
   @Output()
   quizSelected: EventEmitter<boolean> = new EventEmitter<boolean>();
 

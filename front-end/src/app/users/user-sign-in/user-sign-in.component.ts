@@ -60,7 +60,4 @@ export class UserSignInComponent implements OnInit {
     this.accountNotFound = true;
   }
 
-  reload() {
-    window.location.reload();
-  }
 }

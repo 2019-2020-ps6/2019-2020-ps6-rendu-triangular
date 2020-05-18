@@ -4,6 +4,7 @@ const manageAllErrors = require('../../utils/routes/error-management')
 const QuestionsRouter = require('./questions')
 const {buildQuizz, buildQuizzes} = require('./manager')
 const QuizMongo = require('../../models/MongooseModels/quiz.model')
+const QuestionMongo = require('../../models/MongooseModels/question.model')
 
 const router = new Router()
 
@@ -40,7 +41,7 @@ router.post('/', (req, res) => {
 
 router.put('/:quizId', (req, res) => {
 
-    QuizMongo.updateOne({
+    QuizMongo.findOneAndUpdate({
         _id: req.params.quizId
     }, {
         ...req.body
@@ -54,14 +55,21 @@ router.put('/:quizId', (req, res) => {
 
 router.delete('/:quizId', (req, res) => {
 
-    QuizMongo.find({
+    QuizMongo.findOneAndDelete({
         _id: req.params.quizId
     }, (err, del) => {
-        if (err)
-            res.status(404).json(err)
-        else
-            res.status(200).json(del + {message: 'deleted'});
+
+        QuestionMongo.deleteMany({
+            quizId: req.params.quizId
+        }, (err) => {
+            if (err)
+                res.status(404).json(err)
+            else
+                res.status(200).json({message: 'All identified questions deletted'});
+        })
     })
+
+
 })
 
 module.exports = router

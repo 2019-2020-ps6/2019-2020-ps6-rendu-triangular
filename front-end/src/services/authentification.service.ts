@@ -50,9 +50,9 @@ export class AuthentificationService {
     if (this.allDataUser === null) {
       this.http.post<ConnectedUser>(this.url, connectedU).subscribe((arg) => {
         this.allDataUser = user;
+        this.userIsAuthentified = true;
       })
 
-      this.userIsAuthentified = true;
     }
   }
 
@@ -64,10 +64,11 @@ export class AuthentificationService {
       const path = this.url + "/" + connectedU._id;
       this.http.delete<ConnectedUser>(path).subscribe((arg) => {
         console.log(arg.username + "deleted")
+        this.allDataUser = null;
+        this.loggedUser$.next(this.allDataUser)
+        this.userIsAuthentified = false;
       })
-      this.allDataUser = null;
-      this.loggedUser$.next(this.allDataUser)
-      this.userIsAuthentified = false;
+
     }
 
   }

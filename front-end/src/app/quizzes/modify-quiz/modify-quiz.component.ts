@@ -13,6 +13,8 @@ export class ModifyQuizComponent implements OnInit {
 
   public quizForm: FormGroup;
 
+  defautlurlImage = "https://medias.liberation.fr/photo/1269696-p-tit-libe-les-droits-de-l-enfant-menu-quiz.png?modified_at=1573658071&ratio_x=03&ratio_y=02&width=750"
+
   @Input()
   quiz: Quiz;
 
@@ -40,6 +42,9 @@ export class ModifyQuizComponent implements OnInit {
     if (this.quizForm.valid) {
       quizToCreate._id = this.quiz._id;
       quizToCreate.questionIndex = 0;
+      if (quizToCreate.image === '')
+        quizToCreate.image = this.defautlurlImage;
+
       this.quizService.editQuiz(quizToCreate);
     }
 

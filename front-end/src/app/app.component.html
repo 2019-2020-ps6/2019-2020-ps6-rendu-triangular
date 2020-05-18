@@ -53,6 +53,13 @@
       </div>
     </div>
 
+    <div style="margin-left: 400px">
+      {{currentTime.getHours() < 10 ? '0' + currentTime.getHours() : currentTime.getHours()}}
+      <span> : </span>
+      {{currentTime.getMinutes() < 10 ? '0' + currentTime.getMinutes() : currentTime.getMinutes()}}
+      <!-- : {{currentTime.getSeconds() < 10 ? '0' + currentTime.getSeconds() : currentTime.getSeconds()}}-->
+    </div>
+
     <!--Après Connexion Administarteur-->
     <div class="btn-group btn-group-inline">
       <ng-template #After class="nav-item dropdown">
@@ -64,7 +71,7 @@
         <div aria-labelledby="arrow-down" class="dropdown-menu " id="user-data">
           <a class="dropdown-item text-dark " routerLink="user-profile/{{this.connectedUser.firstName}}">Voir Profil</a>
           <a *ngIf="connectedUser != null && connectedUser.type === 'Admin'" class="dropdown-item text-dark"
-             routerLink="user-list">Assigner un quiz</a>
+             routerLink="quiz-assign">Assigner un quiz</a>
           <a *ngIf="connectedUser != null && connectedUser.type === 'Admin'" class="dropdown-item text-dark"
              routerLink="user-list">Listes des comptes</a>
           <a (click)="logOutUser()" class="dropdown-item text-dark" routerLink="accueil">Déconnexion</a>
@@ -77,60 +84,7 @@
   <mat-sidenav-container [style.marginTop.px]="mobileQuery.matches ? 56 : 0" class="example-sidenav-container">
     <mat-sidenav #snav [fixedInViewport]="mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'"
                  fixedTopGap="56" id="sidenav">
-      <div class="all">
-        <div class="wrapper d-flex align-items-stretch">
-          <nav id="sidebar" style="height: 93vh">
-            <div class="p-4 pt-5">
-              <a class="image rounded-circle mb-5" routerLink="/user-profile/{{this.connectedUser.firstName}}"
-                 style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f4/User_Avatar_2.png')"></a>
-              <ul class="list-unstyled components mb-5">
-                <li>
-                  <a routerLink="/accueil">Accueil</a>
-                </li>
-                <li class="active">
-                  <a aria-expanded="false" class="dropdown-toggle text-white" data-toggle="collapse"
-                     href="#homeSubmenu">Quiz Image</a>
-                  <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li>
-                      <a routerLink="quiz-form">Créer Quiz Image</a>
-                    </li>
-                    <li>
-                      <a routerLink="quiz-list">Liste Quiz Image</a>
-                    </li>
-                    <li>
-                      <a routerLink="view-list-quiz">Lancer un Quiz Image</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" href="#pageSubmenu">Quiz
-                    Couleur</a>
-                  <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li>
-                      <a routerLink="quiz-color-form">Créer Quiz Couleur</a>
-                    </li>
-                    <li>
-                      <a routerLink="quiz-color-list">Liste Quiz Couleur</a>
-                    </li>
-                    <li>
-                      <a routerLink="quiz-color-view-list">Lancer un Quiz Couleur</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a routerLink="resultats-record">Tutoriel</a>
-                </li>
-                <li>
-                  <a routerLink="apropos">Résultats</a>
-                </li>
-              </ul>
-
-            </div>
-          </nav>
-
-        </div>
-
-      </div>
+      <app-side-nav-container></app-side-nav-container>
     </mat-sidenav>
 
     <mat-sidenav-content>

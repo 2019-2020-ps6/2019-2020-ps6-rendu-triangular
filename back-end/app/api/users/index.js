@@ -9,15 +9,12 @@ const router = new Router()
 router.use('/patients', Patient)
 
 router.get('/', (req, res) => {
-    try {
-        UserMongo.find().exec().then((user) => {
-
-            res.status(200).json(user)
-        })
-
-    } catch (err) {
-        manageAllErrors(res, err)
-    }
+    UserMongo.find({}, (err, data) => {
+        if (err)
+            res.status(404).json(err);
+        else
+            res.status(200).json(data);
+    })
 })
 
 router.get('/:userId', (req, res) => {

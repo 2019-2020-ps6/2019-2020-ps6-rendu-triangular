@@ -11,6 +11,17 @@ router.get('/', async (req, res) => {
     })
 })
 
+router.get('/:patientId', (req, res) => {
+    Patient.findOne({
+        _id: req.params.patientId
+    }, (err, patient) => {
+        if (err)
+            res.status(404).json(err);
+        else
+            res.status(200).json(patient);
+    })
+})
+
 router.post('/', async (req, res) => {
     delete req.params._id;
     const patient = await new Patient({

@@ -11,7 +11,7 @@ export class UserService {
   public usersSubject$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(null);
   public singleUserSubject$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   private patients: Patient[] = [];
-  public patients$: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>(this.patients);
+  public patients$: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>(null);
   private users: User[] = [];
   public pageObservable$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   private httpOptions = httpOptionsBase;
@@ -21,6 +21,7 @@ export class UserService {
 
   constructor(private http: HttpClient, private auth: AuthentificationService) {
     this.getUsersFromServer();
+    this.getPatientsFromServer();
   }
 
   getUsersFromServer() {
@@ -41,8 +42,8 @@ export class UserService {
     console.log(user);
     this.http.post<User>(this.usersUrl, user, this.httpOptions).subscribe(() => {
       this.getUsersFromServer();
+      this.emitSingleUser(user);
     })
-    this.emitSingleUser(user);
   }
 
   deleteUser(user: User) {
@@ -76,8 +77,8 @@ export class UserService {
   getPatientsFromServer() {
     this.http.get<Patient[]>(this.patientUrl).subscribe((patients) => {
       this.patients = patients;
+      this.patients$.next(this.patients);
     })
-    this.patients$.next(this.patients);
   }
 
   addPatient(user: User) {

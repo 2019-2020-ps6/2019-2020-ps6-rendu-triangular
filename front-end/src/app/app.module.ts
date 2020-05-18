@@ -56,6 +56,10 @@ import {CorrectAnswerDialogComponent} from './matDialogs/correct-answer-dialog/c
 import {TooManyAnswerDialogComponent} from './matDialogs/too-many-answer-dialog/too-many-answer-dialog.component';
 import {OnEndingQuizComponent} from './matDialogs/on-ending-quiz/on-ending-quiz.component';
 import {QuizAssignComponent} from './main/quiz-assign/quiz-assign.component';
+import {SideNavContainerComponent} from './main/side-nav-container/side-nav-container.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -97,6 +101,7 @@ import {QuizAssignComponent} from './main/quiz-assign/quiz-assign.component';
     TooManyAnswerDialogComponent,
     OnEndingQuizComponent,
     QuizAssignComponent,
+    SideNavContainerComponent,
   ],
   imports: [
     BrowserModule,
@@ -114,7 +119,10 @@ import {QuizAssignComponent} from './main/quiz-assign/quiz-assign.component';
     MatListModule,
     MatButtonToggleModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSelectModule,
+    MatExpansionModule,
+    MatCheckboxModule
   ],
   providers: [GameRecordService, UserService, QuizService, AuthentificationService, QuizColorService, ModalModule],
   bootstrap: [AppComponent],

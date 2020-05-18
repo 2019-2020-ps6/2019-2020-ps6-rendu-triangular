@@ -70,20 +70,16 @@ export class QuizService {
     this.http.get<Quiz>(urlWithId).subscribe((quiz) => {
       this.http.get<Question[]>(questionUrl).subscribe((liste) => {
         quiz.questions = liste;
+        this.quizSelected$.next(quiz);
       })
-      this.quizSelected$.next(quiz);
     });
   }
 
   deleteQuiz(quiz: Quiz) {
     const urlWithId = this.quizUrl + '/' + quiz._id;
-    for (let i = 0; i < quiz.questions.length; i++) {
-      this.deleteQuestion(quiz, quiz.questions[i]);
-    }
-
+    console.log("emitted")
+    console.log(urlWithId)
     this.http.delete<Quiz>(urlWithId, this.httpOptions).subscribe(() => this.setQuizzesFromUrl());
-
-
   }
 
   editQuiz(oldQuiz: Quiz) {
@@ -102,11 +98,6 @@ export class QuizService {
     const questionUrl = this.quizUrl + '/' + quiz._id + '/' + this.questionsPath;
     if (question.quizId === quiz._id)
       this.http.post<Question>(questionUrl, question, this.httpOptions).subscribe(() => this.setSelectedQuiz(quiz._id));
-
-    /*if(!this.checkifQuestionAlreadyExist(question, quiz)){
-      quiz.questions.push(question);
-      this.editQuiz(quiz);
-    }*/
   }
 
   deleteQuestion(quiz: Quiz, question: Question) {
@@ -117,8 +108,8 @@ export class QuizService {
     const url = this.quizUrl + '/' + quiz._id + '/' + this.questionsPath;
     this.http.get<Question[]>(url).subscribe((questions) => {
       quiz.questions = questions;
+      this.quizSelected$.next(quiz);
     })
-    this.quizSelected$.next(quiz);
   }
 
   performQuestion(question) {

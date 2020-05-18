@@ -1,4 +1,4 @@
-<div [ngStyle]="{'background': getImageUrl()}" class="card text-white" id="view">
+<span [ngStyle]="{'background': getImageUrl()}" class="card text-white" id="view">
   <h1>
     {{quiz.name}}
   </h1>
@@ -10,8 +10,9 @@
   </div>
 
   <ng-template #second>
-    <button (click)="selectQuiz()" class="button-card btn btn-primary btn-lg " routerLink="/lancement/{{quiz._id}}"
+    <button (click)="selectQuiz()" *ngIf="!hideButton" class="button-card btn btn-primary btn-lg "
+            routerLink="/lancement/{{quiz._id}}"
             routerLinkActive="active">Jouer
     </button>
   </ng-template>
-</div>
+</span>

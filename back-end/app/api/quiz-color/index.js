@@ -9,12 +9,10 @@ const router = new Router();
 
 router.get('/', (request, response) => {
     try {
-        const quizzes = buildQuizzes()
         QuizColor.find().exec().then((quiz) => {
             console.log(quiz);
             response.status(200).json(quiz)
         })
-        //response.status(200).json(quizzes);
     } catch (e) {
         response.status(404).json(e);
     }
@@ -27,7 +25,6 @@ router.get('/:quizId', (request, response) => {
             console.log(quiz);
         });
 
-        // response.status(200).json(quizz)
     } catch (err) {
         manageAllErrors(response, err)
     }
@@ -35,7 +32,6 @@ router.get('/:quizId', (request, response) => {
 
 router.post('/', async (request, response) => {
     try {
-        const quiz = await ColorQuiz.create({...request.body})
         const quizColor = new QuizColor({
             ...request.body
         })
@@ -46,7 +42,6 @@ router.post('/', async (request, response) => {
             response.status(400).json(err);
         });
 
-        // response.status(201).json(quiz)
     } catch (err) {
         manageAllErrors(response, err)
     }
@@ -66,7 +61,6 @@ router.put('/:quizId', (request, response) => {
         })
 
 
-        // response.status(200).json(ColorQuiz.update(request.params.quizId, request.body))
     } catch (err) {
         manageAllErrors(response, err)
     }
@@ -82,8 +76,6 @@ router.delete('/:quizId', (request, response) => {
             response.status(404).json(err)
         })
 
-        // ColorQuiz.delete(request.params.quizId)
-        // response.status(204).end()
     } catch (err) {
         manageAllErrors(response, err)
     }

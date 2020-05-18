@@ -20,10 +20,8 @@ export class AppComponent implements OnDestroy, OnInit {
 
   currentPage: string;
 
-  fillerNav = Array.from({length: 1}, (_, i) => `Accueil`);
+  currentTime: Date = new Date();
 
-  fillerContent = Array.from({length: 1}, () =>
-    ``);
 
   private readonly _mobileQueryListener: () => void;
 
@@ -39,6 +37,10 @@ export class AppComponent implements OnDestroy, OnInit {
         this.userService.pageObservable$.next(event.url);
       }
     })
+
+    setInterval(() => {
+      this.currentTime = new Date();
+    }, 1);
   }
 
   ngOnInit(): void {
@@ -49,9 +51,7 @@ export class AppComponent implements OnDestroy, OnInit {
     console.log("userIsAuthenficated : " + this.authService.userIsAuthentified);
   }
 
-  ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
-  }
+
 
   logOutUser() {
     this.authService.logOff(this.connectedUser);
@@ -72,4 +72,9 @@ export class AppComponent implements OnDestroy, OnInit {
 
     return true;
   }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
 }
