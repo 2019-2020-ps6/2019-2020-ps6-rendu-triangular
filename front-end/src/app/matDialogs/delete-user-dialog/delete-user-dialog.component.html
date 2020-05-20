@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Supression</h2>
+<mat-dialog-content class="text">
+  <div class="text-center">
+    <mat-form-field appearance="standard">
+      <mat-label>Utilisateur</mat-label>
+      <mat-select (selectionChange)="getUser($event)">
+        <mat-option *ngFor="let user of this.listOfUsers">
+          {{user.firstName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button [mat-dialog-close]="true" color="primary" mat-raised-button>Annuler</button>
+  <button (click)="deleteUser()" [mat-dialog-close]="true" color="primary" mat-raised-button>Supprimer</button>
+</mat-dialog-actions>

@@ -22,6 +22,29 @@ router.get('/:patientId', (req, res) => {
     })
 })
 
+router.put('/:patientId', (req, res) => {
+
+    Patient.deleteOne({
+        _id: req.params.patientId
+    }, (err, pat) => {
+        if (err)
+            res.status(404).json(err);
+        else
+            res.status(202).json(pat);
+    });
+
+    Patient.updateOne({
+        _id: req.params.patientId
+    }, {
+        ...req.body
+    }, (err, pat) => {
+        if (err)
+            res.status(404).json(err);
+        else
+            res.status(202).json(pat);
+    })
+})
+
 router.post('/', async (req, res) => {
     delete req.params._id;
     const patient = await new Patient({

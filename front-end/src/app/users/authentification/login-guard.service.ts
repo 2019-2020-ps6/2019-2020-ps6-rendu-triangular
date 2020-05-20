@@ -1,5 +1,12 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  NavigationStart,
+  Router,
+  RouterStateSnapshot,
+  UrlTree
+} from '@angular/router';
 import {Observable} from 'rxjs';
 import {AuthentificationService} from "../../../services/authentification.service";
 
@@ -9,6 +16,8 @@ import {AuthentificationService} from "../../../services/authentification.servic
 
 export class LoginGuard implements CanActivate {
 
+  currentPage;
+
   constructor(private router: Router, private auth: AuthentificationService) {
   }
 
@@ -16,11 +25,19 @@ export class LoginGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.auth.userIsAuthentified) {
-      return true;
-    }
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        console.log(event.url);
+        this.currentPage = event.url;
+        if (!this.auth.userIsAuthentified && this.currentPage === '/user-sign-in') {
+          return true;
+        }
+      }
+    })
 
-    //this.router.navigate(['/accueil']);
+    if (this.auth.userIsAuthentified)
+      return true;
+
     return false;
   }
 

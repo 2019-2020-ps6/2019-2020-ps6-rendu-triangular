@@ -91,4 +91,12 @@ export class UserService {
       console.log("Patient Succesfully Added" + patient)
     })
   }
+
+  updatePatient(patient: Patient) {
+    const url = this.patientUrl + '/' + patient._id;
+    console.log(patient)
+    this.http.put<Patient>(url, patient).subscribe(() => {
+      console.log("updated");
+    })
+  }
 }

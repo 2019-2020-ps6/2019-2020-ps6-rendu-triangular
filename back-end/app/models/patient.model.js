@@ -13,6 +13,12 @@ const Patient = mongoose.Schema({
         type: Number,
         required: true
     },
+    quizzesImage: {
+        type: Array
+    },
+    quizzesColor: {
+        type: Array
+    }
 })
 
 module.exports = mongoose.model('Patient', Patient, 'Patient');

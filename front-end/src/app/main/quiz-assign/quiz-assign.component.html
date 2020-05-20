@@ -6,7 +6,7 @@
     <div class="text-center" id="content">
       <mat-form-field appearance="standard">
         <mat-label id="patient-label">Patient</mat-label>
-        <mat-select id="patient-select-list">
+        <mat-select (selectionChange)="getSelectedPatient($event)" id="patient-select-list">
           <mat-option *ngFor="let patient of patientList" [value]="patient.firstName">
             {{patient.firstName}}
           </mat-option>

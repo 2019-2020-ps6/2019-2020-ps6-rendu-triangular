@@ -45,12 +45,13 @@ export class ResultatsRecordComponent implements OnInit {
   }
 
   deleteGameRecorder() {
-    if (this.gameRecordList.length != 0) {
+    if (this.gameRecordList.length !== 0) {
       console.log(this.gameRecordList.length - 1)
       const game = this.gameRecordList[this.gameRecordList.length - 1];
       this.game.deleteGameRecorder(game);
+      window.location.reload();
+
     }
-    window.location.reload();
   }
 
   public emit() {

@@ -60,6 +60,8 @@ import {SideNavContainerComponent} from './main/side-nav-container/side-nav-cont
 import {MatSelectModule} from "@angular/material/select";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {DeleteUserDialogComponent} from './matDialogs/delete-user-dialog/delete-user-dialog.component';
+import {QuizIsAssignedDialogComponent} from './matDialogs/quiz-is-assigned-dialog/quiz-is-assigned-dialog.component';
 
 
 @NgModule({
@@ -102,6 +104,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     OnEndingQuizComponent,
     QuizAssignComponent,
     SideNavContainerComponent,
+    DeleteUserDialogComponent,
+    QuizIsAssignedDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from "../../../models/user.model";
 import {Subscription} from "rxjs";
 import {UserService} from "../../../services/user.service";
+import {MatDialog} from "@angular/material/dialog";
+import {DeleteUserDialogComponent} from "../../matDialogs/delete-user-dialog/delete-user-dialog.component";
 
 @Component({
   selector: 'app-user-list',
@@ -13,7 +15,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   users: User[] = this.userService.getAllUsers();
   userSubscription: Subscription = new Subscription();
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private matDialog: MatDialog) {
     this.userSubscription = this.userService.usersSubject$.subscribe((users) => {
       this.users = users;
     })
@@ -38,5 +40,11 @@ export class UserListComponent implements OnInit, OnDestroy {
         break;
       }
     }
+  }
+
+  deleteUserDialog() {
+    this.matDialog.open(DeleteUserDialogComponent, {
+      hasBackdrop: true
+    })
   }
 }

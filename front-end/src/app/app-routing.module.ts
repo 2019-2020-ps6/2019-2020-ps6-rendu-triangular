@@ -27,27 +27,25 @@ import {QuizColorViewComponent} from "./quizzes-color/quiz-color-view/quiz-color
 import {LancementQuizColorComponent} from "./main/lancement-quiz-color/lancement-quiz-color.component";
 import {QuizColorViewListComponent} from "./quizzes-color/quiz-color-view-list/quiz-color-view-list.component";
 import {LoginGuard} from "./users/authentification/login-guard.service";
-import {LogoutGuard} from "./users/authentification/logout.guard";
 import {QuizAssignComponent} from "./main/quiz-assign/quiz-assign.component";
 
 
 const routes: Routes = [
-  {path: 'quiz-list', component: QuizListComponent, canDeactivate: [LogoutGuard]},
-  {path: 'quiz-form', component: QuizFormComponent, canDeactivate: [LogoutGuard]},
-  {path: 'edit-quiz/:id', component: EditQuizComponent, canDeactivate: [LogoutGuard]},
-  {path: 'quiz', component: QuizComponent, canDeactivate: [LogoutGuard]},
-  {path: 'modify-quiz/:id', component: ModifyQuizComponent, canDeactivate: [LogoutGuard]},
-  {path: 'question-list', component: QuestionListComponent, canDeactivate: [LogoutGuard]},
-  {path: 'question-form', component: QuestionFormComponent, canDeactivate: [LogoutGuard]},
-  {path: 'question', component: QuestionComponent, canDeactivate: [LogoutGuard]},
+  {path: 'quiz-list', component: QuizListComponent,},
+  {path: 'quiz-form', component: QuizFormComponent,},
+  {path: 'edit-quiz/:id', component: EditQuizComponent,},
+  {path: 'quiz', component: QuizComponent},
+  {path: 'modify-quiz/:id', component: ModifyQuizComponent,},
+  {path: 'question-list', component: QuestionListComponent,},
+  {path: 'question-form', component: QuestionFormComponent,},
+  {path: 'question', component: QuestionComponent,},
   {path: 'apropos', component: AproposComponent},
-  {path: 'view-list-quiz', component: ViewListQuizComponent, canDeactivate: [LogoutGuard]},
-  {path: 'lancement/:id', component: LancementComponent, canDeactivate: [LogoutGuard]},
+  {path: 'view-list-quiz', component: ViewListQuizComponent,},
+  {path: 'lancement/:id', component: LancementComponent,},
   {
     path: 'resultats-record',
     component: ResultatsRecordComponent,
     canActivate: [LoginGuard],
-    canDeactivate: [LogoutGuard]
   },
   {path: 'resultats/:id', component: ResultatsComponent},
   {path: 'accueil', component: AcceuilComponent},
@@ -56,27 +54,24 @@ const routes: Routes = [
     path: 'user-profile/:id',
     component: UserProfileComponent,
     canActivate: [LoginGuard],
-    canDeactivate: [LogoutGuard],
     data: {title: 'Connexion'}
   },
   {path: 'user-form', component: UserFormComponent},
   {path: 'user-sign-in', component: UserSignInComponent},
-  {path: 'user-list', component: UserListComponent, canActivate: [LoginGuard], canDeactivate: [LogoutGuard]},
-  {path: 'quiz-color-list', component: QuizColorListComponent, canDeactivate: [LogoutGuard]},
-  {path: 'quiz-color-form', component: QuizColorFormComponent, canDeactivate: [LogoutGuard]},
+  {path: 'user-list', component: UserListComponent},
+  {path: 'quiz-color-list', component: QuizColorListComponent,},
+  {path: 'quiz-color-form', component: QuizColorFormComponent,},
   {path: 'quiz-color', component: QuizColorComponent},
-  {path: 'quiz-color-view', component: QuizColorViewComponent, canDeactivate: [LogoutGuard]},
-  {path: 'quiz-color-list', component: QuizColorListComponent, canDeactivate: [LogoutGuard]},
-  {path: 'quiz-assign', component: QuizAssignComponent, canDeactivate: [LogoutGuard]},
+  {path: 'quiz-color-view', component: QuizColorViewComponent},
+  {path: 'quiz-color-list', component: QuizColorListComponent},
+  {path: 'quiz-assign', component: QuizAssignComponent,},
   {
     path: 'quiz-color-view-list',
     component: QuizColorViewListComponent,
-    canDeactivate: [LogoutGuard]
   },
   {
     path: 'lancement-quiz-color/:id',
     component: LancementQuizColorComponent,
-    canDeactivate: [LogoutGuard]
   },
   {path: '', redirectTo: '/accueil', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent},

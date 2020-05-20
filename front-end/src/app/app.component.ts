@@ -18,7 +18,7 @@ export class AppComponent implements OnDestroy, OnInit {
 
   mobileQuery: MediaQueryList;
 
-  currentPage: string;
+   currentPage: string;
 
   currentTime: Date = new Date();
 
@@ -51,11 +51,10 @@ export class AppComponent implements OnDestroy, OnInit {
     console.log("userIsAuthenficated : " + this.authService.userIsAuthentified);
   }
 
-
-
-  logOutUser() {
+  async logOutUser() {
     this.authService.logOff(this.connectedUser);
     this.authService.userIsAuthentified = false;
+    await this.router.navigate(['/accueil']);
   }
 
   pageChecker() {

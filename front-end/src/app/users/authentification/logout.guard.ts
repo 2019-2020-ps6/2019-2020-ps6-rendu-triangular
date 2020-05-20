@@ -15,6 +15,6 @@ export class LogoutGuard implements CanDeactivate<boolean> {
                 currentRoute: ActivatedRouteSnapshot,
                 currentState: RouterStateSnapshot,
                 nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.auth.userIsAuthentified || true;
+    return this.auth.userIsAuthentified;
   }
 }
