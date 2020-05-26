@@ -3,6 +3,8 @@ import {UserService} from "../../../services/user.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {User} from "../../../models/user.model";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ConnectionDialogComponent} from "../../matDialogs/connection-dialog/connection-dialog.component";
 
 @Component({
   selector: 'app-user-form',
@@ -12,11 +14,13 @@ import {User} from "../../../models/user.model";
 export class UserFormComponent implements OnInit {
 
   userForm: FormGroup;
+  dialog: MatDialogRef<ConnectionDialogComponent>;
 
   @Output()
   accountSuccessfulEmitter: EventEmitter<User> = new EventEmitter<User>();
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private userService: UserService, private formBuilder: FormBuilder,
+              private router: Router, private matDialog: MatDialog) {
     this.initForm();
   }
 
@@ -54,6 +58,12 @@ export class UserFormComponent implements OnInit {
     if (newUser.type === 'Patient') {
       this.userService.addPatient(newUser);
     }
+
+    this.dialog = this.matDialog.open(ConnectionDialogComponent, {
+      hasBackdrop: true
+    })
+
+    this.dialog.componentInstance.message = 'Commpte Crée';
 
     this.accountSuccessfulEmitter.emit(newUser);
     console.log(this.accountSuccessfulEmitter);

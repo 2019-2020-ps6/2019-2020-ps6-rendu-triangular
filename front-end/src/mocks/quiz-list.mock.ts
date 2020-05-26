@@ -40,5 +40,6 @@ export const QUIZ_LIST: Quiz[] = [
     theme: 'Actor',
     questions: [QUESTION_ACTOR],
     questionIndex: 0,
+    assigneeList: []
   },
 ];

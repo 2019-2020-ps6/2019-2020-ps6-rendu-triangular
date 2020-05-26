@@ -1,9 +1,26 @@
 <article class="container-fluid">
   <div class="quiz-list">
-    <div *ngFor="let quiz of quizList; let i = index" class="d-inline-block quiz" id="quiz">
-      <app-view-quiz (quizSelected)="quizSelected($event)" [quiz]="quiz"></app-view-quiz>
-      <div *ngIf="i+1%3!=0">
-        <br>
+    <div *ngIf="connectedUser.type === 'Admin'; else patient">
+      <div *ngFor="let quiz of quizList; let i = index" class="d-inline-block quiz" id="quiz">
+        <app-view-quiz (quizSelected)="quizSelected($event)" [quiz]="quiz"></app-view-quiz>
+        <div *ngIf="i+1%3!=0">
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #patient>
+      <div *ngFor="let quiz of this.quizPatients; let i = index" class="d-inline-block quiz" id="quiz">
+        <app-view-quiz (quizSelected)="quizSelected($event)" [quiz]="quiz"></app-view-quiz>
+        <div *ngIf="i+1%3!=0">
+          <br>
+        </div>
+      </div>
+    </ng-template>
+
+    <div *ngIf="quizList.length === 0">
+      <div class="mat-display-1">
+        Aucun Quiz Disponible
       </div>
     </div>
   </div>

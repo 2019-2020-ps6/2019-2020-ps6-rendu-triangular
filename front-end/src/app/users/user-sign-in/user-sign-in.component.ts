@@ -5,6 +5,8 @@ import {UserService} from "../../../services/user.service";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {AuthentificationService} from "../../../services/authentification.service";
+import {ConnectionDialogComponent} from "../../matDialogs/connection-dialog/connection-dialog.component";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-user-sign-in',
@@ -24,7 +26,10 @@ export class UserSignInComponent implements OnInit {
 
   accountNotFound: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, private authService: AuthentificationService) {
+  authentificationDialog: MatDialogRef<ConnectionDialogComponent>
+
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router,
+              private authService: AuthentificationService, private matDialog: MatDialog) {
     this.initForm();
     this.userSub = this.userService.usersSubject$.subscribe((list) => {
       this.userList = list;
@@ -54,6 +59,11 @@ export class UserSignInComponent implements OnInit {
         this.authService.loggedUser$.next(user);
         this.authService.logIn(userLogIn);
         this.router.navigate(['/accueil'])
+        this.authentificationDialog = this.matDialog.open(ConnectionDialogComponent, {
+          hasBackdrop: true
+        })
+        this.authentificationDialog.componentInstance.message = "Connexion reussie";
+
         return;
       }
     }

@@ -12,6 +12,7 @@ export class UserService {
   public singleUserSubject$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   private patients: Patient[] = [];
   public patients$: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>(null);
+  public singlePatient$: BehaviorSubject<Patient> = new BehaviorSubject<Patient>(null);
   private users: User[] = [];
   public pageObservable$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   private httpOptions = httpOptionsBase;
@@ -90,6 +91,7 @@ export class UserService {
     this.http.post<Patient>(this.patientUrl, patient).subscribe((patient) => {
       console.log("Patient Succesfully Added" + patient)
     })
+    this.patients$.next(this.patients);
   }
 
   updatePatient(patient: Patient) {
@@ -98,5 +100,10 @@ export class UserService {
     this.http.put<Patient>(url, patient).subscribe(() => {
       console.log("updated");
     })
+  }
+
+  deletePatient(id: string) {
+    const url = this.patientUrl + '/' + id;
+    this.http.delete(url).subscribe(() => console.log("patient user deleted in patient"))
   }
 }

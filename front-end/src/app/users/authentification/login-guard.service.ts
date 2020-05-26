@@ -9,6 +9,8 @@ import {
 } from '@angular/router';
 import {Observable} from 'rxjs';
 import {AuthentificationService} from "../../../services/authentification.service";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ConnectionDialogComponent} from "../../matDialogs/connection-dialog/connection-dialog.component";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,9 @@ export class LoginGuard implements CanActivate {
 
   currentPage;
 
-  constructor(private router: Router, private auth: AuthentificationService) {
+  authentificationDialog: MatDialogRef<ConnectionDialogComponent>
+
+  constructor(private router: Router, private auth: AuthentificationService, private matDialog: MatDialog) {
   }
 
   canActivate(
@@ -35,9 +39,9 @@ export class LoginGuard implements CanActivate {
       }
     })
 
-    if (this.auth.userIsAuthentified)
+    if (this.auth.userIsAuthentified) {
       return true;
-
+    }
     return false;
   }
 

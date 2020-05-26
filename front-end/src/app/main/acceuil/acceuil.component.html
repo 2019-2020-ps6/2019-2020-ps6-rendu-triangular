@@ -12,11 +12,11 @@
 
           <div>
             <div *ngIf="auth.userIsAuthentified ; else con">
-              <mat-grid-list cols="3" rowHeight="3:3">
+              <mat-grid-list cols="3" rowHeight="3:6">
                 <mat-grid-tile *ngIf="connectedUser.type === 'Admin'">
                   <button (click)="checkIfConnected()" class="card" routerLink="../quiz-form"
                   >
-                    <p style="font-size: 25px; margin-left: 25px">Création Quiz Image</p>
+                    <p style="font-size: 25px; margin-left: 10px">Création Quiz Image</p>
                   </button>
                 </mat-grid-tile>
                 <mat-grid-tile>
@@ -29,12 +29,12 @@
                 <mat-grid-tile>
                   <button (click)="checkIfConnected()" class="card" routerLink="../view-list-quiz"
                   >
-                    <p style="font-size: 25px; margin-left: 25px">Lancer un Quiz Image </p>
+                    <p style="font-size: 25px; margin-left: 5px">Lancer un Quiz Image </p>
                   </button>
                 </mat-grid-tile>
               </mat-grid-list>
 
-              <mat-grid-list cols="3" rowHeight="5:5">
+              <!--<mat-grid-list cols="3" rowHeight="5:5">
                 <mat-grid-tile>
                   <button (click)="checkIfConnected()" *ngIf="connectedUser.type === 'Admin'" class="card"
                           routerLink="../quiz-color-form"
@@ -56,7 +56,7 @@
                   </button>
                 </mat-grid-tile>
 
-              </mat-grid-list>
+              </mat-grid-list>-->
             </div>
           </div>
 

@@ -4,8 +4,8 @@
     <mat-form-field appearance="standard">
       <mat-label>Utilisateur</mat-label>
       <mat-select (selectionChange)="getUser($event)">
-        <mat-option *ngFor="let user of this.listOfUsers">
-          {{user.firstName}}
+        <mat-option *ngFor="let user of this.listOfUsers" [value]="user.firstName">
+          {{user.firstName}} {{user.lastName}}
         </mat-option>
       </mat-select>
     </mat-form-field>

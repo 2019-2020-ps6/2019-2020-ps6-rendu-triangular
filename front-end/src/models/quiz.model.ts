@@ -7,4 +7,5 @@ export class Quiz {
   questions: Question[];
   image?: string;
   questionIndex: number;
+  assigneeList: string[];
 }

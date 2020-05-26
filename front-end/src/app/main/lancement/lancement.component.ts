@@ -12,6 +12,8 @@ import {WrongAnswerDialogComponent} from "../../matDialogs/wrong-answer-dialog/w
 import {CorrectAnswerDialogComponent} from "../../matDialogs/correct-answer-dialog/correct-answer-dialog.component";
 import {TooManyAnswerDialogComponent} from "../../matDialogs/too-many-answer-dialog/too-many-answer-dialog.component";
 import {OnEndingQuizComponent} from "../../matDialogs/on-ending-quiz/on-ending-quiz.component";
+import {User} from "../../../models/user.model";
+import {AuthentificationService} from "../../../services/authentification.service";
 
 
 @Component({
@@ -49,6 +51,8 @@ export class LancementComponent implements OnInit {
 
   hideSeeSolution: boolean = true;
 
+  connectedUser: User;
+
   @Output()
   scoreFinal: number;
   numberOfFails: number;
@@ -59,7 +63,9 @@ export class LancementComponent implements OnInit {
   onEndingDialog: MatDialogRef<OnEndingQuizComponent>;
 
 
-  constructor(private route: ActivatedRoute, private router: Router, protected formBuilder: FormBuilder, private quizService: QuizService, private game: GameRecordService, private dialog: MatDialog) {
+  constructor(private route: ActivatedRoute, private router: Router, protected formBuilder: FormBuilder,
+              private quizService: QuizService, private game: GameRecordService, private dialog: MatDialog,
+              private auth: AuthentificationService) {
     this.quizService.quizSelected$.subscribe((quiz) => {
         this.quiz = quiz;
       }
@@ -73,6 +79,9 @@ export class LancementComponent implements OnInit {
       this.tempsDeJeu = sm;
     })
 
+    this.auth.loggedUser$.subscribe((user) => {
+      this.connectedUser = user;
+    })
 
     this.quizService.perfomQuiz(this.quiz);
   }
@@ -157,6 +166,7 @@ export class LancementComponent implements OnInit {
     this.gameRecorder.endDate = new Date();
     this.gameRecorder.duration = this.tempsDeJeu;
     this.gameRecorder.typeOfQuiz = "Quiz Image";
+    this.gameRecorder.patient = this.connectedUser;
 
     this.game.performGameRecorder(this.gameRecorder);
     this.game.performTempsDeJeu(this.tempsDeJeu);

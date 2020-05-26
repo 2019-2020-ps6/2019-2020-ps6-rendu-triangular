@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
 
 router.put('/:quizId', (req, res) => {
 
-    QuizMongo.findOneAndUpdate({
+    QuizMongo.updateOne({
         _id: req.params.quizId
     }, {
         ...req.body

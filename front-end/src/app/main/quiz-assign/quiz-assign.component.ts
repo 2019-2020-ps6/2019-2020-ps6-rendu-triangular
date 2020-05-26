@@ -14,7 +14,7 @@ import {QuizIsAssignedDialogComponent} from "../../matDialogs/quiz-is-assigned-d
   styleUrls: ['./quiz-assign.component.scss']
 })
 export class QuizAssignComponent implements OnInit {
-  patientList: Patient[];
+  patientList: Patient[] = [];
 
   quizzesImages: Quiz[];
 
@@ -45,7 +45,7 @@ export class QuizAssignComponent implements OnInit {
 
     this.userService.patients$.subscribe((patients) => {
       this.patientList = patients;
-      console.log(patients);
+      console.log(this.patientList);
     })
   }
 
@@ -71,7 +71,6 @@ export class QuizAssignComponent implements OnInit {
     })
     console.log(this.selectedQuizImage)
   }
-
 
   getCheckBoxColor() {
     this.selectQuizColor = [];
@@ -102,7 +101,8 @@ export class QuizAssignComponent implements OnInit {
     if (this.selectedPatient != undefined) {
       if (this.selectedQuizImage.length != 0) {
         this.selectedQuizImage.forEach((quiz) => {
-          this.selectedPatient.quizzesImage.push(quiz);
+          if (!this.quizExistInPatient(this.selectedPatient, quiz))
+            this.selectedPatient.quizzesImage.push(quiz);
         })
         console.log(this.selectedPatient)
         this.userService.updatePatient(this.selectedPatient);
@@ -110,7 +110,8 @@ export class QuizAssignComponent implements OnInit {
 
       if (this.selectQuizColor.length != 0) {
         this.selectQuizColor.forEach((quiz) => {
-          this.selectedPatient.quizzesColor.push(quiz);
+          if (!this.quizExistInPatient(this.selectedPatient, quiz))
+            this.selectedPatient.quizzesColor.push(quiz);
         })
         console.log(this.selectedPatient)
         this.userService.updatePatient(this.selectedPatient);
@@ -118,10 +119,23 @@ export class QuizAssignComponent implements OnInit {
 
     }
 
-    if (this.selectedPatient !== undefined) {
+    if (this.selectedPatient !== undefined && (this.selectQuizColor.length != 0 || this.selectedQuizImage.length != 0)) {
       this.matDialog.open(QuizIsAssignedDialogComponent, {
         hasBackdrop: true
+
       })
+
+      //Assignation du noms des patients sur les quiz
+      for (let quiz of this.selectedQuizImage) {
+        if (!this.patientExistInQuiz(this.selectedPatient, quiz)) {
+          quiz.assigneeList.push(this.selectedPatient.firstName);
+          this.quizService.editQuiz(quiz);
+        }
+      }
+
+      /*for (let quiz of this.selectQuizColor){
+        quiz.assigneeList.push(this.selectedPatient.firstName);
+      }*/
     }
 
     this.selectedQuizImage = [];
@@ -133,5 +147,22 @@ export class QuizAssignComponent implements OnInit {
     this.selectedPatient = patient[0];
   }
 
+  quizExistInPatient(patient: Patient, quiz: Quiz | QuizColor) {
+    let exist = false;
+    for (let sm of patient.quizzesImage) {
+      if (sm._id === quiz._id)
+        exist = true;
+    }
+    return exist;
+  }
+
+  patientExistInQuiz(patient: Patient, quiz: Quiz) {
+    let exist = false;
+    for (let qui of quiz.assigneeList) {
+      if (patient.firstName === qui)
+        exist = true;
+    }
+    return exist;
+  }
 
 }

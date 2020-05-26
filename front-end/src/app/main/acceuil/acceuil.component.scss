@@ -128,7 +128,7 @@ p {
   -moz-transition: background-position 0.1s linear;
   -o-transition: background-position 0.1s linear;
   transition: background-position 0.1s linear;
-  height: 200px;
+  height: 250px;
   width: 300px;
 }
 
@@ -147,9 +147,14 @@ p {
   margin-right: 50px;
   text-decoration: none;
   float: right;
-  height: 200px;
+  height: 250px;
   width: 300px;
   position: relative;
+}
+
+.rubrique button p {
+  padding-top: 25px;
+  position: sticky;
 }
 
 .rubrique {

@@ -62,6 +62,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {DeleteUserDialogComponent} from './matDialogs/delete-user-dialog/delete-user-dialog.component';
 import {QuizIsAssignedDialogComponent} from './matDialogs/quiz-is-assigned-dialog/quiz-is-assigned-dialog.component';
+import {ConnectionDialogComponent} from './matDialogs/connection-dialog/connection-dialog.component';
 
 
 @NgModule({
@@ -106,6 +107,7 @@ import {QuizIsAssignedDialogComponent} from './matDialogs/quiz-is-assigned-dialo
     SideNavContainerComponent,
     DeleteUserDialogComponent,
     QuizIsAssignedDialogComponent,
+    ConnectionDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -126,7 +128,7 @@ import {QuizIsAssignedDialogComponent} from './matDialogs/quiz-is-assigned-dialo
     MatGridListModule,
     MatSelectModule,
     MatExpansionModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   providers: [GameRecordService, UserService, QuizService, AuthentificationService, QuizColorService, ModalModule],
   bootstrap: [AppComponent],

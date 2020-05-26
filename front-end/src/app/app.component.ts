@@ -4,6 +4,8 @@ import {AuthentificationService} from "../services/authentification.service";
 import {MediaMatcher} from "@angular/cdk/layout";
 import {NavigationStart, Router} from "@angular/router";
 import {UserService} from "../services/user.service";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ConnectionDialogComponent} from "./matDialogs/connection-dialog/connection-dialog.component";
 
 @Component({
   selector: 'app-root',
@@ -18,14 +20,16 @@ export class AppComponent implements OnDestroy, OnInit {
 
   mobileQuery: MediaQueryList;
 
-   currentPage: string;
+  currentPage: string;
 
   currentTime: Date = new Date();
 
+  authentificationDialog: MatDialogRef<ConnectionDialogComponent>
 
   private readonly _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private authService: AuthentificationService, private router: Router, private userService: UserService) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private authService: AuthentificationService,
+              private router: Router, private userService: UserService, private matDialog: MatDialog) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -54,6 +58,10 @@ export class AppComponent implements OnDestroy, OnInit {
   async logOutUser() {
     this.authService.logOff(this.connectedUser);
     this.authService.userIsAuthentified = false;
+    this.authentificationDialog = this.matDialog.open(ConnectionDialogComponent, {
+      hasBackdrop: true
+    })
+    this.authentificationDialog.componentInstance.message = "Déconnexion";
     await this.router.navigate(['/accueil']);
   }
 
