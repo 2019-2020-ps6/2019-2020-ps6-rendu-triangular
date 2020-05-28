@@ -19,7 +19,11 @@
       <tr>
         <th scope="row">{{i + 1}}</th>
         <td>{{gameRec.typeOfQuiz}} </td>
-        <td>{{gameRec.patient}} </td>
+        <td>{{gameRec.patient.firstName}}
+          <span *ngIf="gameRec.patient.type === 'Admin'">
+          (Test Admin)
+        </span>
+        </td>
         <td>{{gameRec.startDate | date:'MMMM d, y, HH:mm:ss '}}</td>
         <td>{{gameRec.duration}} s</td>
         <td>{{gameRec.numberOfAttempts}}</td>

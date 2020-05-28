@@ -9,7 +9,7 @@ router.get('/', (request, response) => {
         if (err)
             response.status(404).json(err)
         else
-            response.status(202).json({message: "Game record Retrieved with success"})
+            response.status(202).json(records)
     })
 })
 

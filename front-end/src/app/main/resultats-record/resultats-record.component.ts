@@ -21,10 +21,12 @@ export class ResultatsRecordComponent implements OnInit {
   constructor(private game: GameRecordService) {
     this.subscription = this.game.gameRecorderList$.subscribe((list) => {
       this.gameRecordList = list;
+      console.log(this.gameRecordList);
     })
 
     this.subscription2 = this.game.gameRecorder$.subscribe((sm) => {
       this.toPush = sm;
+      console.log(this.toPush);
     })
 
     this.subscription3 = this.game.tempsDeJeu$.subscribe(sm => {
@@ -37,7 +39,6 @@ export class ResultatsRecordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.toPush.finalScore);
   }
 
   addGameRecorder(game: GameRecorder) {
@@ -49,7 +50,7 @@ export class ResultatsRecordComponent implements OnInit {
       console.log(this.gameRecordList.length - 1)
       const game = this.gameRecordList[this.gameRecordList.length - 1];
       this.game.deleteGameRecorder(game);
-      window.location.reload();
+      //window.location.reload();
 
     }
   }

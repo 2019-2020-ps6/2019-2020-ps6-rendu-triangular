@@ -18,7 +18,7 @@
       </div>
     </ng-template>
 
-    <div *ngIf="quizList.length === 0">
+    <div *ngIf="quizList.length === 0 || (this.connectedUser.type === 'Patient' && quizPatients.length === 0)">
       <div class="mat-display-1">
         Aucun Quiz Disponible
       </div>

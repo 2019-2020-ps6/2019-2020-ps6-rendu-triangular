@@ -32,7 +32,7 @@ export class GameRecordService {
     console.log("game Recoder supprimé")
     const gameRecorderPath = this.urlGameRecorder + '/' + game._id;
     this.http.delete<GameRecorder>(gameRecorderPath, this.httpOptions).subscribe()
-
+    this.getGameRecorder();
   }
 
   public performGameRecorder(game: GameRecorder) {

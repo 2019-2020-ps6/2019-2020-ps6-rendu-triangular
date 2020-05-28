@@ -63,7 +63,7 @@ export class UserFormComponent implements OnInit {
       hasBackdrop: true
     })
 
-    this.dialog.componentInstance.message = 'Commpte Crée';
+    this.dialog.componentInstance.message = 'Compte Crée';
 
     this.accountSuccessfulEmitter.emit(newUser);
     console.log(this.accountSuccessfulEmitter);

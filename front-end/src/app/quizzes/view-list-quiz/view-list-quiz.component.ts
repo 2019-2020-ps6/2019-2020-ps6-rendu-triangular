@@ -37,9 +37,8 @@ export class ViewListQuizComponent implements OnInit {
         }
       }
     })
-    this.quizPatients = this.quizList.filter((data) => data.assigneeList.includes(this.patientData.firstName));
-    console.log(this.quizPatients);
-
+    if (this.connectedUser.type === 'Patient')
+      this.quizPatients = this.quizList.filter((data) => data.assigneeList.includes(this.patientData.firstName));
   }
 
   ngOnInit(): void {

@@ -116,7 +116,6 @@ export class QuizAssignComponent implements OnInit {
         console.log(this.selectedPatient)
         this.userService.updatePatient(this.selectedPatient);
       }
-
     }
 
     if (this.selectedPatient !== undefined && (this.selectQuizColor.length != 0 || this.selectedQuizImage.length != 0)) {

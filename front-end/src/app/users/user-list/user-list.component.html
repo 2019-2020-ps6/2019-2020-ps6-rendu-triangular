@@ -7,6 +7,7 @@
       <th scope="col">Nom</th>
       <th scope="col">Age</th>
       <th scope="col">Type</th>
+      <th scope="col">Jeu</th>
     </tr>
     </thead>
     <tbody>
@@ -16,6 +17,16 @@
       <td>{{user.lastName}}</td>
       <td>{{user.age}}</td>
       <td>{{user.type}}</td>
+      <span *ngIf="user.type === 'Patient'">
+        <span *ngFor="let pat of patients">
+             <select *ngIf="pat.firstName === user.firstName" id="select">
+            <option *ngFor="let sm of pat.quizzesImage" [value]="sm" id="option">
+            {{sm.name}}
+            </option>
+            </select>
+        </span>
+      </span>
+      <button (click)="launchQuiz()" *ngIf="user.type === 'Patient'" class="btn btn-danger">Lancer un Quiz</button>
     </tr>
     </tbody>
   </table>
